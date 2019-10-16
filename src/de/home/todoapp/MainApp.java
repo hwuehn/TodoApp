@@ -35,6 +35,11 @@ public class MainApp extends Application {
     }
 
     /**
+     * Constructor
+     */
+    public MainApp() {}
+
+    /**
      * Initializes the root layout and tries to load the last opened todoFile.
      */
     public void initRootLayout() {

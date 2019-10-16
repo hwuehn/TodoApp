@@ -32,15 +32,6 @@ public class ListViewController {
     // Reference to the main application.
     private MainApp mainApp;
 
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param mainApp
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
-
         /**
          * The constructor.
          * The constructor is called before the initialize() method.
@@ -60,6 +51,15 @@ public class ListViewController {
         setListView();
     }
 
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+    
     /**
      * Returns the data as an observable list of Persons.
      * @return
