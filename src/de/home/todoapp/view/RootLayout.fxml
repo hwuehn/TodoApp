@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -12,9 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController">
-   <children>
-      <BorderPane prefHeight="800.0" prefWidth="700.0" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <ButtonBar buttonMinWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
               <buttons>
@@ -50,9 +47,6 @@
               </buttons>
             </ButtonBar>
          </top>
-         <center>
-            <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </center>
          <bottom>
             <ButtonBar buttonMinWidth="50.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <buttons>
@@ -106,5 +100,3 @@
             </ButtonBar>
          </bottom>
       </BorderPane>
-   </children>
-</AnchorPane>

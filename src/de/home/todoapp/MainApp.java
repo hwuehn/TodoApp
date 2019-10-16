@@ -1,27 +1,25 @@
 package de.home.todoapp;
 
+import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 
 public class MainApp extends Application {
-
 
     public static void main(String[] args) {
         launch(args);
     }
 
     private Stage primaryStage;
-    private AnchorPane rootLayout;
+    private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -33,18 +31,18 @@ public class MainApp extends Application {
 
         initRootLayout();
 
-
+        showListView();
     }
 
     /**
      * Initializes the root layout and tries to load the last opened todoFile.
      */
     public void initRootLayout() {
-        try{
+        try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Rootlayout.fxml"));
-            rootLayout = (AnchorPane) loader.load();
+            rootLayout =  loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -59,18 +57,30 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // TODO Try to load last opened todoFile.
-//        File file = getTodoFilePath();
-//        if (file != null) {
-//            loadTodoDataFromFile(file);
-//        }
-
-
-
     }
 
+    /**
+     * Shows the task overview inside the root layout.
+     */
+    public void showListView() {
+        try {
+            // Load task overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/ListView.fxml"));
+            BorderPane taskOverview = (BorderPane) loader.load();
 
+            // Set task overview into the center of root layout.
+            rootLayout.setCenter(taskOverview);
 
+            // Give the controller access to the main app.
+            ListViewController controller = loader.getController();
+            controller.setMainApp(this);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
