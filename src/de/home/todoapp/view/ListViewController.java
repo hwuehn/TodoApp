@@ -41,7 +41,6 @@ public class ListViewController {
         this.mainApp = mainApp;
     }
 
-
         /**
          * The constructor.
          * The constructor is called before the initialize() method.

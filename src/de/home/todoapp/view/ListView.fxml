@@ -8,7 +8,7 @@
    <children>
       <BorderPane prefHeight="600.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <ListView BorderPane.alignment="CENTER" />
+            <ListView fx:id="listView" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

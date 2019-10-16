@@ -67,7 +67,7 @@ public class MainApp extends Application {
             // Load task overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/ListView.fxml"));
-            BorderPane taskOverview = (BorderPane) loader.load();
+            AnchorPane taskOverview = (AnchorPane) loader.load();
 
             // Set task overview into the center of root layout.
             rootLayout.setCenter(taskOverview);
