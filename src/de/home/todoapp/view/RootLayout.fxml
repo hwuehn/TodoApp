@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController">
+<AnchorPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="700.0" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -23,7 +23,7 @@
                         <Font size="20.0" />
                      </font>
                   </ToggleButton>
-                  <Region maxWidth="274.0" minWidth="274.0" prefHeight="44.0" prefWidth="274.0" />
+                  <Region maxWidth="320.0" minWidth="274.0" prefHeight="44.0" prefWidth="370.0" />
                   <ToggleButton fx:id="noHurryBtn" maxWidth="104.0" minWidth="104.0" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="104.0" styleClass="button" stylesheets="@style.css" text="Eilt nicht">
                      <font>
                         <Font size="20.0" />
@@ -58,46 +58,46 @@
               <buttons>
                 <ToggleButton fx:id="emainlBtn" maxWidth="50.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="50.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/images/mail.png" />
                            </image>
                            <effect>
-                              <ColorAdjust brightness="0.4" />
+                              <ColorAdjust brightness="0.5" />
                            </effect></ImageView>
                      </graphic>
                   </ToggleButton>
-                  <Region minWidth="0.0" prefHeight="58.0" prefWidth="430.0" />
+                  <Region minWidth="0.0" prefHeight="60.0" prefWidth="473.0" />
                   <ToggleButton fx:id="checkBtn" maxWidth="50.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="50.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/check.png" />
+                              <Image url="@../resources/images/check2.png" />
                            </image>
                            <effect>
-                              <ColorAdjust brightness="0.4" />
+                              <ColorAdjust brightness="0.5" />
                            </effect></ImageView>
                      </graphic>
                   </ToggleButton>
                   <ToggleButton fx:id="editBtn" maxWidth="50.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="50.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/edit.png" />
+                              <Image url="@../resources/images/edit2.png" />
                            </image>
                            <effect>
-                              <ColorAdjust brightness="0.4" />
+                              <ColorAdjust brightness="0.6" />
                            </effect></ImageView>
                      </graphic>
                   </ToggleButton>
                   <ToggleButton fx:id="addBtn" maxWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="53.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/plus.png" />
+                              <Image url="@../resources/images/add.png" />
                            </image>
                            <effect>
-                              <ColorAdjust brightness="0.4" />
+                              <ColorAdjust brightness="0.5" />
                            </effect>
                         </ImageView>
                      </graphic>

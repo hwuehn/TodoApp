@@ -3,12 +3,14 @@
 }
 
 .button {
-   -fx-background-color: azure;
+   -fx-background-color: black;
    -fx-text-fill: grey;
 }
 
 #buttonSelected {
-   -fx-text-fill: black;
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-font-size: 18;
 }
 
 #buttonNotSelected {
