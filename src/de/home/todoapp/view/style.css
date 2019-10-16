@@ -1,0 +1,16 @@
+.root {
+   button-base-color: lightgrey;
+}
+
+.button {
+   -fx-background-color: azure;
+   -fx-text-fill: grey;
+}
+
+#buttonSelected {
+   -fx-text-fill: black;
+}
+
+#buttonNotSelected {
+   -fx-text-fill: grey;
+}
