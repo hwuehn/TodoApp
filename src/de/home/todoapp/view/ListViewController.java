@@ -45,8 +45,8 @@ public class ListViewController {
      */
     @FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
-        assert listView != null : "fx:id=\"listView\" was not injected: check your FXML file 'CustomList.fxml'.";
+        // Initialize the task view with the two columns.
+        assert listView != null : "fx:id=\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
         setListView();
     }
@@ -59,9 +59,9 @@ public class ListViewController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-    
+
     /**
-     * Returns the data as an observable list of Persons.
+     * Returns the data as an observable list of Tasks.
      * @return
      */
     public ObservableList<Task> getObservableList() {
