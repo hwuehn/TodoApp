@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-      <BorderPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane prefHeight="700.0" prefWidth="600.0" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController">
          <top>
             <ButtonBar buttonMinWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
               <buttons>
@@ -20,7 +20,7 @@
                         <Font size="20.0" />
                      </font>
                   </ToggleButton>
-                  <Region maxWidth="320.0" minWidth="274.0" prefHeight="44.0" prefWidth="370.0" />
+                  <Region maxWidth="174.0" minWidth="174.0" prefHeight="44.0" prefWidth="174.0" />
                   <ToggleButton fx:id="noHurryBtn" maxWidth="104.0" minWidth="104.0" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="104.0" styleClass="button" stylesheets="@style.css" text="Eilt nicht">
                      <font>
                         <Font size="20.0" />

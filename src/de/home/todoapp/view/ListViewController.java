@@ -17,17 +17,10 @@ import java.util.ResourceBundle;
 
 public class ListViewController {
 
-    @FXML
-    private ListView<Task> listView;
     @FXML private ResourceBundle resources;
     @FXML private URL location;
 
-    private List<Task> stringList     = new ArrayList<>(10);
-
-    /**
-     * The data as an observable list of Tasks.
-     */
-    private ObservableList<Task> observableList = FXCollections.observableArrayList();
+    @FXML private ListView<Task> taskData;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -45,10 +38,9 @@ public class ListViewController {
      */
     @FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
-        assert listView != null : "fx:id=\"listView\" was not injected: check your FXML file 'CustomList.fxml'.";
+        // Initialize the task view.
 
-        setListView();
+       // setListView();
     }
 
     /**
@@ -58,40 +50,17 @@ public class ListViewController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+
+        // Add observable list data to the table
+        taskData.setItems(mainApp.getTaskData());
     }
     
-    /**
-     * Returns the data as an observable list of Persons.
-     * @return
-     */
-    public ObservableList<Task> getObservableList() {
-        return observableList;
-    }
 
-    public void setListView(){
 
-        // Add some sample data
-        stringList.add(new Task("Hans"));
-        stringList.add(new Task("Ruth"));
-        stringList.add(new Task("Heinz"));
-        stringList.add(new Task("Cornelia"));
-        stringList.add(new Task("Werner"));
-        stringList.add(new Task("Lydia"));
-        stringList.add(new Task("Anna"));
-        stringList.add(new Task("Stefan"));
-        stringList.add(new Task("Martin"));
-
-        observableList.setAll(stringList);
-
-        listView.setItems(observableList);
-
-        listView.setCellFactory(
-                new Callback<ListView<Task>, ListCell<Task>>() {
-                    @Override
-                    public ListCell<Task> call(ListView<Task> listView) {
-                        return new ListViewCell();
-                    }
-                });
-    }
+//    public void setListView(){
+//
+//        taskData.setCellFactory(
+//                listView -> new ListViewCell());
+//    }
 
 }//ListViewController

@@ -1,8 +1,11 @@
 package de.home.todoapp;
 
+import de.home.todoapp.model.Task;
 import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -21,6 +24,35 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
 
+    /**
+     * The data as an observable list of Tasks.
+     */
+    private ObservableList<Task> taskData = FXCollections.observableArrayList();
+
+    /**
+     * Constructor
+     */
+    public MainApp() {
+        // Add some sample data
+        taskData.add(new Task("Hans"));
+        taskData.add(new Task("Ruth"));
+        taskData.add(new Task("Heinz"));
+        taskData.add(new Task("Cornelia"));
+        taskData.add(new Task("Werner"));
+        taskData.add(new Task("Lydia"));
+        taskData.add(new Task("Anna"));
+        taskData.add(new Task("Stefan"));
+        taskData.add(new Task("Martin"));
+    }
+
+    /**
+     * Returns the data as an observable list of Persons.
+     * @return
+     */
+    public ObservableList<Task> getTaskData() {
+        return taskData;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
@@ -33,11 +65,6 @@ public class MainApp extends Application {
 
         showListView();
     }
-
-    /**
-     * Constructor
-     */
-    public MainApp() {}
 
     /**
      * Initializes the root layout and tries to load the last opened todoFile.

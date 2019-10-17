@@ -6,8 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalAmount;
 
 /**
  * Model class for a Task.
@@ -20,7 +18,7 @@ public class Task {
     private final StringProperty input;
     private final ObjectProperty<LocalDate> finishDate;
     private final ObjectProperty<LocalDate> today;
-    private final LocalDate daysToFinish;
+    private final ObjectProperty<LocalDate> daysToFinish;
     /**
      * Default constructor.
      */
@@ -40,7 +38,8 @@ public class Task {
         this.input = new SimpleStringProperty("some commits to do");
         this.finishDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2019,10,29)) ;
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
-        this.daysToFinish = LocalDate.from((TemporalAccessor) finishDate).minus((TemporalAmount) today);
+        this.daysToFinish = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+        //this.daysToFinish = LocalDate.from((TemporalAccessor) finishDate).minus((TemporalAmount) today);
     }
 
     public String getName() {
@@ -91,7 +90,25 @@ public class Task {
         this.today.set(today);
     }
 
-    public LocalDate getDaysToFinish() {
+    public ObjectProperty<LocalDate> getDaysToFinish() {
         return daysToFinish;
     }
+
+    @Override
+    public String toString() {
+        return name + "\n" +
+               input + "\t" + finishDate + "\n" +
+               daysToFinish;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "Task{" +
+//                "name=" + name +
+//                ", input=" + input +
+//                ", finishDate=" + finishDate +
+//                ", today=" + today +
+//                ", daysToFinish=" + daysToFinish +
+//                '}';
+//    }
 }
