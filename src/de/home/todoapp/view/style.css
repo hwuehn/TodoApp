@@ -21,7 +21,7 @@
    -fx-background-color: silver;
  }
 
- .button:hover {
+.button:hover {
     -fx-text-fill: white;
+}
 
- }
