@@ -10,9 +10,18 @@
 #buttonSelected {
    -fx-text-fill: white;
    -fx-font-weight: bold;
-   -fx-font-size: 18;
+   -fx-font-size: 12;
 }
 
 #buttonNotSelected {
    -fx-text-fill: grey;
 }
+
+.list-cell:odd {
+   -fx-background-color: silver;
+ }
+
+ .button:hover {
+    -fx-text-fill: white;
+
+ }

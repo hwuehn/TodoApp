@@ -21,7 +21,6 @@ public class ListViewController implements Initializable {
     private ObservableList<Task> tasks = FXCollections.observableArrayList(
             new Task("Hans"),
             new Task("Heinz"),
-            new Task("Ruth" ),
             new Task("Cornelia" ),
             new Task("Werner" ),
             new Task("Lydia" ),
@@ -55,9 +54,8 @@ public class ListViewController implements Initializable {
                     if (empty || item.getName() == null || item == null) {
                         setText(null);
                     } else {
-                        setText(item.getName() + " \n" +
-                                item.getInput() + "\t"  +  "\n"
-                                + "\t" +item.getFinishDate());
+                        setText(item.getName() + "\t\t\t\t\t\t\t\t\t"  + "Noch " + item.getDaysBetween() + " Tage Zeit"  +"\n" +
+                                item.getInput() +  "\t\t\t\t\t\t" + "Frist: " +item.getFinishDate());
 
                     }
                 }

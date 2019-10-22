@@ -44,8 +44,7 @@ public class Task {
     }
 
     public long getDaysBetween() {
-        long days =  ChronoUnit.DAYS.between((Temporal) input, (Temporal) finishDate);
-        System.out.println(days);
+        long days = (LocalDate.of(2019, 10, 29).getDayOfMonth()) - LocalDate.now().getDayOfMonth();
         return days;
     }
 
