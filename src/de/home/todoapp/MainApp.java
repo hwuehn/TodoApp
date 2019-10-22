@@ -27,31 +27,31 @@ public class MainApp extends Application {
     /**
      * The data as an observable list of Tasks.
      */
-    private ObservableList<Task> taskData = FXCollections.observableArrayList();
+    //private ObservableList<Task> taskData = FXCollections.observableArrayList();
 
     /**
      * Constructor
      */
     public MainApp() {
         // Add some sample data
-        taskData.add(new Task("Hans"));
-        taskData.add(new Task("Ruth"));
-        taskData.add(new Task("Heinz"));
-        taskData.add(new Task("Cornelia"));
-        taskData.add(new Task("Werner"));
-        taskData.add(new Task("Lydia"));
-        taskData.add(new Task("Anna"));
-        taskData.add(new Task("Stefan"));
-        taskData.add(new Task("Martin"));
+//        taskData.add(new Task("Hans"));
+//        taskData.add(new Task("Ruth"));
+//        taskData.add(new Task("Heinz"));
+//        taskData.add(new Task("Cornelia"));
+//        taskData.add(new Task("Werner"));
+//        taskData.add(new Task("Lydia"));
+//        taskData.add(new Task("Anna"));
+//        taskData.add(new Task("Stefan"));
+//        taskData.add(new Task("Martin"));
     }
 
     /**
      * Returns the data as an observable list of Persons.
      * @return
      */
-    public ObservableList<Task> getTaskData() {
-        return taskData;
-    }
+//    public ObservableList<Task> getTaskData() {
+//        return taskData;
+//    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {

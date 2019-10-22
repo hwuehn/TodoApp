@@ -1,46 +1,68 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
-import de.home.todoapp.model.ListViewCell;
 import de.home.todoapp.model.Task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.util.Callback;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class ListViewController {
+public class ListViewController implements Initializable {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
 
-    @FXML private ListView<Task> taskData;
+    private ObservableList<Task> tasks = FXCollections.observableArrayList(
+            new Task("Hans"),
+            new Task("Heinz"),
+            new Task("Ruth" ),
+            new Task("Cornelia" ),
+            new Task("Werner" ),
+            new Task("Lydia" ),
+            new Task("Anna" ),
+            new Task("Stefan" ),
+            new Task("Martin" ));
+
+    @FXML private ListView<Task> listView = new ListView<>(tasks);
+
+    @FXML
+    Pane pane;
 
     // Reference to the main application.
     private MainApp mainApp;
 
-        /**
-         * The constructor.
-         * The constructor is called before the initialize() method.
-         */
     public ListViewController() {
     }
 
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
-    @FXML
-    private void initialize() {
-        // Initialize the task view.
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        createCellFactory();
+        listView.setItems(tasks);
+    }
 
-       // setListView();
+    public void createCellFactory() {
+        listView.setCellFactory(param -> {
+            return new ListCell<Task>() {
+                @Override
+                protected void updateItem(Task item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item.getName() == null || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getName() + " \n" +
+                                item.getInput() + "\t"  +  "\n"
+                                + "\t" +item.getFinishDate());
+
+                    }
+                }
+            };
+        });
     }
 
     /**
@@ -50,17 +72,5 @@ public class ListViewController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
-        // Add observable list data to the table
-        taskData.setItems(mainApp.getTaskData());
     }
-    
-
-
-//    public void setListView(){
-//
-//        taskData.setCellFactory(
-//                listView -> new ListViewCell());
-//    }
-
-}//ListViewController
+}

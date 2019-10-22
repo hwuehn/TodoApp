@@ -1,18 +1,19 @@
 package de.home.todoapp.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class EditDialogController {
 
     @FXML
-    private Label inputLabel;
+    private Label nameLabel;
+    @FXML
+    private Label todoLabel;
     @FXML
     private Label finishDateLabel;
+    @FXML
+    private TextField inputtextField;
     @FXML
     private TextArea inputTextAreaField;
     @FXML
