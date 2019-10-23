@@ -148,6 +148,14 @@ public class MainApp extends Application {
             return false;
         }
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
 }
 
 

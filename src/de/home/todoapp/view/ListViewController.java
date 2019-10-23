@@ -5,8 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -18,7 +20,17 @@ public class ListViewController implements Initializable {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
-    @FXML private ListView<Task> listView;
+    @FXML public ListView<Task> listView;
+    private Task task;
+
+    @FXML
+    private ToggleButton addBtn;
+    @FXML
+    private ToggleButton editBtn;
+    @FXML
+    private ToggleButton checkBtn;
+    @FXML
+    private ToggleButton emainlBtn;
 
     public void setCellFactory() {
         listView.setCellFactory(
@@ -29,6 +41,10 @@ public class ListViewController implements Initializable {
                     }
                 }
         );
+    }
+
+    public ListView<Task> getListView() {
+        return listView;
     }
 
     // Reference to the main application.
@@ -51,5 +67,50 @@ public class ListViewController implements Initializable {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         listView.setItems(mainApp.getObservableList());
+
     }
+
+    /**
+     * Called when the user clicks the new button. Opens a dialog to edit
+     * details for a new task.
+     */
+    @FXML
+    private void handleNewTask() {
+        Task tempTask = new Task();
+        boolean okClicked = mainApp.showEditDialog(tempTask);
+        if (okClicked) {
+            mainApp.getObservableList().add(tempTask);
+        }
+    }
+
+    /**
+     * Called when the user clicks the edit button. Opens a dialog to edit
+     * details for the selected person.
+     */
+    @FXML
+    private void handleEditTask() {
+        Task selectedTask = listView.getSelectionModel().getSelectedItem();
+            if (selectedTask != null) {
+            boolean okClicked = mainApp.showEditDialog(selectedTask);
+            if (okClicked) {
+                selectedTask.setName(selectedTask.getName());
+                selectedTask.setInput(selectedTask.getInput());
+                selectedTask.setFinishDate(selectedTask.getFinishDate());
+                listView.refresh();
+            }
+
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Task Selected");
+            alert.setContentText("Please select a task in the table.");
+            alert.showAndWait();
+        }
+    }
+
+
+
 }

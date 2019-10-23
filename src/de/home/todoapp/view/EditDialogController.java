@@ -73,6 +73,7 @@ public class EditDialogController {
             task.setName(inputNameField.getText());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
+
             okClicked = true;
             dialogStage.close();
         }

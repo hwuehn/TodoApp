@@ -2,6 +2,7 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleButton;
 
 /**
@@ -38,14 +39,7 @@ public class RootLayoutController {
     @FXML
     private ToggleButton otherBtn;
 
-    @FXML
-    private ToggleButton addBtn;
-    @FXML
-    private ToggleButton editBtn;
-    @FXML
-    private ToggleButton checkBtn;
-    @FXML
-    private ToggleButton emainlBtn;
+
 
      /**
      * Is set as the standard selection.
@@ -94,17 +88,6 @@ public class RootLayoutController {
         allBtn.setId("buttonNotSelected");
     }
 
-    /**
-     * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new task.
-     */
-    @FXML
-    private void handleNewTask() {
-        Task tempTask = new Task();
-        boolean okClicked = mainApp.showEditDialog(tempTask);
-        if (okClicked) {
-            mainApp.getObservableList().add(tempTask);
-        }
-    }
+
 
 }
