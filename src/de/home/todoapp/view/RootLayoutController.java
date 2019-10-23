@@ -1,17 +1,8 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-
-import java.awt.*;
-
-import static javafx.scene.control.ToggleButton.*;
 
 /**
  * The controller for the root layout. The root layout provides the basic

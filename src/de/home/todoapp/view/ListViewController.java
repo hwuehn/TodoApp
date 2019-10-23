@@ -1,16 +1,17 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
-import de.home.todoapp.model.Task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListViewController implements Initializable {
@@ -18,20 +19,30 @@ public class ListViewController implements Initializable {
     @FXML private ResourceBundle resources;
     @FXML private URL location;
 
-    private ObservableList<Task> tasks = FXCollections.observableArrayList(
-            new Task("Hans"),
-            new Task("Heinz"),
-            new Task("Cornelia" ),
-            new Task("Werner" ),
-            new Task("Lydia" ),
-            new Task("Anna" ),
-            new Task("Stefan" ),
-            new Task("Martin" ));
+    @FXML private ListView<Task> listView;
 
-    @FXML private ListView<Task> listView = new ListView<>(tasks);
+    private List<Task> taskList = new ArrayList<>(5);
+    private ObservableList<Task> observableList = FXCollections.observableArrayList();
 
-    @FXML
-    Pane pane;
+    public void setListView() {
+
+        taskList.add(new Task("Bob Schmidt"));
+        taskList.add(new Task("Klaus Buzze"));
+        taskList.add(new Task("Tobi Fubzz"));
+
+        observableList.setAll(taskList);
+
+        listView.setItems(observableList);
+
+        listView.setCellFactory(
+                new Callback<ListView<Task>, ListCell<Task>>() {
+                    @Override
+                    public ListCell<Task> call(ListView<Task> listView) {
+                        return new ListViewCell();
+                    }
+                }
+        );
+    }
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -39,29 +50,32 @@ public class ListViewController implements Initializable {
     public ListViewController() {
     }
 
+
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        createCellFactory();
-        listView.setItems(tasks);
+    public void initialize(URL location, ResourceBundle resources) {
+        assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
+
+        setListView();
     }
 
-    public void createCellFactory() {
-        listView.setCellFactory(param -> {
-            return new ListCell<Task>() {
-                @Override
-                protected void updateItem(Task item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item.getName() == null || item == null) {
-                        setText(null);
-                    } else {
-                        setText(item.getName() + "\t\t\t\t\t\t\t\t\t"  + "Noch " + item.getDaysBetween() + " Tage Zeit"  +"\n" +
-                                item.getInput() +  "\t\t\t\t\t\t" + "Frist: " +item.getFinishDate());
-
-                    }
-                }
-            };
-        });
-    }
+//    public void createCellFactory() {
+//        listView.setCellFactory(param -> {
+//            return new ListCell<Task>() {
+//                @Override
+//                protected void updateItem(Task item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (empty || item.getName() == null || item == null) {
+//                        setText(null);
+//                    } else {
+//                        setText(item.getName() + "\t\t\t\t\t\t\t\t\t"  + "Noch " + item.getDaysBetween() + " Tage Zeit"  +"\n" +
+//                                item.getInput() +  "\t\t\t\t\t\t" + "Frist: " +item.getFinishDate());
+//
+//                    }
+//                }
+//            };
+//        });
+//    }
 
     /**
      * Is called by the main application to give a reference back to itself.

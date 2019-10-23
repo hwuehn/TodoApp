@@ -1,11 +1,8 @@
 package de.home.todoapp;
 
-import de.home.todoapp.model.Task;
 import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -21,45 +18,23 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    private Stage primaryStage;
+    private Stage stage;
     private BorderPane rootLayout;
-
-    /**
-     * The data as an observable list of Tasks.
-     */
-    //private ObservableList<Task> taskData = FXCollections.observableArrayList();
 
     /**
      * Constructor
      */
     public MainApp() {
-        // Add some sample data
-//        taskData.add(new Task("Hans"));
-//        taskData.add(new Task("Ruth"));
-//        taskData.add(new Task("Heinz"));
-//        taskData.add(new Task("Cornelia"));
-//        taskData.add(new Task("Werner"));
-//        taskData.add(new Task("Lydia"));
-//        taskData.add(new Task("Anna"));
-//        taskData.add(new Task("Stefan"));
-//        taskData.add(new Task("Martin"));
     }
 
-    /**
-     * Returns the data as an observable list of Persons.
-     * @return
-     */
-//    public ObservableList<Task> getTaskData() {
-//        return taskData;
-//    }
-
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("TodoApp");
+    public void start(Stage stage) throws Exception {
+        this.stage = stage;
+
+        this.stage.setTitle("TodoApp");
 
         // Set the application icon
-        this.primaryStage.getIcons().add(new Image("file:resources/images/todo.png"));
+        this.stage.getIcons().add(new Image("file:resources/images/todo.png"));
 
         initRootLayout();
 
@@ -78,13 +53,13 @@ public class MainApp extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
+            stage.setScene(scene);
 
             // Give the controller access to the main app.
             RootLayoutController controller = loader.getController();
             controller.setMainApp(this);
 
-            primaryStage.show();
+            stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();

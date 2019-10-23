@@ -1,4 +1,4 @@
-package de.home.todoapp.model;
+package de.home.todoapp.view;
 
 import javafx.beans.property.*;
 
@@ -36,7 +36,7 @@ public class Task {
 
 
         // Some initial dummy data, just for convenient testing.
-        this.input = new SimpleStringProperty("some commits to do");
+        this.input = new SimpleStringProperty("some commits to do and something more. a lot stuff to fix");
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>((LocalDate.of(2019, 10, 29)));
 
