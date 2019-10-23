@@ -6,5 +6,5 @@ public enum Priority {
     EILT,
     OFFEN,
     EILT_NICHT,
-    
+
 }

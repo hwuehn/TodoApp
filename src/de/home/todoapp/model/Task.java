@@ -16,6 +16,7 @@ public class Task {
     private SimpleObjectProperty<LocalDate> finishDate;
     private SimpleObjectProperty<LocalDate> today;
     private long daysToFinish = 0;
+    private Priority priority;
 
     /**
      * Default constructor.
@@ -100,5 +101,13 @@ public class Task {
 
     public void setDaysToFinish(int daysToFinish) {
         this.daysToFinish = daysToFinish;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }
