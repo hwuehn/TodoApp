@@ -64,7 +64,7 @@
                            </effect></ImageView>
                      </graphic>
                   </ToggleButton>
-                  <ToggleButton fx:id="addBtn" maxWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button" stylesheets="@style.css">
+                  <ToggleButton fx:id="addBtn" maxWidth="50.0" mnemonicParsing="false" onAction="#handleNewTask" prefHeight="50.0" prefWidth="50.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
                         <ImageView fitHeight="53.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>

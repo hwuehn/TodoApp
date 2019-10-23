@@ -70,7 +70,7 @@ public class EditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            task.setName(inputTextAreaField.getText());
+            task.setName(inputNameField.getText());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
             okClicked = true;

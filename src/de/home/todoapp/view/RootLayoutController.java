@@ -93,4 +93,18 @@ public class RootLayoutController {
         hurryBtn.setId("buttonNotSelected");
         allBtn.setId("buttonNotSelected");
     }
+
+    /**
+     * Called when the user clicks the new button. Opens a dialog to edit
+     * details for a new task.
+     */
+    @FXML
+    private void handleNewTask() {
+        Task tempTask = new Task();
+        boolean okClicked = mainApp.showEditDialog(tempTask);
+        if (okClicked) {
+            mainApp.getObservableList().add(tempTask);
+        }
+    }
+
 }
