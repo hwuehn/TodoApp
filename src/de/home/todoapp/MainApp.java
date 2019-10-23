@@ -28,7 +28,7 @@ public class MainApp extends Application {
     private Stage stage;
     private BorderPane rootLayout;
 
-    private List<Task> taskList = new ArrayList<>(5);
+    private List<Task> taskList = new ArrayList<>(10);
 
     private ObservableList<Task> observableList = FXCollections.observableArrayList();
 
