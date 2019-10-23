@@ -4,6 +4,8 @@ import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
 import de.home.todoapp.view.Task;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -25,11 +27,23 @@ public class MainApp extends Application {
     private Stage stage;
     private BorderPane rootLayout;
 
+    private List<Task> taskList = new ArrayList<>(5);
+
+    private ObservableList<Task> observableList = FXCollections.observableArrayList();
+
+    public ObservableList<Task> getObservableList() {
+        return observableList;
+    }
 
     /**
      * Constructor
      */
     public MainApp() {
+        taskList.add(new Task("Bob Schmidt"));
+        taskList.add(new Task("Klaus Buzze"));
+        taskList.add(new Task("Tobi Fubzz"));
+
+        observableList.setAll(taskList);
     }
 
     @Override
