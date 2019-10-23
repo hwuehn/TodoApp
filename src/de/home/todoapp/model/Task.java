@@ -1,4 +1,4 @@
-package de.home.todoapp.view;
+package de.home.todoapp.model;
 
 import javafx.beans.property.*;
 
@@ -42,7 +42,7 @@ public class Task {
     }
 
     public long getDaysBetween() {
-        long days = (LocalDate.of(2019, 10, 29).getDayOfMonth()) - LocalDate.now().getDayOfMonth();
+        long days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
         return days;
     }
 

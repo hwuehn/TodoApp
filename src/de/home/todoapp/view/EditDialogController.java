@@ -1,5 +1,6 @@
 package de.home.todoapp.view;
 
+import de.home.todoapp.model.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;

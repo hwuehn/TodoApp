@@ -3,7 +3,7 @@ package de.home.todoapp;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
-import de.home.todoapp.view.Task;
+import de.home.todoapp.model.Task;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
