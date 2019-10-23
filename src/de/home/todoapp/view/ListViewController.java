@@ -57,6 +57,8 @@ public class ListViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
         setCellFactory();
+
+
     }
 
     /**
@@ -111,6 +113,25 @@ public class ListViewController implements Initializable {
         }
     }
 
+    /**
+     * Called when the user clicks on the delete button.
+     */
+    @FXML
+    private void handleDeleteTask() {
+        int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            listView.getItems().remove(selectedIndex);
 
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
+        }
+    }
 
 }

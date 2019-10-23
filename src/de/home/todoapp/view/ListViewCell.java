@@ -14,5 +14,8 @@ public class ListViewCell extends ListCell<Task>
             data.setInfo(task);
             setGraphic(data.getBox());
         }
+        if(task == null) {
+            setGraphic(null);
+        }
     }
 }
