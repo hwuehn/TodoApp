@@ -28,35 +28,43 @@
                               </effect></ImageView>
                         </graphic>
                      </ToggleButton>
-                     <Region maxWidth="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="71.0" />
-                     <ToggleButton fx:id="checkBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="68.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css" />
-                     <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditTask" prefHeight="55.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css" />
-                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNewTask" prefHeight="48.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css" />
-                  <Region prefHeight="200.0" prefWidth="200.0" />
-                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../resources/images/check3.png" />
-                        </image>
-                        <effect>
-                           <ColorAdjust brightness="0.5" />
-                        </effect>
-                  </ImageView>
-                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../resources/images/edit3.png" />
-                        </image>
-                        <effect>
-                           <ColorAdjust brightness="0.6" />
-                        </effect>
-                  </ImageView>
-                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../resources/images/plus3.png" />
-                        </image>
-                        <effect>
-                           <ColorAdjust brightness="0.5" />
-                        </effect>
-                     </ImageView>
+                     <Region maxWidth="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="50.0" />
+                  <Region prefHeight="48.0" prefWidth="50.0" />
+                  <Region layoutX="231.0" layoutY="10.0" prefHeight="48.0" prefWidth="50.0" />
+                  <Region layoutX="231.0" layoutY="10.0" prefHeight="48.0" prefWidth="50.0" />
+                     <ToggleButton fx:id="checkBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="50.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <graphic>
+                           <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../resources/images/check3.png" />
+                              </image>
+                              <effect>
+                                 <ColorAdjust brightness="0.5" />
+                              </effect>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                     <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditTask" prefHeight="55.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <graphic>
+                           <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../resources/images/edit3.png" />
+                              </image>
+                              <effect>
+                                 <ColorAdjust brightness="0.6" />
+                              </effect>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNewTask" prefHeight="48.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <graphic>
+                           <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../resources/images/plus3.png" />
+                              </image>
+                              <effect>
+                                 <ColorAdjust brightness="0.5" />
+                              </effect>
+                           </ImageView>
+                     </graphic></ToggleButton>
                   </buttons>
                </ButtonBar>
          </children>

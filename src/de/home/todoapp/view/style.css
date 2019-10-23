@@ -38,3 +38,6 @@
     -fx-font-size: 15;
 }
 
+#over6Days {
+    -fx-text-fill: red;
+}

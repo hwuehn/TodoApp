@@ -51,7 +51,13 @@ public class Data
     public void setInfo(Task task)
     {
         nameLabel.setText(task.getName());
-        daysToLabel.setText(String.valueOf(task.getDaysBetween()));
+
+        int number = (int) task.getDaysBetween();
+
+        if (number >= 7)
+            daysToLabel.setId("over6Days");
+
+        daysToLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
         inputLabel.setText(task.getInput());
         finishLabel.setText(String.valueOf(task.getFinishDate()));
     }
