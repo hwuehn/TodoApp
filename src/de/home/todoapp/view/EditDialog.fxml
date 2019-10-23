@@ -56,8 +56,8 @@
             </DatePicker>
             <ButtonBar buttonMinWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
               <buttons>
-                <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Cancel" />
-                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="OK" />
+                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" prefHeight="50.0" prefWidth="100.0" text="Cancel" />
+                  <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" prefHeight="50.0" prefWidth="100.0" text="OK" />
                   <Region prefHeight="87.0" prefWidth="200.0" />
               </buttons>
                <opaqueInsets>
