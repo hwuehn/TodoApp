@@ -1,10 +1,9 @@
 package de.home.todoapp.view;
 
 import javafx.beans.property.*;
+import javafx.util.StringConverter;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 
 /**
  * Model class for a Task.
@@ -72,7 +71,7 @@ public class Task {
         this.input.set(input);
     }
 
-    public LocalDate getFinishDate() {
+    public StringConverter<LocalDate> getFinishDate() {
         return finishDate.get();
     }
 
