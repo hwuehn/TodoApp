@@ -96,9 +96,7 @@ public class EditDialogController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (inputNameField.getText() == null || inputNameField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
-        }
+
         if (inputTextAreaField.getText() == null || inputTextAreaField.getText().length() == 0) {
             errorMessage += "No valid input!\n";
         }

@@ -50,6 +50,7 @@ public class Data
 
     public void setInfo(Task task)
     {
+        nameLabel.setId("name");
         nameLabel.setText(task.getName());
 
         long number = task.getDaysBetween();

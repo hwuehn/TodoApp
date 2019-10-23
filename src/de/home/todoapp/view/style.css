@@ -49,3 +49,7 @@
 #under3Days {
     -fx-text-fill: red;
 }
+
+#name {
+    -fx-text-fill: blue;
+}
