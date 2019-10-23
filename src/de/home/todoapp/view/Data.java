@@ -56,9 +56,15 @@ public class Data
 
         if (number >= 7) {
             daysToFinishLabel.setId("over6Days");
+            daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
         }
         else if ((number > 2) & (number < 7)) {
             daysToFinishLabel.setId("over2Days");
+            daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
+        }
+        else if ((number < 3) & (number >= 2)) {
+            daysToFinishLabel.setId("under3Days");
+            daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
         }
         else if (number < 3) {
             daysToFinishLabel.setId("under3Days");
@@ -70,7 +76,7 @@ public class Data
             case 1: daysToFinishLabel.setText("Morgen"); break;
         }
 
-        daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
+        //daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
         inputLabel.setText(task.getInput());
         finishLabel.setText(String.valueOf(task.getFinishDate()));
 
