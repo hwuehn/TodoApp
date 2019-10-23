@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class EditDialogController {
 
     @FXML
@@ -55,7 +57,7 @@ public class EditDialogController {
 
         inputtextField.setText(task.getName());
         inputTextAreaField.setText(task.getInput());
-        finishDatePicker.setConverter(task.getFinishDate());
+        finishDatePicker.setValue(task.getFinishDate());
     }
 
     /**
@@ -75,7 +77,7 @@ public class EditDialogController {
         if (isInputValid()) {
             task.setName(inputtextField.getText());
             task.setInput(inputTextAreaField.getText());
-            task.setFinishDate(com.factory.address.util.DateUtil.parse(finishDatePicker.converterProperty()));
+            task.setFinishDate(finishDatePicker.getValue());
 
             okClicked = true;
             dialogStage.close();
@@ -103,13 +105,6 @@ public class EditDialogController {
         }
         if (inputTextAreaField.getText() == null || inputTextAreaField.getText().length() == 0) {
             errorMessage += "No valid input!\n";
-        }
-        if (finishDatePicker.getConverter() == null) {
-            errorMessage += "No valid finish date!\n";
-        } else {
-            if (!com.factory.address.util.DateUtil.validDate(finishDatePicker.getConverter())) {
-                errorMessage += "No valid date. Use the format dd.mm.yyyy!\n";
-            }
         }
 
         if (errorMessage.length() == 0) {

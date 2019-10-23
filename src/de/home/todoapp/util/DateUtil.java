@@ -1,6 +1,5 @@
-package com.factory.address.util;
+package de.home.todoapp.util;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.util.StringConverter;
 
 import java.time.LocalDate;
@@ -44,9 +43,9 @@ public class DateUtil {
      * @param dateString the date as String
      * @return the date object or null if it could not be converted
      */
-    public static LocalDate parse(ObjectProperty<StringConverter<LocalDate>> dateString) {
+    public static LocalDate parse(String dateString) {
         try {
-            return DATE_FORMATTER.parse(dateString, LocalDate::from);
+            return (LocalDate) DATE_FORMATTER.parse(dateString, LocalDate::from);
         } catch (DateTimeParseException e) {
             return null;
         }
@@ -58,7 +57,7 @@ public class DateUtil {
      * @param dateString
      * @return true if the String is a valid date
      */
-    public static boolean validDate(StringConverter<LocalDate> dateString) {
+    public static boolean validDate(String dateString) {
         // Try to parse the String.
         return DateUtil.parse(dateString) != null;
     }

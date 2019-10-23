@@ -1,7 +1,6 @@
 package de.home.todoapp.view;
 
 import javafx.beans.property.*;
-import javafx.util.StringConverter;
 
 import java.time.LocalDate;
 
@@ -71,7 +70,7 @@ public class Task {
         this.input.set(input);
     }
 
-    public StringConverter<LocalDate> getFinishDate() {
+    public LocalDate getFinishDate() {
         return finishDate.get();
     }
 
