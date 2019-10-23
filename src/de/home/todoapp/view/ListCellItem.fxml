@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="vBox" cacheShape="false" centerShape="false" depthTest="DISABLE" fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="430.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="hBoxTop" prefHeight="25.0" prefWidth="500.0">
+      <HBox fx:id="hBoxTop" cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="193.0" scaleShape="false">
          <children>
-            <Label fx:id="nameLabel" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Name">
+            <Label fx:id="nameLabel" cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="157.0" scaleShape="false" text="Name">
                <font>
                   <Font size="14.0" />
                </font>
-               <padding>
-                  <Insets left="2.0" right="2.0" />
-               </padding>
             </Label>
          </children>
       </HBox>
-      <HBox fx:id="hBoxBottom" prefHeight="50.0" prefWidth="200.0">
+      <HBox fx:id="hBoxBottom" cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="430.0" scaleShape="false">
          <children>
-            <Label fx:id="inputLabel" alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="300.0" text="Input" wrapText="true">
+            <Label fx:id="inputLabel" alignment="TOP_LEFT" cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="273.0" scaleShape="false" text="Input" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
-               <padding>
-                  <Insets left="2.0" right="2.0" />
-               </padding>
             </Label>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="157.0" scaleShape="false">
                <children>
-                  <Label fx:id="daysToLabel" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" text="Frist">
+                  <Label fx:id="daysToLabel" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="156.0" scaleShape="false" text="Frist">
                      <font>
                         <Font size="14.0" />
                      </font>
-                     <padding>
-                        <Insets left="2.0" right="2.0" />
-                     </padding>
                   </Label>
-                  <Label fx:id="finishLabel" alignment="BOTTOM_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="150.0" text="Frist">
+                  <Label fx:id="finishLabel" alignment="BOTTOM_RIGHT" cacheShape="false" centerShape="false" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="156.0" scaleShape="false" text="Frist">
                      <font>
                         <Font size="14.0" />
                      </font>
-                     <padding>
-                        <Insets left="2.0" right="2.0" />
-                     </padding>
                   </Label>
                </children>
             </VBox>

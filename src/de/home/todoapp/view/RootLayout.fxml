@@ -3,20 +3,17 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Region?>
 
-<BorderPane fx:id="pane" prefHeight="500.0" prefWidth="500.0" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController">
+<BorderPane fx:id="pane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="button" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.RootLayoutController">
          <top>
-            <ButtonBar buttonMinWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+            <ButtonBar buttonMinWidth="30.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="450.0" BorderPane.alignment="CENTER">
               <buttons>
                 <ToggleButton fx:id="otherBtn" maxWidth="46.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleOther" prefHeight="44.0" prefWidth="43.0" styleClass="button" stylesheets="@style.css" text="..." />
-                  <Region maxWidth="105.0" minWidth="174.0" prefHeight="44.0" prefWidth="174.0" />
-                  <ToggleButton fx:id="noHurryBtn" maxWidth="77.0" minWidth="104.0" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="104.0" styleClass="button" stylesheets="@style.css" text="Eilt nicht">
+                  <Region maxWidth="105.0" minWidth="174.0" prefHeight="44.0" prefWidth="99.0" />
+                  <ToggleButton fx:id="noHurryBtn" maxWidth="90.0" minWidth="104.0" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="90.0" styleClass="button" stylesheets="@style.css" text="Eilt nicht">
                      <toggleGroup>
                         <ToggleGroup fx:id="ColorToggleGroup" />
                      </toggleGroup>
