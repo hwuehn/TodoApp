@@ -39,5 +39,13 @@
 }
 
 #over6Days {
+    -fx-text-fill: green;
+}
+
+#over2Days {
+    -fx-text-fill: orange;
+}
+
+#under3Days {
     -fx-text-fill: red;
 }

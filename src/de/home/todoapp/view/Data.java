@@ -22,7 +22,7 @@ public class Data
     private Label nameLabel;
 
     @FXML
-    private Label daysToLabel;
+    private Label daysToFinishLabel;
 
     @FXML
     private HBox hBoxBottom;
@@ -52,14 +52,28 @@ public class Data
     {
         nameLabel.setText(task.getName());
 
-        int number = (int) task.getDaysBetween();
+        long number = task.getDaysBetween();
 
-        if (number >= 7)
-            daysToLabel.setId("over6Days");
+        if (number >= 7) {
+            daysToFinishLabel.setId("over6Days");
+        }
+        else if ((number > 2) & (number < 7)) {
+            daysToFinishLabel.setId("over2Days");
+        }
+        else if (number < 3) {
+            daysToFinishLabel.setId("under3Days");
+        }
 
-        daysToLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
+        switch ((int) task.getDaysBetween()) {
+            case -1: daysToFinishLabel.setText("Gestern"); break;
+            case 0: daysToFinishLabel.setText("Heute"); break;
+            case 1: daysToFinishLabel.setText("Morgen"); break;
+        }
+
+        daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
         inputLabel.setText(task.getInput());
         finishLabel.setText(String.valueOf(task.getFinishDate()));
+
     }
 
     public VBox getBox()

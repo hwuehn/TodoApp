@@ -14,12 +14,12 @@
    <children>
       <VBox prefHeight="500.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="451.0" stylesheets="@style.css" />
-            <ButtonBar buttonMinWidth="35.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="451.0">
+            <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" stylesheets="@style.css" />
+            <ButtonBar buttonMinWidth="35.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="450.0">
                   <buttons>
-                     <ToggleButton fx:id="emailBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="emailBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
                         <graphic>
-                           <ImageView fitHeight="35.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@../resources/images/email3.png" />
                               </image>
@@ -28,10 +28,10 @@
                               </effect></ImageView>
                         </graphic>
                      </ToggleButton>
-                     <Region maxWidth="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="50.0" />
-                  <Region prefHeight="48.0" prefWidth="50.0" />
-                  <Region layoutX="231.0" layoutY="10.0" prefHeight="48.0" prefWidth="50.0" />
-                  <Region layoutX="231.0" layoutY="10.0" prefHeight="48.0" prefWidth="50.0" />
+                  <Region layoutX="408.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Region layoutX="397.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Region layoutX="382.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Region prefHeight="200.0" prefWidth="200.0" />
                      <ToggleButton fx:id="checkBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="50.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -54,7 +54,7 @@
                               </effect>
                         </ImageView>
                      </graphic></ToggleButton>
-                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNewTask" prefHeight="48.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNewTask" prefHeight="50.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>

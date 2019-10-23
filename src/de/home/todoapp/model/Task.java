@@ -99,7 +99,7 @@ public class Task {
         return daysToFinish;
     }
 
-    public void setDaysToFinish(int daysToFinish) {
+    public void setDaysToFinish(long daysToFinish) {
         this.daysToFinish = daysToFinish;
     }
 
