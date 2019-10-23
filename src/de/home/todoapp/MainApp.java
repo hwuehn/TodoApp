@@ -1,6 +1,5 @@
 package de.home.todoapp;
 
-import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
 import de.home.todoapp.view.Task;
@@ -26,11 +25,6 @@ public class MainApp extends Application {
     private Stage stage;
     private BorderPane rootLayout;
 
-    private List<Task> taskList = new ArrayList<>(5);
-
-    public List<Task> getTaskList() {
-        return taskList;
-    }
 
     /**
      * Constructor
@@ -99,46 +93,7 @@ public class MainApp extends Application {
         }
     }
 
-    /**
-     * Opens a dialog to edit details for the specified task. If the user
-     * clicks OK, the changes are saved into the provided task object and true
-     * is returned.
-     *
-     * @param task the person object to be edited
-     * @return true if the user clicked OK, false otherwise.
-     */
-    public boolean showEditDialog(Task task) {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/EditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Person");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(stage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the task into the controller.
-            EditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPerson(task);
-
-            // Set the dialog icon.
-            dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
 
 

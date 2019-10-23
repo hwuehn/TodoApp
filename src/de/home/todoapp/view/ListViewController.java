@@ -21,16 +21,17 @@ public class ListViewController implements Initializable {
 
     @FXML private ListView<Task> listView;
 
+    private List<Task> taskList = new ArrayList<>(5);
 
     private ObservableList<Task> observableList = FXCollections.observableArrayList();
 
     public void setListView() {
 
-        mainApp.getTaskList().add(new Task("Bob Schmidt"));
-        mainApp.getTaskList().add(new Task("Klaus Buzze"));
-        mainApp.getTaskList().add(new Task("Tobi Fubzz"));
+        taskList.add(new Task("Bob Schmidt"));
+        taskList.add(new Task("Klaus Buzze"));
+        taskList.add(new Task("Tobi Fubzz"));
 
-        observableList.setAll(mainApp.getTaskList());
+        observableList.setAll(taskList);
 
         listView.setItems(observableList);
 
