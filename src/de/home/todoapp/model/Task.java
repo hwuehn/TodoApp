@@ -1,5 +1,6 @@
 package de.home.todoapp.model;
 
+import de.home.todoapp.util.DateUtil;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
@@ -40,6 +41,13 @@ public class Task {
         this.finishDate = new SimpleObjectProperty<LocalDate>((LocalDate.of(2019, 10, 29)));
 
 
+    }
+
+    public Task (String name, String input, LocalDate date) {
+        this.name = new SimpleStringProperty(name);
+        this.input = new SimpleStringProperty(input);
+        this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+        this.finishDate = new SimpleObjectProperty<LocalDate>(date);
     }
 
     public long getDaysBetween() {

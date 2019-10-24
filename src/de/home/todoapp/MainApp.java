@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +41,13 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
-        taskList.add(new Task("Bob Schmidt"));
-        taskList.add(new Task("Klaus Buzze"));
-        taskList.add(new Task("Tobi Fubzz"));
+        // Add some test data.
+        taskList.add(new Task("Bob Schmidt", "Termin mit Steuerberater vereinbaren. Einspruch gegen den ESt Bescheid", LocalDate.of(2019, 10, 31)));
+        taskList.add(new Task("Klaus Buzze", "Einkaufen für gemeinsames Abendessen am Wochenende", LocalDate.of(2019,10,27)));
+        taskList.add(new Task("Tobi Fubzz", "Eingangsrechnung vom 05.09.2019 bezahlen. Langsam wird es eng!", LocalDate.of(2019,10,24)));
+        taskList.add(new Task("Henning Wuehn", "Noch einiges zu tun", LocalDate.of(2019,10,26)));
+        taskList.add(new Task("Paul-Christian Meier", "Anzug in die Reinigung bringen", LocalDate.of(2019,10,25)));
+        taskList.add(new Task("Henning Wuehn", "Termin mit Werkstatt vereinbaren", LocalDate.of(2019,10,23)));
 
         observableList.setAll(taskList);
     }
