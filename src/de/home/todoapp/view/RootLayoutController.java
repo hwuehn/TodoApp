@@ -119,4 +119,62 @@ public class RootLayoutController {
         mainApp.setTaskFilePath(null);
     }
 
+    /**
+     * Opens a FileChooser to let the user select an task list to load.
+     */
+    @FXML
+    private void handleOpenMenuBtn() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file dialog
+        File file = fileChooser.showOpenDialog(mainApp.getStage());
+
+        if (file != null) {
+            mainApp.loadTaskDataFromFile(file);
+        }
+    }
+
+    /**
+     * Saves the file to the task file that is currently open. If there is no
+     * open file, the "save as" dialog is shown.
+     */
+    @FXML
+    private void handleSaveMenuBtn() {
+        File taskFile = mainApp.getTaskFilePath();
+        if (taskFile != null) {
+            mainApp.saveTaskDataToFile(taskFile);
+        } else {
+            handleSaveAsMenuBtn();
+        }
+    }
+
+    /**
+     * Opens a FileChooser to let the user select a file to save to.
+     */
+    @FXML
+    private void handleSaveAsMenuBtn() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file dialog
+        File file = fileChooser.showSaveDialog(mainApp.getStage());
+
+        if (file != null) {
+            // Make sure it has the correct extension
+            if (!file.getPath().endsWith(".xml")) {
+                file = new File(file.getPath() + ".xml");
+            }
+            mainApp.saveTaskDataToFile(file);
+        }
+    }
+
 }

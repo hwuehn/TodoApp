@@ -1,5 +1,6 @@
 package de.home.todoapp;
 
+import de.home.todoapp.model.TaskListWrapper;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.ListViewController;
 import de.home.todoapp.view.RootLayoutController;
@@ -9,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -189,6 +191,85 @@ public class MainApp extends Application {
 
             // Update the stage title.
             stage.setTitle("TodoApp");
+        }
+    }
+
+    /**
+     * Loads person data from the specified file. The current person data will
+     * be replaced.
+     *
+     * @param file
+     */
+    public void loadTaskDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(TaskListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            TaskListWrapper wrapper = (TaskListWrapper) um.unmarshal(file);
+
+            observableList.clear();
+            observableList.addAll(wrapper.getTasks());
+
+            // Save the file path to the registry.
+            setTaskFilePath(file);
+
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load data");
+            alert.setContentText("Could not load data from file:\n" + file.getPath());
+
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Returns the task file preference, i.e. the file that was last opened.
+     * The preference is read from the OS specific registry. If no such
+     * preference can be found, null is returned.
+     *
+     * @return
+     */
+    public File getTaskFilePath() {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null) {
+            return new File(filePath);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Saves the current task data to the specified file.
+     *
+     * @param file
+     */
+    public void saveTaskDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(TaskListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our task data.
+            TaskListWrapper wrapper = new TaskListWrapper();
+            wrapper.setTasks(observableList);
+
+            // Marshalling and saving XML to the file.
+            m.marshal(wrapper, file);
+
+            // Save the file path to the registry.
+            setTaskFilePath(file);
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
+
+            alert.showAndWait();
         }
     }
 }
