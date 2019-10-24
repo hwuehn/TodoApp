@@ -11,6 +11,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class ListViewController implements Initializable {
@@ -65,7 +66,8 @@ public class ListViewController implements Initializable {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        listView.setItems(mainApp.getObservableList());
+        listView.setItems(mainApp.getObservableList().sorted(Comparator.comparing(Task::getDaysBetween)));
+
 
     }
 
