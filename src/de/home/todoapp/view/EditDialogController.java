@@ -1,6 +1,6 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.model.Priority;
+
 import de.home.todoapp.model.Task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -30,9 +31,8 @@ public class EditDialogController {
     private Task task;
     private boolean okClicked = false;
 
-    ObservableList<Priority> prios = FXCollections.observableArrayList(Priority.ALLE, Priority.EILT, Priority.OFFEN, Priority.EILT_NICHT);
-
-    
+    ObservableList<Task.Priority> prios = FXCollections.observableArrayList(Task.Priority.ALLE, Task.Priority.EILT,
+            Task.Priority.OFFEN, Task.Priority.EILT_Nicht);
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -65,6 +65,7 @@ public class EditDialogController {
         inputNameField.setText(task.getName());
         inputTextAreaField.setText(task.getInput());
         finishDatePicker.setValue(task.getFinishDate());
+        priorityCombo.setValue(task.getPriority());
     }
 
     /**
@@ -85,6 +86,7 @@ public class EditDialogController {
             task.setName(inputNameField.getText());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
+            task.setPriority((Task.Priority) priorityCombo.getSelectionModel().getSelectedItem());
 
             okClicked = true;
             dialogStage.close();

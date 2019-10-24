@@ -93,6 +93,7 @@ public class ListViewController implements Initializable {
                 selectedTask.setName(selectedTask.getName());
                 selectedTask.setInput(selectedTask.getInput());
                 selectedTask.setFinishDate(selectedTask.getFinishDate());
+                selectedTask.setPriority(selectedTask.getPriority());
                 listView.refresh();
             }
 
