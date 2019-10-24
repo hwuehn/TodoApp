@@ -52,12 +52,12 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // Add some test data.
-        taskList.add(new Task("Bob Schmidt", "Termin mit Steuerberater vereinbaren. Einspruch gegen den ESt Bescheid", LocalDate.of(2019, 10, 31)));
-        taskList.add(new Task("Klaus Buzze", "Einkaufen für gemeinsames Abendessen am Wochenende", LocalDate.of(2019,10,27)));
-        taskList.add(new Task("Tobi Fubzz", "Eingangsrechnung vom 05.09.2019 bezahlen. Langsam wird es eng!", LocalDate.of(2019,10,24)));
-        taskList.add(new Task("Henning Wuehn", "Noch einiges zu tun", LocalDate.of(2019,10,26)));
-        taskList.add(new Task("Paul-Christian Meier", "Anzug in die Reinigung bringen", LocalDate.of(2019,10,25)));
-        taskList.add(new Task("Henning Wuehn", "Termin mit Werkstatt vereinbaren", LocalDate.of(2019,10,23)));
+//        taskList.add(new Task("Bob Schmidt", "Termin mit Steuerberater vereinbaren. Einspruch gegen den ESt Bescheid", LocalDate.of(2019, 10, 31)));
+//        taskList.add(new Task("Klaus Buzze", "Einkaufen für gemeinsames Abendessen am Wochenende", LocalDate.of(2019,10,27)));
+//        taskList.add(new Task("Tobi Fubzz", "Eingangsrechnung vom 05.09.2019 bezahlen. Langsam wird es eng!", LocalDate.of(2019,10,24)));
+//        taskList.add(new Task("Henning Wuehn", "Noch einiges zu tun", LocalDate.of(2019,10,26)));
+//        taskList.add(new Task("Paul-Christian Meier", "Anzug in die Reinigung bringen", LocalDate.of(2019,10,25)));
+//        taskList.add(new Task("Henning Wuehn", "Termin mit Werkstatt vereinbaren", LocalDate.of(2019,10,23)));
 
         taskList.sort(Comparator.comparing(Task::getDaysBetween));
         observableList.setAll(taskList);
@@ -99,6 +99,12 @@ public class MainApp extends Application {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        // Try to load last opened person file.
+        File file = getTaskFilePath();
+        if (file != null) {
+            loadTaskDataFromFile(file);
         }
     }
 

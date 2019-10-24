@@ -3,29 +3,43 @@
     <task>
         <daysToFinish>0</daysToFinish>
         <finishDate>2019-10-23</finishDate>
-        <input>Termin mit Werkstatt vereinbaren</input>
+        <input>Fix: AccountingApp loading functionality</input>
         <name>Henning Wuehn</name>
         <today>2019-10-24</today>
     </task>
     <task>
         <daysToFinish>0</daysToFinish>
         <finishDate>2019-10-24</finishDate>
-        <input>Eingangsrechnung vom 05.09.2019 bezahlen. Langsam wird es eng!</input>
-        <name>Tobi Fubzz</name>
+        <input>Feature: add new, open, save, save as, about, exit to TodoApp </input>
+        <name>Henning Wühn </name>
+        <today>2019-10-24</today>
+    </task>
+    <task>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-25</finishDate>
+        <input>Refactoring: TodoApp</input>
+        <name>Dozent</name>
+        <today>2019-10-24</today>
+    </task>
+    <task>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-26</finishDate>
+        <input>Refactoring: AccountingApp</input>
+        <name>Dozent</name>
         <today>2019-10-24</today>
     </task>
     <task>
         <daysToFinish>0</daysToFinish>
         <finishDate>2019-10-27</finishDate>
-        <input>Einkaufen für gemeinsames Abendessen am Wochenende</input>
-        <name>Klaus Buzze</name>
+        <input>Feature:  Poilish code for TodoApp</input>
+        <name>Henning Wühn</name>
         <today>2019-10-24</today>
     </task>
     <task>
         <daysToFinish>0</daysToFinish>
         <finishDate>2019-10-31</finishDate>
-        <input>Termin mit Steuerberater vereinbaren. Einspruch gegen den ESt Bescheid</input>
-        <name>Bob Schmidt</name>
+        <input>Feature:  Create and finish build with installer.</input>
+        <name>Henning Wühn</name>
         <today>2019-10-24</today>
     </task>
 </tasks>
