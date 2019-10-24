@@ -1,8 +1,10 @@
 package de.home.todoapp.model;
 
 import de.home.todoapp.util.DateUtil;
+import de.home.todoapp.util.*;
 import javafx.beans.property.*;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 /**
@@ -79,6 +81,7 @@ public class Task {
         this.input.set(input);
     }
 
+    @XmlJavaTypeAdapter(de.home.todoapp.util.LocalDateAdapter.class)
     public LocalDate getFinishDate() {
         return finishDate.get();
     }
@@ -91,6 +94,7 @@ public class Task {
         this.finishDate.set(finishDate);
     }
 
+    @XmlJavaTypeAdapter(de.home.todoapp.util.LocalDateAdapter.class)
     public LocalDate getToday() {
         return today.get();
     }

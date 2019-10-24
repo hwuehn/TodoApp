@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasks>
+    <task>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-23</finishDate>
+        <input>Termin mit Werkstatt vereinbaren</input>
+        <name>Henning Wuehn</name>
+        <today>2019-10-24</today>
+    </task>
+    <task>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-24</finishDate>
+        <input>Eingangsrechnung vom 05.09.2019 bezahlen. Langsam wird es eng!</input>
+        <name>Tobi Fubzz</name>
+        <today>2019-10-24</today>
+    </task>
+    <task>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-27</finishDate>
+        <input>Einkaufen für gemeinsames Abendessen am Wochenende</input>
+        <name>Klaus Buzze</name>
+        <today>2019-10-24</today>
+    </task>
+    <task>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-31</finishDate>
+        <input>Termin mit Steuerberater vereinbaren. Einspruch gegen den ESt Bescheid</input>
+        <name>Bob Schmidt</name>
+        <today>2019-10-24</today>
+    </task>
+</tasks>
