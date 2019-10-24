@@ -3,6 +3,8 @@ package de.home.todoapp.view;
 import de.home.todoapp.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 
 /**
@@ -37,8 +39,25 @@ public class RootLayoutController {
     @FXML
     private ToggleButton noHurryBtn;
     @FXML
-    private ToggleButton otherBtn;
+    private MenuButton otherBtn;
 
+    @FXML
+    private MenuItem newMenuBtn;
+
+    @FXML
+    private MenuItem loadMenuBtn;
+
+    @FXML
+    private MenuItem saveMenuBtn;
+
+    @FXML
+    private MenuItem saveAsMenuBtn;
+
+    @FXML
+    private MenuItem aboutMenuBtn;
+
+    @FXML
+    private MenuItem exitMenuBtn;
 
 
      /**
