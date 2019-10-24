@@ -39,8 +39,6 @@ public class MainApp extends Application {
     private Stage stage;
     private BorderPane rootLayout;
 
-    private List<Task> taskList = new ArrayList<>(10);
-
     private ObservableList<Task> observableList = FXCollections.observableArrayList();
 
     public ObservableList<Task> getObservableList() {
@@ -51,16 +49,6 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
-        // Add some test data.
-//        taskList.add(new Task("Bob Schmidt", "Termin mit Steuerberater vereinbaren. Einspruch gegen den ESt Bescheid", LocalDate.of(2019, 10, 31)));
-//        taskList.add(new Task("Klaus Buzze", "Einkaufen für gemeinsames Abendessen am Wochenende", LocalDate.of(2019,10,27)));
-//        taskList.add(new Task("Tobi Fubzz", "Eingangsrechnung vom 05.09.2019 bezahlen. Langsam wird es eng!", LocalDate.of(2019,10,24)));
-//        taskList.add(new Task("Henning Wuehn", "Noch einiges zu tun", LocalDate.of(2019,10,26)));
-//        taskList.add(new Task("Paul-Christian Meier", "Anzug in die Reinigung bringen", LocalDate.of(2019,10,25)));
-//        taskList.add(new Task("Henning Wuehn", "Termin mit Werkstatt vereinbaren", LocalDate.of(2019,10,23)));
-
-        taskList.sort(Comparator.comparing(Task::getDaysBetween));
-        observableList.setAll(taskList);
     }
 
     @Override
@@ -175,11 +163,7 @@ public class MainApp extends Application {
         return stage;
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    /**
+     /**
      * Sets the file path of the currently loaded file. The path is persisted in
      * the OS specific registry.
      *
