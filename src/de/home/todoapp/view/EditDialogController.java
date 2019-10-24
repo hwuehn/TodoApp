@@ -1,11 +1,16 @@
 package de.home.todoapp.view;
 
+import de.home.todoapp.model.Priority;
 import de.home.todoapp.model.Task;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * Dialog to edit details of a task.
@@ -19,10 +24,15 @@ public class EditDialogController {
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
+    @FXML private ComboBox priorityCombo;
 
     private Stage dialogStage;
     private Task task;
     private boolean okClicked = false;
+
+    ObservableList<Priority> prios = FXCollections.observableArrayList(Priority.ALLE, Priority.EILT, Priority.OFFEN, Priority.EILT_NICHT);
+
+    
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -30,6 +40,7 @@ public class EditDialogController {
      */
     @FXML
     private void initialize() {
+        priorityCombo.setItems(prios);
     }
 
     /**
