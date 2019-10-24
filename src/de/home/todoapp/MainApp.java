@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainApp extends Application {
@@ -49,6 +50,7 @@ public class MainApp extends Application {
         taskList.add(new Task("Paul-Christian Meier", "Anzug in die Reinigung bringen", LocalDate.of(2019,10,25)));
         taskList.add(new Task("Henning Wuehn", "Termin mit Werkstatt vereinbaren", LocalDate.of(2019,10,23)));
 
+        taskList.sort(Comparator.comparing(Task::getDaysBetween));
         observableList.setAll(taskList);
     }
 

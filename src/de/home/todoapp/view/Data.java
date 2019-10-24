@@ -4,6 +4,7 @@ import de.home.todoapp.model.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -13,19 +14,13 @@ import java.io.IOException;
 public class Data
 {
     @FXML
-    private VBox vBox;
-
-    @FXML
-    private HBox hBoxTop;
+    private GridPane GridPane;
 
     @FXML
     private Label nameLabel;
 
     @FXML
     private Label daysToFinishLabel;
-
-    @FXML
-    private HBox hBoxBottom;
 
     @FXML
     private Label inputLabel;
@@ -40,7 +35,7 @@ public class Data
         fxmlLoader.setController(this);
         try
         {
-            vBox = fxmlLoader.load();
+            GridPane = fxmlLoader.load();
         }
         catch (IOException e)
         {
@@ -83,8 +78,8 @@ public class Data
 
     }
 
-    public VBox getBox()
+    public GridPane getBox()
     {
-        return vBox;
+        return GridPane;
     }
 }

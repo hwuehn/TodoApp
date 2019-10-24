@@ -55,8 +55,6 @@ public class ListViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
         setCellFactory();
-
-
     }
 
     /**
@@ -66,9 +64,7 @@ public class ListViewController implements Initializable {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        listView.setItems(mainApp.getObservableList().sorted(Comparator.comparing(Task::getDaysBetween)));
-
-
+        listView.setItems(mainApp.getObservableList());
     }
 
     /**
