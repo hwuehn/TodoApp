@@ -19,8 +19,8 @@
                 <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn" text="Load..." />
                 <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" onAction="#handleSaveMenuBtn" text="Save" />
                 <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" onAction="#handleSaveAsMenuBtn" text="Save As..." />
-                <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" text="About" />
-                <MenuItem fx:id="exitMenuBtn" mnemonicParsing="false" text="Exit" />
+                <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" onAction="#handleAboutMenuBtn" text="About" />
+                <MenuItem fx:id="exitMenuBtn" mnemonicParsing="false" onAction="#handleExitMenuBtn" text="Exit" />
               </items>
             </MenuButton>
                   <Region maxWidth="55.0" minWidth="30.0" prefHeight="44.0" prefWidth="30.0" />

@@ -177,4 +177,25 @@ public class RootLayoutController {
         }
     }
 
+    /**
+     * Opens an about dialog.
+     */
+    @FXML
+    private void handleAboutMenuBtn() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("TodoApp");
+        alert.setHeaderText("About");
+        alert.setContentText("Author: Henning Wuehn");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleExitMenuBtn() {
+        System.exit(0);
+    }
+
 }
