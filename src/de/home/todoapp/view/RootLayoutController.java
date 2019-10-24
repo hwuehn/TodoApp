@@ -114,7 +114,7 @@ public class RootLayoutController {
      * Creates an empty todoList.
      */
     @FXML
-    private void handleNew() {
+    private void handleNewMenuBtn() {
         mainApp.getObservableList().clear();
         mainApp.setTaskFilePath(null);
     }

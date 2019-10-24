@@ -15,7 +15,7 @@
               <buttons>
             <MenuButton fx:id="otherBtn" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="button" stylesheets="@style.css">
               <items>
-                <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" text="New" />
+                <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn" text="New" />
                 <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" text="Load..." />
                 <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" text="Save" />
                 <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" text="Save As..." />
