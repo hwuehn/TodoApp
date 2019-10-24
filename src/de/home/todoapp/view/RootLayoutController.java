@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
+import java.io.File;
 
 /**
  * The controller for the root layout. The root layout provides the basic
@@ -107,6 +110,13 @@ public class RootLayoutController {
         allBtn.setId("buttonNotSelected");
     }
 
-
+    /**
+     * Creates an empty todoList.
+     */
+    @FXML
+    private void handleNew() {
+        mainApp.getObservableList().clear();
+        mainApp.setTaskFilePath(null);
+    }
 
 }

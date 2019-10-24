@@ -21,6 +21,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.IOException;
+import java.util.prefs.Preferences;
+
 public class MainApp extends Application {
 
     public static void main(String[] args) {
@@ -162,6 +169,27 @@ public class MainApp extends Application {
 
     public List<Task> getTaskList() {
         return taskList;
+    }
+
+    /**
+     * Sets the file path of the currently loaded file. The path is persisted in
+     * the OS specific registry.
+     *
+     * @param file the file or null to remove the path
+     */
+    public void setTaskFilePath(File file) {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        if (file != null) {
+            prefs.put("filePath", file.getPath());
+
+            // Update the stage title.
+            stage.setTitle("TodoApp - " + file.getName());
+        } else {
+            prefs.remove("filePath");
+
+            // Update the stage title.
+            stage.setTitle("TodoApp");
+        }
     }
 }
 
