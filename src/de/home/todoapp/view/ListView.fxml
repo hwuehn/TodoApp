@@ -1,46 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ToggleGroup?>
 <AnchorPane prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.ListViewController">
    <children>
       <VBox prefHeight="500.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-
-               <ButtonBar buttonMinWidth="30.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="450.0" >
-                  <buttons>
-                     <MenuButton fx:id="otherBtn" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="button" stylesheets="@style.css">
-                        <items>
-                           <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn" text="New" />
-                           <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn" text="Load..." />
-                           <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" onAction="#handleSaveMenuBtn" text="Save" />
-                           <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" onAction="#handleSaveAsMenuBtn" text="Save As..." />
-                           <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" onAction="#handleAboutMenuBtn" text="About" />
-                           <MenuItem fx:id="exitMenuBtn" mnemonicParsing="false" onAction="#handleExitMenuBtn" text="Exit" />
-                        </items>
-                     </MenuButton>
-                     <Region maxWidth="55.0" minWidth="30.0" prefHeight="44.0" prefWidth="30.0" />
-                     <ToggleButton fx:id="noHurryBtn" maxWidth="90.0" minWidth="104.0" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="90.0" styleClass="button" stylesheets="@style.css" text="Eilt nicht">
-                        <toggleGroup>
+            <HBox fx:id="hBoxFilters">
+               <children>
+                     <ToggleButton fx:id="allBtn" maxWidth="58.0" minWidth="62.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="44.0" prefWidth="62.0" styleClass="button" stylesheets="@style.css" text="Alle">
+                     <toggleGroup>
                            <ToggleGroup fx:id="ColorToggleGroup" />
-                        </toggleGroup>
-                     </ToggleButton>
-                     <ToggleButton fx:id="openBtn" maxWidth="66.0" minWidth="78.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="44.0" prefWidth="78.0" styleClass="button" stylesheets="@style.css" text="Offen" toggleGroup="$ColorToggleGroup" />
-                     <ToggleButton fx:id="hurryBtn" maxWidth="54.0" minWidth="55.0" mnemonicParsing="false" onAction="#handleHurry" prefHeight="44.0" prefWidth="55.0" styleClass="button" stylesheets="@style.css" text="Eilt" toggleGroup="$ColorToggleGroup" />
-                     <ToggleButton fx:id="allBtn" maxWidth="58.0" minWidth="62.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="44.0" prefWidth="62.0" styleClass="button" stylesheets="@style.css" text="Alle" toggleGroup="$ColorToggleGroup" />
-                  </buttons>
-               </ButtonBar>
+                     </toggleGroup>
+                  </ToggleButton>
+                     <ToggleButton fx:id="hurryBtn" maxWidth="54.0" minWidth="55.0" mnemonicParsing="false" onAction="#handleHurry" prefHeight="44.0" prefWidth="55.0" styleClass="button" stylesheets="@style.css" text="Filter 1" toggleGroup="$ColorToggleGroup" />
+                     <ToggleButton fx:id="openBtn" maxWidth="66.0" minWidth="78.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="44.0" prefWidth="78.0" styleClass="button" stylesheets="@style.css" text="Filter 2" toggleGroup="$ColorToggleGroup" />
+                     <ToggleButton fx:id="noHurryBtn" maxWidth="90.0" minWidth="104.0" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="90.0" styleClass="button" stylesheets="@style.css" text="Filter 3" toggleGroup="$ColorToggleGroup" />
+                  <Button mnemonicParsing="false" onAction="#handleNewTask" stylesheets="@style.css" text="+" />
+               </children>
+            </HBox>
 
 
 
@@ -96,6 +87,16 @@
                               </effect>
                            </ImageView>
                      </graphic></ToggleButton>
+                     <MenuButton fx:id="otherBtn" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="button" stylesheets="@style.css">
+                        <items>
+                           <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn" text="New" />
+                           <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn" text="Load..." />
+                           <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" onAction="#handleSaveMenuBtn" text="Save" />
+                           <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" onAction="#handleSaveAsMenuBtn" text="Save As..." />
+                           <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" onAction="#handleAboutMenuBtn" text="About" />
+                           <MenuItem fx:id="exitMenuBtn" mnemonicParsing="false" onAction="#handleExitMenuBtn" text="Exit" />
+                        </items>
+                     </MenuButton>
                   </buttons>
                </ButtonBar>
          </children>

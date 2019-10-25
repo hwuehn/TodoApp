@@ -1,23 +1,18 @@
 package de.home.todoapp.view;
 
-
 import de.home.todoapp.model.Task;
+import de.home.todoapp.model.TasksModel;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * Dialog to edit details of a task.
- *
- * @author Henning Wuehn
- */
 public class EditDialogController {
 
     @FXML private TextField inputNameField;
@@ -25,33 +20,32 @@ public class EditDialogController {
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
-    @FXML private ComboBox priorityCombo;
+    @FXML private ComboBox<String> priorityCombo;
 
     private Stage dialogStage;
     private Task task;
     private boolean okClicked = false;
+    private TasksModel model;
 
-    ObservableList<Task.Priority> prios = FXCollections.observableArrayList(Task.Priority.ALLE, Task.Priority.EILT,
-            Task.Priority.OFFEN, Task.Priority.EILT_Nicht);
+    public void setModel( TasksModel model ) {
+        this.model = model;
 
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
-    @FXML
-    private void initialize() {
-        priorityCombo.setItems(prios);
+        List<String> priorities =
+                this.model.tasksProperty().get()
+                        .stream()
+                        .map( (p) -> p.getPriority() )
+                        .distinct()
+                        .collect(Collectors.toList());
+
+        priorityCombo.setItems(FXCollections.observableArrayList( priorities ) );
     }
 
-    /**
-     * Sets the stage of this dialog.
-     *
-     * @param dialogStage
-     */
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    @FXML
+    private void initialize() {
+    }
 
-        // Set the dialog icon.
+   public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
         this.dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
     }
 
@@ -68,11 +62,6 @@ public class EditDialogController {
         priorityCombo.setValue(task.getPriority());
     }
 
-    /**
-     * Returns true if the user clicked OK, false otherwise.
-     *
-     * @return
-     */
     public boolean isOkClicked() {
         return okClicked;
     }
@@ -86,19 +75,49 @@ public class EditDialogController {
             task.setName(inputNameField.getText());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
-            task.setPriority((Task.Priority) priorityCombo.getSelectionModel().getSelectedItem());
+            task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());
 
             okClicked = true;
             dialogStage.close();
         }
     }
 
-    /**
-     * Called when the user clicks cancel.
-     */
     @FXML
-    private void handleCancel() {
-        dialogStage.close();
+    public void addPlayer(ActionEvent evt) {
+
+        List<String> validationErrors = validate();
+
+        if( validationErrors.isEmpty() ) {
+            model.add( new Task(
+                    inputNameField.getText(),
+                    inputTextAreaField.getText(),
+                    finishDatePicker.getValue(),
+                    priorityCombo.getSelectionModel().getSelectedItem()));
+            dialogStage.hide();
+        }
+    }
+
+    @FXML
+    public void cancel(ActionEvent evt) { hide(evt); }
+
+    private void hide(ActionEvent evt) {
+        ((Button)evt.getSource()).getScene().getWindow().hide();
+    }
+
+    private List<String> validate() {
+
+        List<String> validationErrors = new ArrayList<>();
+
+        if( inputTextAreaField.getText() == null ||
+                inputTextAreaField.getText().isEmpty() ) {
+            validationErrors.add("Player Name is required.");
+        }
+
+        if( priorityCombo.getSelectionModel().getSelectedItem() == null ) {
+            validationErrors.add("Team is required.");
+        }
+
+        return validationErrors;
     }
 
     /**
@@ -117,7 +136,7 @@ public class EditDialogController {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");

@@ -1,47 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasks>
     <task>
-        <daysToFinish>0</daysToFinish>
-        <finishDate>2019-10-23</finishDate>
-        <input>Fix: AccountingApp loading functionality</input>
-        <name>Henning Wuehn</name>
-        <today>2019-10-24</today>
-    </task>
-    <task>
-        <daysToFinish>0</daysToFinish>
-        <finishDate>2019-10-24</finishDate>
-        <input>Feature: add new, open, save, save as, about, exit to TodoApp </input>
-        <name>Henning Wühn </name>
-        <today>2019-10-24</today>
-    </task>
-    <task>
-        <daysToFinish>0</daysToFinish>
-        <finishDate>2019-10-25</finishDate>
-        <input>Refactoring: TodoApp</input>
-        <name>Dozent</name>
-        <today>2019-10-24</today>
-    </task>
-    <task>
-        <daysToFinish>0</daysToFinish>
+        <daysToFinish>1</daysToFinish>
         <finishDate>2019-10-26</finishDate>
-        <input>Refactoring: AccountingApp</input>
-        <name>Dozent</name>
-        <today>2019-10-24</today>
+        <input>Aufgabe 1</input>
+        <name>Henning</name>
+        <priority>EILT</priority>
+        <today>2019-10-25</today>
     </task>
     <task>
-        <daysToFinish>0</daysToFinish>
-        <finishDate>2019-10-27</finishDate>
-        <input>Feature:  TodoApp - implement priorityStatus and showing explizit content</input>
-        <name>Henning Wühn</name>
+        <daysToFinish>1</daysToFinish>
+        <finishDate>2019-10-26</finishDate>
+        <input>Aufgabe 2</input>
+        <name>Henning</name>
         <priority>EILT</priority>
-        <today>2019-10-24</today>
+        <today>2019-10-25</today>
     </task>
     <task>
-        <daysToFinish>0</daysToFinish>
-        <finishDate>2019-10-31</finishDate>
-        <input>Feature:  Create and finish build with installer.</input>
-        <name>Henning Wühn</name>
-        <priority>EILT</priority>
-        <today>2019-10-24</today>
+        <daysToFinish>5</daysToFinish>
+        <finishDate>2019-10-30</finishDate>
+        <input>Aufgabe 3</input>
+        <name>Henning</name>
+        <priority>OFFEN</priority>
+        <today>2019-10-25</today>
+    </task>
+    <task>
+        <daysToFinish>16</daysToFinish>
+        <finishDate>2019-11-10</finishDate>
+        <input>Aufgabe 4</input>
+        <name>Henning</name>
+        <priority>OFFEN</priority>
+        <today>2019-10-25</today>
+    </task>
+    <task>
+        <daysToFinish>67</daysToFinish>
+        <finishDate>2019-12-31</finishDate>
+        <input>Aufgabe 5</input>
+        <name>Henning</name>
+        <priority>EILT_Nicht</priority>
+        <today>2019-10-25</today>
     </task>
 </tasks>

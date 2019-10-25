@@ -2,65 +2,60 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.Task;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+import de.home.todoapp.model.TaskListWrapper;
+import de.home.todoapp.model.TasksModel;
+import de.home.todoapp.model.TeamMatcher;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 public class ListViewController implements Initializable {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML public ListView<Task> listView;
-    private Task task;
 
-    @FXML
-    private ToggleButton addBtn;
-    @FXML
-    private ToggleButton editBtn;
-    @FXML
-    private ToggleButton checkBtn;
-    @FXML
-    private ToggleButton emainlBtn;
+    @FXML private HBox hBoxFilters;
+    @FXML public ToggleButton allBtn;
+    @FXML public ToggleButton hurryBtn;
+    @FXML public ToggleButton openBtn;
+    @FXML public ToggleButton noHurryBtn;
+    @FXML public MenuButton otherBtn;
 
-    @FXML
-    public ToggleButton allBtn;
-    @FXML
-    public ToggleButton hurryBtn;
-    @FXML
-    public ToggleButton openBtn;
-    @FXML
-    public ToggleButton noHurryBtn;
-    @FXML
-    public MenuButton otherBtn;
+    @FXML private MenuItem newMenuBtn;
+    @FXML private MenuItem loadMenuBtn;
+    @FXML private MenuItem saveMenuBtn;
+    @FXML private MenuItem saveAsMenuBtn;
+    @FXML private MenuItem aboutMenuBtn;
+    @FXML private MenuItem exitMenuBtn;
 
-    @FXML
-    private MenuItem newMenuBtn;
+    private ObservableList<Task> items;
 
-    @FXML
-    private MenuItem loadMenuBtn;
-
-    @FXML
-    private MenuItem saveMenuBtn;
-
-    @FXML
-    private MenuItem saveAsMenuBtn;
-
-    @FXML
-    private MenuItem aboutMenuBtn;
-
-    @FXML
-    private MenuItem exitMenuBtn;
-
-
+    
+    private TasksModel tasksModel = new TasksModel();
+    private ToggleGroup filtersGroup = new ToggleGroup();
 
     public void setCellFactory() {
         listView.setCellFactory(
@@ -78,7 +73,7 @@ public class ListViewController implements Initializable {
     }
 
     // Reference to the main application.
-    private MainApp mainApp;
+    private IMainController mainController;
 
     public ListViewController() {
     }
@@ -86,17 +81,109 @@ public class ListViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
+
+        setAppState(new IAppState() {
+            @Override
+            public ObservableList<Task> getViewableTasks() {
+                return items;
+            }
+        });
+        
+        tasksModel.loadTestData();
         setCellFactory();
+        listView.itemsProperty().bind(tasksModel.viewableTasksProperty());
+        listView.setContextMenu(createContextMenu());
+
+        List<String> priority = tasksModel.tasksProperty().get()
+                .stream()
+                .map( (p) -> p.getPriority() )
+                .distinct()
+                .collect(Collectors.toList());
+
+        hBoxFilters.getChildren().clear();
+        hBoxFilters.getChildren().add(
+                createToggleButton("Show All", new TeamMatcher("*"))
+        );
+
+        priority
+                .stream()
+                .forEach( (t) -> hBoxFilters.getChildren().add(
+                        createToggleButton(t, new TeamMatcher(t) ))
+                );
     }
+
+    private ContextMenu createContextMenu() {
+        ContextMenu cm = new ContextMenu();
+        MenuItem mi = new MenuItem("Delete");
+        mi.setOnAction( (evt) -> {
+            Task selectedP = listView.getSelectionModel().getSelectedItem();
+            if( selectedP != null ) {
+                tasksModel.remove(selectedP);
+            }
+        });
+        cm.getItems().add( mi );
+        return cm;
+    }
+
+    private ToggleButton createToggleButton(String Alle, TeamMatcher matcher) {
+        ToggleButton tb = new ToggleButton(Alle);
+        tb.setUserData( matcher );
+        tb.setOnAction( toggleHandler );
+        tb.setToggleGroup( filtersGroup );
+        return tb;
+    }
+
+    private EventHandler
+            <ActionEvent> toggleHandler = event -> {
+        ToggleButton tb = (ToggleButton)event.getSource();
+        Predicate<Task> filter = (Predicate<Task>)tb.getUserData();
+        tasksModel.filterProperty().set( filter );
+    };
+
+//    @FXML
+//    public void showAddPlayer() {
+//
+//        try {
+//
+//            FXMLLoader fxmlLoader =
+//                    new FXMLLoader(ListViewController.class.getResource("/EditDialog.fxml"));
+//
+//            Parent p = fxmlLoader.load();
+//
+//            EditDialogController c = fxmlLoader.getController();
+//
+//            Scene scene = new Scene(p);
+//
+//            Stage stage = new Stage();
+//            stage.setScene( scene );
+//            stage.setTitle("Add Player");
+//            stage.setOnShown( (evt) -> {
+//                c.setModel( tasksModel );
+//            });
+//            stage.show();
+//
+//        } catch(IOException exc) {
+//            exc.printStackTrace();
+//        }
+//    }
 
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param mainApp
+     * @param controller
      */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        listView.setItems(mainApp.getObservableList());
+    public void setMainController(IMainController controller) {
+        this.mainController = controller;
+        // Try to load last opened person file.
+        File file = getTaskFilePath();
+        if (file != null) {
+            loadTaskDataFromFile(file);
+        }
+    }
+
+    public void setAppState(IAppState appState) {
+        items = appState.getViewableTasks();
+        listView.setItems(appState.getViewableTasks());
     }
 
     /**
@@ -106,9 +193,9 @@ public class ListViewController implements Initializable {
     @FXML
     private void handleNewTask() {
         Task tempTask = new Task();
-        boolean okClicked = mainApp.showEditDialog(tempTask);
+        boolean okClicked = mainController.showEditDialog(tempTask);
         if (okClicked) {
-            mainApp.getObservableList().add(tempTask);
+       //    listView.;
         }
     }
 
@@ -120,7 +207,7 @@ public class ListViewController implements Initializable {
     private void handleEditTask() {
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
             if (selectedTask != null) {
-            boolean okClicked = mainApp.showEditDialog(selectedTask);
+            boolean okClicked = mainController.showEditDialog(selectedTask);
             if (okClicked) {
                 selectedTask.setName(selectedTask.getName());
                 selectedTask.setInput(selectedTask.getInput());
@@ -129,11 +216,10 @@ public class ListViewController implements Initializable {
                 listView.refresh();
             }
 
-
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getStage());
+            alert.initOwner(mainController.getStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Task Selected");
             alert.setContentText("Please select a task in the table.");
@@ -153,7 +239,7 @@ public class ListViewController implements Initializable {
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getStage());
+            alert.initOwner(mainController.getStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Person Selected");
             alert.setContentText("Please select a person in the table.");
@@ -161,46 +247,6 @@ public class ListViewController implements Initializable {
             alert.showAndWait();
         }
     }
-
-//    public void enableFiltering() {
-//        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-//        FilteredList<Task> filteredData = new FilteredList<>(mainApp.getObservableList(), r -> true);
-//        // 2. Set the filter Predicate whenever the filter changes.
-//
-//
-//        filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            filteredData.setPredicate(record -> {
-//                // If filter text is empty, display all records.
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//                // Compare all columns with filter text.
-//                String lowerCaseFilter = newValue; //.toLowerCase();
-//
-//                if (record.getDebitAcc().toString().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches debitAcc.
-//                } else if (record.getCreditAcc().toString().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches creditAcc.
-////                } else if (record.getId().contains(lowerCaseFilter)) {
-////                    return true; // Filter matches iD.
-//                } else if (record.getAmount().toString().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches amount.
-//                } else if (record.getDate().toString().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches date.
-//                } else if (record.getDocNum().toString().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches docNum.
-//                } else return record.getTags().contains(lowerCaseFilter); // Filter matches tags.
-//                // Does not match.
-//            });
-//        });
-//
-//        // 3. Wrap the FilteredList in a SortedList.
-//        SortedList<Task> sortedData = new SortedList<>(filteredData);
-//        // 4. Bind the SortedList comperator to the TableView comperator.
-//        sortedData.comparatorProperty().bind(listView.comparatorProperty());
-//        // 5. Add sorted (and filtered) data to the table.
-//        listView.setItems(sortedData);
-//    }
 
     /**
      * Is set as the standard selection.
@@ -222,7 +268,6 @@ public class ListViewController implements Initializable {
         openBtn.setId("buttonNotSelected");
         noHurryBtn.setId("buttonNotSelected");
         otherBtn.setId("buttonNotSelected");
-
     }
 
     public void handleOpen() {
@@ -254,17 +299,15 @@ public class ListViewController implements Initializable {
     /**
      * Creates an empty todoList.
      */
-    @FXML
-    private void handleNewMenuBtn() {
-        mainApp.getObservableList().clear();
-        mainApp.setTaskFilePath(null);
+    @FXML private void handleNewMenuBtn() {
+        tasksModel.getViewableTasks().clear();
+        setTaskFilePath(null);
     }
 
     /**
      * Opens a FileChooser to let the user select an task list to load.
      */
-    @FXML
-    private void handleOpenMenuBtn() {
+    @FXML private void handleOpenMenuBtn() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
@@ -273,10 +316,10 @@ public class ListViewController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainApp.getStage());
+        File file = fileChooser.showOpenDialog(mainController.getStage());
 
         if (file != null) {
-            mainApp.loadTaskDataFromFile(file);
+            loadTaskDataFromFile(file);
         }
     }
 
@@ -284,21 +327,15 @@ public class ListViewController implements Initializable {
      * Saves the file to the task file that is currently open. If there is no
      * open file, the "save as" dialog is shown.
      */
-    @FXML
-    private void handleSaveMenuBtn() {
-        File taskFile = mainApp.getTaskFilePath();
+    @FXML private void handleSaveMenuBtn() {
+        File taskFile = getTaskFilePath();
         if (taskFile != null) {
-            mainApp.saveTaskDataToFile(taskFile);
+            saveTaskDataToFile(taskFile);
         } else {
             handleSaveAsMenuBtn();
         }
     }
-
-    /**
-     * Opens a FileChooser to let the user select a file to save to.
-     */
-    @FXML
-    private void handleSaveAsMenuBtn() {
+    @FXML private void handleSaveAsMenuBtn() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
@@ -307,22 +344,17 @@ public class ListViewController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getStage());
+        File file = fileChooser.showSaveDialog(mainController.getStage());
 
         if (file != null) {
             // Make sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.saveTaskDataToFile(file);
+            saveTaskDataToFile(file);
         }
     }
-
-    /**
-     * Opens an about dialog.
-     */
-    @FXML
-    private void handleAboutMenuBtn() {
+    @FXML private void handleAboutMenuBtn() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TodoApp");
         alert.setHeaderText("About");
@@ -330,14 +362,111 @@ public class ListViewController implements Initializable {
 
         alert.showAndWait();
     }
-
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExitMenuBtn() {
+    @FXML private void handleExitMenuBtn() {
         System.exit(0);
     }
 
+    /**
+     * Loads task data from the specified file. The current task data will
+     * be replaced.
+     *
+     * @param file
+     */
+    public void loadTaskDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(TaskListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
 
+            // Reading XML from the file and unmarshalling.
+            TaskListWrapper wrapper = (TaskListWrapper) um.unmarshal(file);
+
+            tasksModel.getViewableTasks().clear();
+            tasksModel.getViewableTasks().addAll(wrapper.getTasks());
+
+            // Save the file path to the registry.
+            setTaskFilePath(file);
+
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load data");
+            alert.setContentText("Could not load data from file:\n" + file.getPath());
+
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Returns the task file preference, i.e. the file that was last opened.
+     * The preference is read from the OS specific registry. If no such
+     * preference can be found, null is returned.
+     *
+     * @return
+     */
+    public File getTaskFilePath() {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null) {
+            return new File(filePath);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Saves the current task data to the specified file.
+     *
+     * @param file
+     */
+    public void saveTaskDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(TaskListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our task data.
+            try {
+                TaskListWrapper wrapper = new TaskListWrapper();
+                wrapper.setTasks(tasksModel.getViewableTasks());
+                // Marshalling and saving XML to the file.
+                m.marshal(wrapper, file);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Save the file path to the registry.
+            setTaskFilePath(file);
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
+
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Sets the file path of the currently loaded file. The path is persisted in
+     * the OS specific registry.
+     *
+     * @param file the file or null to remove the path
+     */
+    public void setTaskFilePath(File file) {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        if (file != null) {
+            prefs.put("filePath", file.getPath());
+
+            // Update the stage title.
+            mainController.getStage().setTitle("TodoApp - " + file.getName());
+        } else {
+            prefs.remove("filePath");
+
+            // Update the stage title.
+            mainController.getStage().setTitle("TodoApp");
+        }
+    }
 }

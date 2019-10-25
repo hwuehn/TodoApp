@@ -16,57 +16,39 @@ public class Task {
     private StringProperty input;
     private SimpleObjectProperty<LocalDate> finishDate;
     private SimpleObjectProperty<LocalDate> today;
-    private long daysToFinish = 0;
-    private Priority priority;
-
+    private SimpleLongProperty daysToFinish;
+    private StringProperty priority;
 
     /**
      * Default constructor.
      */
     public Task() {
-        this(null);
     }
 
-    /**
-     * Constructor with some initial data.
-     *
-     * @param name
-     */
-    public Task(String name) {
-        this.name = new SimpleStringProperty(name);
-
-
-        // Some initial dummy data, just for convenient testing.
-        this.input = new SimpleStringProperty("some commits to do and something more. a lot stuff to fix");
-        this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
-        this.finishDate = new SimpleObjectProperty<LocalDate>((LocalDate.of(2019, 10, 29)));
-
-
-    }
-
-    public Task(String name, String input, LocalDate date, Priority priority) {
+    public Task(String name, String input, LocalDate date, String priority) {
         this.name = new SimpleStringProperty(name);
         this.input = new SimpleStringProperty(input);
-        this.priority = priority;
+        this.priority = new SimpleStringProperty(priority);
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>(date);
-
-
+        this.daysToFinish = new SimpleLongProperty(getDaysBetween());
     }
-
-    public enum Priority { ALLE, EILT, OFFEN, EILT_Nicht }
 
     public long getDaysBetween() {
         long days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
         return days;
     }
 
-    public Priority getPriority() {
+    public String getPriority() {
+        return priority.get();
+    }
+
+    public StringProperty priorityProperty() {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+    public void setPriority(String priority) {
+        this.priority.set(priority);
     }
 
     public String getName() {
@@ -120,10 +102,14 @@ public class Task {
     }
 
     public long getDaysToFinish() {
+        return daysToFinish.get();
+    }
+
+    public SimpleLongProperty daysToFinishProperty() {
         return daysToFinish;
     }
 
     public void setDaysToFinish(long daysToFinish) {
-        this.daysToFinish = daysToFinish;
+        this.daysToFinish.set(daysToFinish);
     }
 }
