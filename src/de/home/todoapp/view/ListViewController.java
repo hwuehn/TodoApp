@@ -52,7 +52,6 @@ public class ListViewController implements Initializable {
     @FXML private MenuItem exitMenuBtn;
 
     private ObservableList<Task> items;
-
     
     private TasksModel tasksModel = new TasksModel();
     private ToggleGroup filtersGroup = new ToggleGroup();
@@ -88,7 +87,7 @@ public class ListViewController implements Initializable {
                 return items;
             }
         });
-        
+
         tasksModel.loadTestData();
         setCellFactory();
         listView.itemsProperty().bind(tasksModel.viewableTasksProperty());
