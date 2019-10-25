@@ -2,10 +2,10 @@ package de.home.todoapp.model;
 
 import java.util.function.Predicate;
 
-public class TeamMatcher implements Predicate<Task> {
+public class PriorityMatcher implements Predicate<Task> {
 
     private String priority;
-    public TeamMatcher(String priority) {
+    public PriorityMatcher(String priority) {
         this.priority = priority;
     }
 

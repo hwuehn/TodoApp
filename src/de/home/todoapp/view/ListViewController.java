@@ -4,7 +4,7 @@ import de.home.todoapp.MainApp;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskListWrapper;
 import de.home.todoapp.model.TasksModel;
-import de.home.todoapp.model.TeamMatcher;
+import de.home.todoapp.model.PriorityMatcher;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -92,19 +92,19 @@ public class ListViewController implements Initializable, IAppState, IMainContro
                 .distinct()
                 .collect(Collectors.toList());
 
-        allBtn.setUserData( new TeamMatcher("*") );
+        allBtn.setUserData( new PriorityMatcher("*") );
         allBtn.setOnAction( toggleHandler );
         allBtn.setToggleGroup( filtersGroup );
 
-        hurryBtn.setUserData( new TeamMatcher("Eilt") );
+        hurryBtn.setUserData( new PriorityMatcher("Eilt") );
         hurryBtn.setOnAction( toggleHandler );
         hurryBtn.setToggleGroup( filtersGroup );
 
-        openBtn.setUserData(new TeamMatcher("Offen"));
+        openBtn.setUserData(new PriorityMatcher("Offen"));
         openBtn.setOnAction(toggleHandler);
         openBtn.setToggleGroup(filtersGroup);
 
-        noHurryBtn.setUserData(new TeamMatcher("Eilt_nicht"));
+        noHurryBtn.setUserData(new PriorityMatcher("Eilt_nicht"));
         noHurryBtn.setOnAction(toggleHandler);
         noHurryBtn.setToggleGroup(filtersGroup);
 
