@@ -81,13 +81,6 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
-        setAppState(new IAppState() {
-            @Override
-            public ObservableList<Task> getViewableTasks() {
-                return items;
-            }
-        });
-
         tasksModel.loadTestData();
         setCellFactory();
         listView.itemsProperty().bind(tasksModel.viewableTasksProperty());
@@ -99,16 +92,22 @@ public class ListViewController implements Initializable, IAppState, IMainContro
                 .distinct()
                 .collect(Collectors.toList());
 
-        hBoxFilters.getChildren().clear();
-        hBoxFilters.getChildren().add(
-                createToggleButton("Show All", new TeamMatcher("*"))
-        );
+        allBtn.setUserData( new TeamMatcher("*") );
+        allBtn.setOnAction( toggleHandler );
+        allBtn.setToggleGroup( filtersGroup );
 
-        priority
-                .stream()
-                .forEach( (t) -> hBoxFilters.getChildren().add(
-                        createToggleButton(t, new TeamMatcher(t) ))
-                );
+        hurryBtn.setUserData( new TeamMatcher("Eilt") );
+        hurryBtn.setOnAction( toggleHandler );
+        hurryBtn.setToggleGroup( filtersGroup );
+
+        openBtn.setUserData(new TeamMatcher("Offen"));
+        openBtn.setOnAction(toggleHandler);
+        openBtn.setToggleGroup(filtersGroup);
+
+        noHurryBtn.setUserData(new TeamMatcher("Eilt_nicht"));
+        noHurryBtn.setOnAction(toggleHandler);
+        noHurryBtn.setToggleGroup(filtersGroup);
+
     }
 
     private ContextMenu createContextMenu() {
@@ -124,14 +123,6 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         return cm;
     }
 
-    private ToggleButton createToggleButton(String Alle, TeamMatcher matcher) {
-        ToggleButton tb = new ToggleButton(Alle);
-        tb.setUserData( matcher );
-        tb.setOnAction( toggleHandler );
-        tb.setToggleGroup( filtersGroup );
-        return tb;
-    }
-
     private EventHandler
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton)event.getSource();
@@ -139,32 +130,32 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         tasksModel.filterProperty().set( filter );
     };
 
-//    @FXML
-//    public void showAddPlayer() {
-//
-//        try {
-//
-//            FXMLLoader fxmlLoader =
-//                    new FXMLLoader(ListViewController.class.getResource("/EditDialog.fxml"));
-//
-//            Parent p = fxmlLoader.load();
-//
-//            EditDialogController c = fxmlLoader.getController();
-//
-//            Scene scene = new Scene(p);
-//
-//            Stage stage = new Stage();
-//            stage.setScene( scene );
-//            stage.setTitle("Add Player");
-//            stage.setOnShown( (evt) -> {
-//                c.setModel( tasksModel );
-//            });
-//            stage.show();
-//
-//        } catch(IOException exc) {
-//            exc.printStackTrace();
-//        }
-//    }
+    @FXML
+    public void showAddPlayer() {
+
+        try {
+
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(ListViewController.class.getResource("/EditDialog.fxml"));
+
+            Parent p = fxmlLoader.load();
+
+            EditDialogController c = fxmlLoader.getController();
+
+            Scene scene = new Scene(p);
+
+            Stage stage = new Stage();
+            stage.setScene( scene );
+            stage.setTitle("Add Player");
+            stage.setOnShown( (evt) -> {
+                c.setModel( tasksModel );
+            });
+            stage.show();
+
+        } catch(IOException exc) {
+            exc.printStackTrace();
+        }
+    }
 
     /**
      * Is called by the main application to give a reference back to itself.
@@ -173,7 +164,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
      */
     public void setMainController(IMainController controller) {
         this.mainController = controller;
-        // Try to load last opened person file.
+        // Try to load last opened task file.
         File file = getTaskFilePath();
         if (file != null) {
             loadTaskDataFromFile(file);
