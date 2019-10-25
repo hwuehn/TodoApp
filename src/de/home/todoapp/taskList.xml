@@ -33,6 +33,7 @@
         <finishDate>2019-10-27</finishDate>
         <input>Feature:  TodoApp - implement priorityStatus and showing explizit content</input>
         <name>Henning Wühn</name>
+        <priority>EILT</priority>
         <today>2019-10-24</today>
     </task>
     <task>
@@ -40,6 +41,7 @@
         <finishDate>2019-10-31</finishDate>
         <input>Feature:  Create and finish build with installer.</input>
         <name>Henning Wühn</name>
+        <priority>EILT</priority>
         <today>2019-10-24</today>
     </task>
 </tasks>

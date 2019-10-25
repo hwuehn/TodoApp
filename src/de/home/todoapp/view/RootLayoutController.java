@@ -1,6 +1,7 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
+import de.home.todoapp.model.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
@@ -92,6 +93,8 @@ public class RootLayoutController {
         allBtn.setId("buttonNotSelected");
         noHurryBtn.setId("buttonNotSelected");
         otherBtn.setId("buttonNotSelected");
+
+
     }
 
     public void handleNoHurry() {

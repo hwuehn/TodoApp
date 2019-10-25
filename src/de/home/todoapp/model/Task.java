@@ -1,7 +1,5 @@
 package de.home.todoapp.model;
 
-import de.home.todoapp.util.DateUtil;
-import de.home.todoapp.util.*;
 import javafx.beans.property.*;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -20,6 +18,7 @@ public class Task {
     private SimpleObjectProperty<LocalDate> today;
     private long daysToFinish = 0;
     private Priority priority;
+
 
     /**
      * Default constructor.
@@ -45,16 +44,29 @@ public class Task {
 
     }
 
-    public Task (String name, String input, LocalDate date) {
+    public Task(String name, String input, LocalDate date, Priority priority) {
         this.name = new SimpleStringProperty(name);
         this.input = new SimpleStringProperty(input);
+        this.priority = priority;
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>(date);
+
+
     }
+
+    public enum Priority { ALLE, EILT, OFFEN, EILT_Nicht }
 
     public long getDaysBetween() {
         long days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
         return days;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public String getName() {
@@ -113,13 +125,5 @@ public class Task {
 
     public void setDaysToFinish(long daysToFinish) {
         this.daysToFinish = daysToFinish;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
     }
 }
