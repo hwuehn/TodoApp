@@ -3,7 +3,6 @@ package de.home.todoapp;
 import de.home.todoapp.model.TaskListWrapper;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.ListViewController;
-import de.home.todoapp.view.RootLayoutController;
 import de.home.todoapp.model.Task;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -18,16 +17,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.IOException;
 import java.util.prefs.Preferences;
 
 public class MainApp extends Application {
@@ -37,7 +31,7 @@ public class MainApp extends Application {
     }
 
     private Stage stage;
-    private BorderPane rootLayout;
+    private AnchorPane rootLayout;
 
     private ObservableList<Task> observableList = FXCollections.observableArrayList();
 
@@ -61,8 +55,6 @@ public class MainApp extends Application {
         this.stage.getIcons().add(new Image("file:resources/images/todo.png"));
 
         initRootLayout();
-
-        showListView();
     }
 
     /**
@@ -72,7 +64,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/Rootlayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/ListView.fxml"));
             rootLayout =  loader.load();
 
             // Show the scene containing the root layout.
@@ -80,7 +72,7 @@ public class MainApp extends Application {
             stage.setScene(scene);
 
             // Give the controller access to the main app.
-            RootLayoutController controller = loader.getController();
+            ListViewController controller = loader.getController();
             controller.setMainApp(this);
 
             stage.show();
@@ -93,28 +85,6 @@ public class MainApp extends Application {
         File file = getTaskFilePath();
         if (file != null) {
             loadTaskDataFromFile(file);
-        }
-    }
-
-    /**
-     * Shows the task overview inside the root layout.
-     */
-    public void showListView() {
-        try {
-            // Load task overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ListView.fxml"));
-            AnchorPane taskOverview = (AnchorPane) loader.load();
-
-            // Set task overview into the center of root layout.
-            rootLayout.setCenter(taskOverview);
-
-            // Give the controller access to the main app.
-            ListViewController controller = loader.getController();
-            controller.setMainApp(this);
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
