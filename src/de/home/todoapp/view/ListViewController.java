@@ -31,7 +31,7 @@ import java.util.function.Predicate;
 import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 
-public class ListViewController implements Initializable {
+public class ListViewController implements Initializable, IAppState, IMainController {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -194,7 +194,7 @@ public class ListViewController implements Initializable {
         Task tempTask = new Task();
         boolean okClicked = mainController.showEditDialog(tempTask);
         if (okClicked) {
-       //    listView.;
+          tasksModel.add(tempTask);
         }
     }
 
@@ -467,5 +467,20 @@ public class ListViewController implements Initializable {
             // Update the stage title.
             mainController.getStage().setTitle("TodoApp");
         }
+    }
+
+    @Override
+    public ObservableList<Task> getViewableTasks() {
+        return null;
+    }
+
+    @Override
+    public Stage getStage() {
+        return null;
+    }
+
+    @Override
+    public boolean showEditDialog(Task task) {
+        return false;
     }
 }
