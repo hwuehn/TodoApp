@@ -136,7 +136,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         try {
 
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(ListViewController.class.getResource("/EditDialog.fxml"));
+                    new FXMLLoader(ListViewController.class.getResource("EditDialog.fxml"));
 
             Parent p = fxmlLoader.load();
 

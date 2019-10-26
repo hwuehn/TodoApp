@@ -1,6 +1,7 @@
 package de.home.todoapp.model;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -10,12 +11,13 @@ import java.util.List;
  *
  * @author Henning Wuehn
  */
+@XmlAccessorType(value = XmlAccessType.FIELD)
 @XmlRootElement(name = "tasks")
 public class TaskListWrapper {
 
     private List<Task> tasks;
 
-    @XmlElement(name = "task")
+    //@XmlElement(name = "task")
     public List<Task> getTasks() {
         return tasks;
     }

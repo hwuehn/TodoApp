@@ -23,6 +23,13 @@ public class Task {
      * Default constructor.
      */
     public Task() {
+        this.name = new SimpleStringProperty();
+        this.input = new SimpleStringProperty();
+        this.priority = new SimpleStringProperty();
+        this.today = new SimpleObjectProperty<LocalDate>();
+        this.finishDate = new SimpleObjectProperty<LocalDate>();
+        this.daysToFinish = new SimpleLongProperty();
+
     }
 
     public Task(String name, String input, LocalDate date, String priority) {
