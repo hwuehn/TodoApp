@@ -1,10 +1,7 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
-import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskListWrapper;
-import de.home.todoapp.model.TaskAdministration;
-import de.home.todoapp.model.PriorityMatcher;
+import de.home.todoapp.model.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

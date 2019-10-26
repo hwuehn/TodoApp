@@ -1,6 +1,6 @@
-package de.home.todoapp.view;
+package de.home.todoapp.model;
 
-import de.home.todoapp.model.Task;
+import de.home.todoapp.view.Data;
 import javafx.scene.control.ListCell;
 
 public class ListViewCell extends ListCell<Task>
