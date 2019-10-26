@@ -38,7 +38,7 @@
         </GridPane>
         <ButtonBar layoutX="176.0" layoutY="233.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <buttons>
-                <Button fx:id="okBtn" defaultButton="true" mnemonicParsing="false" onAction="#addPlayer" text="OK" />
+                <Button fx:id="okBtn" defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="OK" />
                 <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancel" prefWidth="120.0" text="Cancel" />
             </buttons>
         </ButtonBar>
