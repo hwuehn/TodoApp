@@ -3,7 +3,7 @@
     <tasks>
         <daysToFinish>0</daysToFinish>
         <finishDate>2019-10-26</finishDate>
-        <input>Aufgabe 1</input>
+        <input>Feature: sort list befor loading</input>
         <name>Henning</name>
         <priority>EILT</priority>
         <today>2019-10-26</today>
@@ -11,7 +11,7 @@
     <tasks>
         <daysToFinish>0</daysToFinish>
         <finishDate>2019-10-26</finishDate>
-        <input>Aufgabe 2</input>
+        <input>Aufgabe 10</input>
         <name>Henning</name>
         <priority>EILT</priority>
         <today>2019-10-26</today>
@@ -20,14 +20,6 @@
         <daysToFinish>4</daysToFinish>
         <finishDate>2019-10-30</finishDate>
         <input>Aufgabe 3</input>
-        <name>Henning</name>
-        <priority>OFFEN</priority>
-        <today>2019-10-26</today>
-    </tasks>
-    <tasks>
-        <daysToFinish>15</daysToFinish>
-        <finishDate>2019-11-10</finishDate>
-        <input>Aufgabe 4</input>
         <name>Henning</name>
         <priority>OFFEN</priority>
         <today>2019-10-26</today>
@@ -54,6 +46,14 @@
         <input>wäsche machen</input>
         <name>Nanett</name>
         <priority>EILT_Nicht</priority>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>7</daysToFinish>
+        <finishDate>2019-11-02</finishDate>
+        <input>Aufgabe 11</input>
+        <name>Henning</name>
+        <priority>OFFEN</priority>
         <today>2019-10-26</today>
     </tasks>
 </tasks>

@@ -52,7 +52,7 @@
                         <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@../resources/images/email3.png" />
+                                 <Image url="@/images/email.png" />
                               </image>
                               <effect>
                                  <ColorAdjust brightness="0.5" />
@@ -67,7 +67,7 @@
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@../resources/images/edit3.png" />
+                                 <Image url="@/images/edit.png" />
                               </image>
                               <effect>
                                  <ColorAdjust brightness="0.6" />
@@ -78,7 +78,7 @@
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@../resources/images/plus3.png" />
+                                 <Image url="@/images/add.png" />
                               </image>
                               <effect>
                                  <ColorAdjust brightness="0.5" />

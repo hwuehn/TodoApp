@@ -1,7 +1,7 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TasksModel;
+import de.home.todoapp.model.TaskAdministration;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,9 +25,9 @@ public class EditDialogController {
     private Stage dialogStage;
     private Task task;
     private boolean okClicked = false;
-    private TasksModel model;
+    private TaskAdministration model;
 
-    public void setModel( TasksModel model ) {
+    public void setModel( TaskAdministration model ) {
         this.model = model;
 
         List<String> priorities =

@@ -3,7 +3,7 @@ package de.home.todoapp.view;
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskListWrapper;
-import de.home.todoapp.model.TasksModel;
+import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.PriorityMatcher;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,7 +53,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
 
     private ObservableList<Task> items;
     
-    private TasksModel tasksModel = new TasksModel();
+    private TaskAdministration taskAdministration = new TaskAdministration();
     private ToggleGroup filtersGroup = new ToggleGroup();
 
     public void setCellFactory() {
@@ -81,12 +81,12 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
-        tasksModel.loadTestData();
+        taskAdministration.loadTestData();
         setCellFactory();
-        listView.itemsProperty().bind(tasksModel.viewableTasksProperty());
+        listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
 
-        List<String> priority = tasksModel.tasksProperty().get()
+        List<String> priority = taskAdministration.tasksProperty().get()
                 .stream()
                 .map( (p) -> p.getPriority() )
                 .distinct()
@@ -116,7 +116,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         mi.setOnAction( (evt) -> {
             Task selectedP = listView.getSelectionModel().getSelectedItem();
             if( selectedP != null ) {
-                tasksModel.remove(selectedP);
+                taskAdministration.remove(selectedP);
             }
         });
         cm.getItems().add( mi );
@@ -127,7 +127,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton)event.getSource();
         Predicate<Task> filter = (Predicate<Task>)tb.getUserData();
-        tasksModel.filterProperty().set( filter );
+        taskAdministration.filterProperty().set( filter );
     };
 
     @FXML
@@ -148,7 +148,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             dialogStage.setScene( scene );
             dialogStage.setTitle("Add Player");
             dialogStage.setOnShown( (evt) -> {
-                c.setModel( tasksModel );
+                c.setModel(taskAdministration);
             });
             dialogStage.show();
 
@@ -185,7 +185,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         Task tempTask = new Task();
         boolean okClicked = mainController.showEditDialog(tempTask);
         if (okClicked) {
-          tasksModel.add(tempTask);
+          taskAdministration.add(tempTask);
         }
     }
 
@@ -290,7 +290,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
      * Creates an empty todoList.
      */
     @FXML private void handleNewMenuBtn() {
-        tasksModel.getTasks().clear();
+        taskAdministration.getTasks().clear();
         setTaskFilePath(null);
     }
 
@@ -371,8 +371,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             // Reading XML from the file and unmarshalling.
             TaskListWrapper wrapper = (TaskListWrapper) um.unmarshal(file);
 
-            tasksModel.getTasks().clear();
-            tasksModel.getTasks().addAll(wrapper.getTasks());
+            taskAdministration.getTasks().clear();
+            taskAdministration.getTasks().addAll(wrapper.getTasks());
 
             // Save the file path to the registry.
             setTaskFilePath(file);
@@ -419,7 +419,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             // Wrapping our task data.
             try {
                 TaskListWrapper wrapper = new TaskListWrapper();
-                wrapper.setTasks(tasksModel.getViewableTasks());
+                wrapper.setTasks(taskAdministration.getViewableTasks());
                 // Marshalling and saving XML to the file.
                 m.marshal(wrapper, file);
 

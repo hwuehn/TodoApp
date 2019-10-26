@@ -10,7 +10,7 @@ import javafx.collections.transformation.FilteredList;
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
-public class TasksModel {
+public class TaskAdministration {
 
     private final ObservableList<Task> tasks =
             FXCollections.observableArrayList();
