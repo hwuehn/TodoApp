@@ -56,4 +56,9 @@ public class TasksModel {
     public FilteredList<Task> getViewableTasks() {
         return viewableTasks;
     }
+
+    public ObservableList<Task> getTasks() {
+        return tasks;
+    }
 }
+

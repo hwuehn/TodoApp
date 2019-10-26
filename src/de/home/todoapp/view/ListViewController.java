@@ -290,7 +290,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
      * Creates an empty todoList.
      */
     @FXML private void handleNewMenuBtn() {
-        tasksModel.getViewableTasks().clear();
+        tasksModel.getTasks().clear();
         setTaskFilePath(null);
     }
 
@@ -371,8 +371,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             // Reading XML from the file and unmarshalling.
             TaskListWrapper wrapper = (TaskListWrapper) um.unmarshal(file);
 
-            tasksModel.getViewableTasks().clear();
-            tasksModel.getViewableTasks().addAll(wrapper.getTasks());
+            tasksModel.getTasks().clear();
+            tasksModel.getTasks().addAll(wrapper.getTasks());
 
             // Save the file path to the registry.
             setTaskFilePath(file);
