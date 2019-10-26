@@ -13,7 +13,7 @@ import java.util.List;
  */
 @XmlAccessorType(value = XmlAccessType.FIELD)
 @XmlRootElement(name = "tasks")
-public class TaskListWrapper {
+public class XMLWrapper {
 
     private List<Task> tasks;
 

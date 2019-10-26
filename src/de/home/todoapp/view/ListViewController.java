@@ -362,11 +362,11 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     public void loadTaskDataFromFile(File file) {
         try {
             JAXBContext context = JAXBContext
-                    .newInstance(TaskListWrapper.class);
+                    .newInstance(XMLWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
 
             // Reading XML from the file and unmarshalling.
-            TaskListWrapper wrapper = (TaskListWrapper) um.unmarshal(file);
+            XMLWrapper wrapper = (XMLWrapper) um.unmarshal(file);
 
             taskAdministration.getTasks().clear();
             taskAdministration.getTasks().addAll(wrapper.getTasks());
@@ -409,13 +409,13 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     public void saveTaskDataToFile(File file) {
         try {
             JAXBContext context = JAXBContext
-                    .newInstance(TaskListWrapper.class);
+                    .newInstance(XMLWrapper.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             // Wrapping our task data.
             try {
-                TaskListWrapper wrapper = new TaskListWrapper();
+                XMLWrapper wrapper = new XMLWrapper();
                 wrapper.setTasks(taskAdministration.getViewableTasks());
                 // Marshalling and saving XML to the file.
                 m.marshal(wrapper, file);
