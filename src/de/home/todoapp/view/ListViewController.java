@@ -112,7 +112,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
 
     private ContextMenu createContextMenu() {
         ContextMenu cm = new ContextMenu();
-        MenuItem mi = new MenuItem("Delete");
+        MenuItem mi = new MenuItem("Finish");
         mi.setOnAction( (evt) -> {
             Task selectedP = listView.getSelectionModel().getSelectedItem();
             if( selectedP != null ) {
@@ -144,13 +144,13 @@ public class ListViewController implements Initializable, IAppState, IMainContro
 
             Scene scene = new Scene(p);
 
-            Stage stage = new Stage();
-            stage.setScene( scene );
-            stage.setTitle("Add Player");
-            stage.setOnShown( (evt) -> {
+            Stage dialogStage = new Stage();
+            dialogStage.setScene( scene );
+            dialogStage.setTitle("Add Player");
+            dialogStage.setOnShown( (evt) -> {
                 c.setModel( tasksModel );
             });
-            stage.show();
+            dialogStage.show();
 
         } catch(IOException exc) {
             exc.printStackTrace();
