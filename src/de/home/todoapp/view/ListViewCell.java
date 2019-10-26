@@ -1,5 +1,6 @@
-package de.home.todoapp.model;
+package de.home.todoapp.view;
 
+import de.home.todoapp.model.Task;
 import de.home.todoapp.view.Data;
 import javafx.scene.control.ListCell;
 
