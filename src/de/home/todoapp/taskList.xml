@@ -48,4 +48,12 @@
         <priority>EILT</priority>
         <today>2019-10-26</today>
     </tasks>
+    <tasks>
+        <daysToFinish>8</daysToFinish>
+        <finishDate>2019-11-03</finishDate>
+        <input>wäsche machen</input>
+        <name>Nanett</name>
+        <priority>EILT_Nicht</priority>
+        <today>2019-10-26</today>
+    </tasks>
 </tasks>

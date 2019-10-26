@@ -45,10 +45,10 @@
 
 
 
-            <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" stylesheets="@style.css" />
+            <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="450.0" stylesheets="@style.css" />
             <ButtonBar buttonMinWidth="35.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="450.0">
                   <buttons>
-                     <ToggleButton fx:id="emailBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="emailBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
                         <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -63,7 +63,7 @@
                   <Region layoutX="397.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
                   <Region layoutX="382.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
-                     <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditTask" prefHeight="55.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditTask" prefHeight="35.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -74,7 +74,7 @@
                               </effect>
                         </ImageView>
                      </graphic></ToggleButton>
-                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddPlayer" prefHeight="50.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddPlayer" prefHeight="35.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
