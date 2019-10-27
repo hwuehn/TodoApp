@@ -21,7 +21,7 @@ public class Task {
     private SimpleObjectProperty<LocalDate> today;
     private SimpleLongProperty daysToFinish;
     private StringProperty priority;
-    private StringProperty sort;
+    private SimpleObjectProperty<Sort> sort;
 
     /**
      * Default constructor.
@@ -33,13 +33,13 @@ public class Task {
         this.today = new SimpleObjectProperty<LocalDate>();
         this.finishDate = new SimpleObjectProperty<LocalDate>();
         this.daysToFinish = new SimpleLongProperty();
-        this.sort = new SimpleStringProperty();
+        this.sort = new SimpleObjectProperty<Sort>();
 
     }
 
-    public Task(String name, String sort, String input, LocalDate date, String priority) {
+    public Task(String name, Sort sort, String input, LocalDate date, String priority) {
         this.name = new SimpleStringProperty(name);
-        this.sort = new SimpleStringProperty(sort);
+        this.sort = new SimpleObjectProperty<Sort>(sort);
         this.input = new SimpleStringProperty(input);
         this.priority = new SimpleStringProperty(priority);
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
@@ -52,15 +52,15 @@ public class Task {
         return days;
     }
 
-    public String getSort() {
+    public Sort getSort() {
         return sort.get();
     }
 
-    public void setSort(String sort) {
+    public void setSort(Sort sort) {
         this.sort.set(sort);
     }
 
-    public StringProperty sortProperty() {
+    public SimpleObjectProperty<Sort> sortProperty() {
         return sort;
     }
 

@@ -22,11 +22,9 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.prefs.Preferences;
-import java.util.stream.Collectors;
 
 public class ListViewController implements Initializable, IAppState, IMainController {
 
@@ -84,12 +82,6 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         setCellFactory();
         listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
-
-        List<String> priority = taskAdministration.tasksProperty().get()
-                .stream()
-                .map( (p) -> p.getPriority() )
-                .distinct()
-                .collect(Collectors.toList());
 
         allBtn.setUserData( new PriorityMatcher("*") );
         allBtn.setOnAction( toggleHandler );
