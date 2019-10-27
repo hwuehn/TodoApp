@@ -101,6 +101,7 @@ public class EditDialogController {
         if( validationErrors.isEmpty() ) {
             model.add( new Task(
                     inputNameField.getText(),
+                    sortCombo.getSelectionModel().getSelectedItem(),
                     inputTextAreaField.getText(),
                     finishDatePicker.getValue(),
                     priorityCombo.getSelectionModel().getSelectedItem()));

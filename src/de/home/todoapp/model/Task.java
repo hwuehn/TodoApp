@@ -1,6 +1,9 @@
 package de.home.todoapp.model;
 
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
@@ -18,6 +21,7 @@ public class Task {
     private SimpleObjectProperty<LocalDate> today;
     private SimpleLongProperty daysToFinish;
     private StringProperty priority;
+    private StringProperty sort;
 
     /**
      * Default constructor.
@@ -29,11 +33,13 @@ public class Task {
         this.today = new SimpleObjectProperty<LocalDate>();
         this.finishDate = new SimpleObjectProperty<LocalDate>();
         this.daysToFinish = new SimpleLongProperty();
+        this.sort = new SimpleStringProperty();
 
     }
 
-    public Task(String name, String input, LocalDate date, String priority) {
+    public Task(String name, String sort, String input, LocalDate date, String priority) {
         this.name = new SimpleStringProperty(name);
+        this.sort = new SimpleStringProperty(sort);
         this.input = new SimpleStringProperty(input);
         this.priority = new SimpleStringProperty(priority);
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
@@ -44,6 +50,18 @@ public class Task {
     public long getDaysBetween() {
         long days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
         return days;
+    }
+
+    public String getSort() {
+        return sort.get();
+    }
+
+    public void setSort(String sort) {
+        this.sort.set(sort);
+    }
+
+    public StringProperty sortProperty() {
+        return sort;
     }
 
     public String getPriority() {
