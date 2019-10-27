@@ -13,7 +13,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
@@ -23,11 +22,9 @@
             <Label fx:id="finishDateLabel" text="Finish date" GridPane.rowIndex="2" />
             <DatePicker fx:id="finishDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextArea fx:id="inputTextAreaField" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Prioritaet" GridPane.rowIndex="3" />
-            <ComboBox fx:id="priorityCombo" prefWidth="150.0" promptText="choose" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label text="Sort" GridPane.rowIndex="4"/>
+                <Label text="Sort" GridPane.rowIndex="3"/>
                 <ComboBox fx:id="sortCombo" prefWidth="150.0" promptText="choose" GridPane.columnIndex="1"
-                          GridPane.rowIndex="4"/>
+                          GridPane.rowIndex="3"/>
             </children>
         </GridPane>
         <ButtonBar buttonMinWidth="50.0" layoutX="176.0" layoutY="233.0" maxWidth="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

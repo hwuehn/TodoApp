@@ -58,11 +58,11 @@ public class TaskAdministration implements IMainController, IAppState {
         viewableTasks.clear();
         sortedTasks.clear();
 
-        add(new Task("Henning", Sort.Feature, "Aufgabe 1", LocalDate.of(2019, 10, 26), Priority.Eilt));
-        add(new Task("Henning", Sort.Fix, "Aufgabe 2", LocalDate.of(2019, 10, 26), Priority.Eilt));
-        add(new Task("Henning", Sort.Refactor, "Aufgabe 3", LocalDate.of(2019, 10, 30), Priority.Offen));
-        add(new Task("Henning", Sort.Feature, "Aufgabe 4", LocalDate.of(2019, 11, 10), Priority.Offen));
-        add(new Task("Henning", Sort.Refactor, "Aufgabe 5", LocalDate.of(2019, 12, 31), Priority.Alle));
+        add(new Task("Henning", Sort.Feature, "Aufgabe 1", LocalDate.of(2019, 10, 26)));
+        add(new Task("Henning", Sort.Fix, "Aufgabe 2", LocalDate.of(2019, 10, 26)));
+        add(new Task("Henning", Sort.Refactor, "Aufgabe 3", LocalDate.of(2019, 10, 30)));
+        add(new Task("Henning", Sort.Feature, "Aufgabe 4", LocalDate.of(2019, 11, 10)));
+        add(new Task("Henning", Sort.Refactor, "Aufgabe 5", LocalDate.of(2019, 12, 31)));
 
     }
 

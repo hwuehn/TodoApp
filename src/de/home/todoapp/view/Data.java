@@ -1,5 +1,6 @@
 package de.home.todoapp.view;
 
+import de.home.todoapp.model.Priority;
 import de.home.todoapp.model.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,19 +14,18 @@ public class Data
 {
     @FXML
     private GridPane GridPane;
-
     @FXML
     private Label nameLabel;
-
     @FXML
     private Label daysToFinishLabel;
-
     @FXML
     private Label inputLabel;
-
     @FXML
     private Label finishLabel;
-
+    @FXML
+    private Label sortLabel;
+    @FXML
+    private Label toLabel;
 
     public Data()
     {
@@ -43,6 +43,14 @@ public class Data
 
     public void setInfo(Task task)
     {
+
+        if (sortLabel != null) {
+            sortLabel.setId("name");
+            sortLabel.setText(String.valueOf(task.getSort()));
+        }
+
+        toLabel.setText("von");
+
         nameLabel.setId("name");
         nameLabel.setText(task.getName());
 
@@ -50,18 +58,21 @@ public class Data
 
         if (number >= 7) {
             daysToFinishLabel.setId("over6Days");
-            daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
+            daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
+            task.setPriority(Priority.Eilt_nicht);
         }
         else if ((number > 2) & (number < 7)) {
             daysToFinishLabel.setId("over2Days");
-            daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
+            daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
+            task.setPriority(Priority.Offen);
         }
         else if ((number < 3) & (number >= 2)) {
             daysToFinishLabel.setId("under3Days");
-            daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
+            daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
         }
         else if (number < 3) {
             daysToFinishLabel.setId("under3Days");
+            task.setPriority(Priority.Eilt);
         }
 
         switch ((int) task.getDaysBetween()) {

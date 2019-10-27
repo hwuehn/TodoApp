@@ -1,6 +1,5 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.model.Priority;
 import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
@@ -20,8 +19,8 @@ public class EditDialogController {
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
-    @FXML
-    private ComboBox<Priority> priorityCombo = new ComboBox<>();
+    //  @FXML
+    // private ComboBox<Priority> priorityCombo = new ComboBox<>();
     @FXML
     private ComboBox<Sort> sortCombo = new ComboBox<>();
 
@@ -33,7 +32,7 @@ public class EditDialogController {
     public void setModel( TaskAdministration model ) {
         this.model = model;
 
-        priorityCombo.getItems().setAll(Priority.values());
+        // priorityCombo.getItems().setAll(Priority.values());
         sortCombo.getItems().setAll(Sort.values());
 //        List<Priority> priorities =
 //                this.model.tasksProperty().get()
@@ -76,7 +75,7 @@ public class EditDialogController {
         sortCombo.getItems().setAll(Sort.values());
         inputTextAreaField.setText(task.getInput());
         finishDatePicker.setValue(task.getFinishDate());
-        priorityCombo.getItems().setAll(Priority.values());
+        //priorityCombo.getItems().setAll(Priority.values());
     }
 
     public boolean isOkClicked() {
@@ -93,7 +92,7 @@ public class EditDialogController {
             task.setSort(sortCombo.getSelectionModel().getSelectedItem());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
-            task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());
+            //task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());
 
             okClicked = true;
             dialogStage.close();
@@ -110,8 +109,8 @@ public class EditDialogController {
                     inputNameField.getText(),
                     sortCombo.getSelectionModel().getSelectedItem(),
                     inputTextAreaField.getText(),
-                    finishDatePicker.getValue(),
-                    priorityCombo.getSelectionModel().getSelectedItem()));
+                    finishDatePicker.getValue()));
+            // priorityCombo.getSelectionModel().getSelectedItem()));
             dialogStage.hide();
         }
     }
@@ -132,9 +131,9 @@ public class EditDialogController {
             validationErrors.add("Player Name is required.");
         }
 
-        if( priorityCombo.getSelectionModel().getSelectedItem() == null ) {
-            validationErrors.add("Team is required.");
-        }
+//        if( priorityCombo.getSelectionModel().getSelectedItem() == null ) {
+//            validationErrors.add("Team is required.");
+//        }
 
         return validationErrors;
     }

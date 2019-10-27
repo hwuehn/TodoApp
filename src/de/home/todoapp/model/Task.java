@@ -37,11 +37,11 @@ public class Task {
 
     }
 
-    public Task(String name, Sort sort, String input, LocalDate date, Priority priority) {
+    public Task(String name, Sort sort, String input, LocalDate date) {
         this.name = new SimpleStringProperty(name);
         this.sort = new SimpleObjectProperty<Sort>(sort);
         this.input = new SimpleStringProperty(input);
-        this.priority = new SimpleObjectProperty(priority);
+        this.priority = new SimpleObjectProperty<Priority>();
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>(date);
         this.daysToFinish = new SimpleLongProperty(getDaysBetween());
@@ -68,12 +68,12 @@ public class Task {
         return priority.get();
     }
 
-    public void setPriority(Priority priority) {
-        this.priority.set(priority);
-    }
-
     public SimpleObjectProperty<Priority> priorityProperty() {
         return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority.set(priority);
     }
 
     public String getName() {
