@@ -1,5 +1,7 @@
 package de.home.todoapp.view;
 
+import de.home.todoapp.model.Priority;
+import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import javafx.collections.FXCollections;
@@ -20,9 +22,11 @@ public class EditDialogController {
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
-    @FXML private ComboBox<String> priorityCombo;
     @FXML
-    private ComboBox<String> sortCombo;
+    private ComboBox<Priority> priorityCombo;
+
+    @FXML
+    private ComboBox<Sort> sortCombo;
 
     private Stage dialogStage;
     private Task task;
@@ -32,7 +36,7 @@ public class EditDialogController {
     public void setModel( TaskAdministration model ) {
         this.model = model;
 
-        List<String> priorities =
+        List<Priority> priorities =
                 this.model.tasksProperty().get()
                         .stream()
                         .map((task) -> task.getPriority())
@@ -41,7 +45,7 @@ public class EditDialogController {
 
         priorityCombo.setItems(FXCollections.observableArrayList( priorities ) );
 
-        List<String> sorts =
+        List<Sort> sorts =
                 this.model.tasksProperty().get()
                         .stream()
                         .map((task) -> task.getSort())
@@ -49,10 +53,13 @@ public class EditDialogController {
                         .collect(Collectors.toList());
 
         sortCombo.setItems(FXCollections.observableArrayList(sorts));
+
+
     }
 
     @FXML
     private void initialize() {
+
     }
 
    public void setDialogStage(Stage dialogStage) {
@@ -68,6 +75,7 @@ public class EditDialogController {
     public void setPerson(Task task) {
         this.task = task;
         inputNameField.setText(task.getName());
+        sortCombo.setValue(task.getSort());
         inputTextAreaField.setText(task.getInput());
         finishDatePicker.setValue(task.getFinishDate());
         priorityCombo.setValue(task.getPriority());
@@ -84,6 +92,7 @@ public class EditDialogController {
     private void handleOk() {
         if (isInputValid()) {
             task.setName(inputNameField.getText());
+            task.setSort(sortCombo.getSelectionModel().getSelectedItem());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
             task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());

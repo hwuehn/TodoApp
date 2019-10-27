@@ -20,7 +20,7 @@ public class Task {
     private SimpleObjectProperty<LocalDate> finishDate;
     private SimpleObjectProperty<LocalDate> today;
     private SimpleLongProperty daysToFinish;
-    private StringProperty priority;
+    private SimpleObjectProperty<Priority> priority;
     private SimpleObjectProperty<Sort> sort;
 
     /**
@@ -29,7 +29,7 @@ public class Task {
     public Task() {
         this.name = new SimpleStringProperty();
         this.input = new SimpleStringProperty();
-        this.priority = new SimpleStringProperty();
+        this.priority = new SimpleObjectProperty<Priority>();
         this.today = new SimpleObjectProperty<LocalDate>();
         this.finishDate = new SimpleObjectProperty<LocalDate>();
         this.daysToFinish = new SimpleLongProperty();
@@ -37,11 +37,11 @@ public class Task {
 
     }
 
-    public Task(String name, Sort sort, String input, LocalDate date, String priority) {
+    public Task(String name, Sort sort, String input, LocalDate date, Priority priority) {
         this.name = new SimpleStringProperty(name);
         this.sort = new SimpleObjectProperty<Sort>(sort);
         this.input = new SimpleStringProperty(input);
-        this.priority = new SimpleStringProperty(priority);
+        this.priority = new SimpleObjectProperty(priority);
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>(date);
         this.daysToFinish = new SimpleLongProperty(getDaysBetween());
@@ -64,16 +64,16 @@ public class Task {
         return sort;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority.get();
     }
 
-    public StringProperty priorityProperty() {
-        return priority;
+    public void setPriority(Priority priority) {
+        this.priority.set(priority);
     }
 
-    public void setPriority(String priority) {
-        this.priority.set(priority);
+    public SimpleObjectProperty<Priority> priorityProperty() {
+        return priority;
     }
 
     public String getName() {

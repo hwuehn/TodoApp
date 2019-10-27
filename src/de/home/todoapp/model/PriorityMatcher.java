@@ -4,8 +4,9 @@ import java.util.function.Predicate;
 
 public class PriorityMatcher implements Predicate<Task> {
 
-    private String priority;
-    public PriorityMatcher(String priority) {
+    private Priority priority;
+
+    public PriorityMatcher(Priority priority) {
         this.priority = priority;
     }
 
@@ -15,6 +16,6 @@ public class PriorityMatcher implements Predicate<Task> {
         if( priority.equals("*") ) {  // for show all
             return true;
         }
-        return priority.equalsIgnoreCase(task.getPriority());
+        return priority.equals(task.getPriority());
     }
 }

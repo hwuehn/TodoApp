@@ -83,19 +83,19 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
 
-        allBtn.setUserData( new PriorityMatcher("*") );
+        allBtn.setUserData(new PriorityMatcher(Priority.Alle)); // "*"
         allBtn.setOnAction( toggleHandler );
         allBtn.setToggleGroup( filtersGroup );
 
-        hurryBtn.setUserData( new PriorityMatcher("Eilt") );
+        hurryBtn.setUserData(new PriorityMatcher(Priority.Eilt));
         hurryBtn.setOnAction( toggleHandler );
         hurryBtn.setToggleGroup( filtersGroup );
 
-        openBtn.setUserData(new PriorityMatcher("Offen"));
+        openBtn.setUserData(new PriorityMatcher(Priority.Offen));
         openBtn.setOnAction(toggleHandler);
         openBtn.setToggleGroup(filtersGroup);
 
-        noHurryBtn.setUserData(new PriorityMatcher("Eilt_nicht"));
+        noHurryBtn.setUserData(new PriorityMatcher(Priority.Eilt_nicht));
         noHurryBtn.setOnAction(toggleHandler);
         noHurryBtn.setToggleGroup(filtersGroup);
     }
@@ -207,6 +207,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             boolean okClicked = mainController.showEditDialog(selectedTask);
             if (okClicked) {
                 selectedTask.setName(selectedTask.getName());
+                selectedTask.setSort(selectedTask.getSort());
                 selectedTask.setInput(selectedTask.getInput());
                 selectedTask.setFinishDate(selectedTask.getFinishDate());
                 selectedTask.setPriority(selectedTask.getPriority());
