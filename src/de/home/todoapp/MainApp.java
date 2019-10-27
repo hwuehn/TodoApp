@@ -1,10 +1,12 @@
 package de.home.todoapp;
 
+import de.home.todoapp.model.IAppState;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.IMainController;
 import de.home.todoapp.view.ListViewController;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainApp extends Application implements IMainController {
+public class MainApp extends Application implements IMainController, IAppState {
 
     public static void main(String[] args) {
         launch(args);
@@ -60,7 +62,7 @@ public class MainApp extends Application implements IMainController {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/EditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -90,6 +92,11 @@ public class MainApp extends Application implements IMainController {
 
     public Stage getStage() {
         return stage;
+    }
+
+    @Override
+    public ObservableList<Task> getViewableTasks() {
+        return null;
     }
 }
 

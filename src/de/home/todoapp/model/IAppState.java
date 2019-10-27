@@ -1,6 +1,5 @@
-package de.home.todoapp.view;
+package de.home.todoapp.model;
 
-import de.home.todoapp.model.Task;
 import javafx.collections.ObservableList;
 
 public interface IAppState {

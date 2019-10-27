@@ -273,4 +273,20 @@
         <priority>EILT</priority>
         <today>2019-10-27</today>
     </tasks>
+    <tasks>
+        <daysToFinish>4</daysToFinish>
+        <finishDate>2019-10-31</finishDate>
+        <input>Feature: Add a readonly list with finished tasks.</input>
+        <name>Henning Wuehn</name>
+        <priority>EILT</priority>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>65</daysToFinish>
+        <finishDate>2019-12-31</finishDate>
+        <input>Feature: Start building an android addaption.</input>
+        <name>Henning Wuehn</name>
+        <priority>OFFEN</priority>
+        <today>2019-10-27</today>
+    </tasks>
 </tasks>

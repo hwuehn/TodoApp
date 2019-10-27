@@ -1,16 +1,19 @@
 package de.home.todoapp.model;
 
+import de.home.todoapp.view.IMainController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
-public class TaskAdministration {
+public class TaskAdministration implements IMainController, IAppState {
 
     private final ObservableList<Task> tasks =
             FXCollections.observableArrayList();
@@ -26,37 +29,34 @@ public class TaskAdministration {
         return new SimpleObjectProperty<>(viewableTasks);
     }
 
-//    // 3. Wrap the FilteredList in a SortedList.
-//    private final SortedList<Task> sortedData = new SortedList<>(viewableTasks);
-//
-//    // 4. Bind the SortedList comperator to the ListView comperator.
-//    public ReadOnlyObjectProperty<ObservableList<Task>> sortedDataProperty() {
-//        sortedData.comparatorProperty().bind(viewableTasks.comparatorProperty());
-//        // 5. Add sorted (and filtered) data to the table.
-//        tasks.setItems(sortedData);
-//    }
+    // Wrap the FilteredList in a SortedList.
+    private final SortedList<Task> sortedTasks = new SortedList<>(viewableTasks);
 
-
-
-
-
+    public ReadOnlyObjectProperty<ObservableList<Task>> sortedTasksProperty() {
+        return new SimpleObjectProperty<>(sortedTasks);
+    }
 
     public ObjectProperty<Predicate<? super Task>> filterProperty() {
         return viewableTasks .predicateProperty();
     }
 
-    public void add(Task p) {
-        tasks.add(p);
+    public void add(Task task) {
+        tasks.add(task);
     }
 
-    public void remove( Task p ) {
-        tasks.remove( p );
+    public void remove(Task task) {
+        tasks.remove(task);
+    }
+
+    public void edit(Task task) {
+
     }
 
     public void loadTestData() {
 
         tasks.clear();
         viewableTasks.clear();
+        sortedTasks.clear();
 
         add(new Task("Henning", "Aufgabe 1", LocalDate.of(2019,10,26), "EILT"));
         add(new Task("Henning", "Aufgabe 2", LocalDate.of(2019,10,26), "EILT"));
@@ -74,6 +74,14 @@ public class TaskAdministration {
         return tasks;
     }
 
+    @Override
+    public Stage getStage() {
+        return null;
+    }
 
+    @Override
+    public boolean showEditDialog(Task task) {
+        return false;
+    }
 }
 

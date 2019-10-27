@@ -78,6 +78,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
+        setAppState(new TaskAdministration());
+
         taskAdministration.loadTestData();
         setCellFactory();
         listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
@@ -104,19 +106,33 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         noHurryBtn.setUserData(new PriorityMatcher("Eilt_nicht"));
         noHurryBtn.setOnAction(toggleHandler);
         noHurryBtn.setToggleGroup(filtersGroup);
-
     }
 
     private ContextMenu createContextMenu() {
         ContextMenu cm = new ContextMenu();
-        MenuItem mi = new MenuItem("Finish");
-        mi.setOnAction( (evt) -> {
-            Task selectedP = listView.getSelectionModel().getSelectedItem();
-            if( selectedP != null ) {
-                taskAdministration.remove(selectedP);
+        MenuItem finish = new MenuItem("Finish");
+        MenuItem edit = new MenuItem("Edit");
+        Task selectedTask = listView.getSelectionModel().getSelectedItem();
+        finish.setOnAction((evt) -> {
+            if (selectedTask != null) {
+                taskAdministration.remove(selectedTask);
             }
         });
-        cm.getItems().add( mi );
+        edit.setOnAction((evt) -> {
+            mainController.showEditDialog(selectedTask);
+
+//                boolean okClicked = mainController.showEditDialog(selectedTask);
+//                if (okClicked) {
+//                    selectedTask.setName(selectedTask.getName());
+//                    selectedTask.setInput(selectedTask.getInput());
+//                    selectedTask.setFinishDate(selectedTask.getFinishDate());
+//                    selectedTask.setPriority(selectedTask.getPriority());
+//                    listView.refresh();
+//                }
+//            }
+        });
+        cm.getItems().add(finish);
+        cm.getItems().add(edit);
         return cm;
     }
 
@@ -166,6 +182,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         if (file != null) {
             loadTaskDataFromFile(file);
         }
+
+
     }
 
     public void setAppState(IAppState appState) {

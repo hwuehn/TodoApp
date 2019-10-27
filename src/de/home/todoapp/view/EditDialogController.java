@@ -21,6 +21,8 @@ public class EditDialogController {
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
     @FXML private ComboBox<String> priorityCombo;
+    @FXML
+    private ComboBox<String> sortCombo;
 
     private Stage dialogStage;
     private Task task;
@@ -33,11 +35,20 @@ public class EditDialogController {
         List<String> priorities =
                 this.model.tasksProperty().get()
                         .stream()
-                        .map( (p) -> p.getPriority() )
+                        .map((task) -> task.getPriority())
                         .distinct()
                         .collect(Collectors.toList());
 
         priorityCombo.setItems(FXCollections.observableArrayList( priorities ) );
+
+        List<String> sorts =
+                this.model.tasksProperty().get()
+                        .stream()
+                        .map((task) -> task.getSort())
+                        .distinct()
+                        .collect(Collectors.toList());
+
+        sortCombo.setItems(FXCollections.observableArrayList(sorts));
     }
 
     @FXML
