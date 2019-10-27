@@ -55,6 +55,11 @@
     -fx-text-fill: red;
 }
 
+#underZero {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+
 #name {
     -fx-text-fill: blue;
 }

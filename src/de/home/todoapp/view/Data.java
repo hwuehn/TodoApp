@@ -70,9 +70,12 @@ public class Data
             daysToFinishLabel.setId("under3DaysAnd");
             daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
             task.setPriority(Priority.Eilt);
-        }
-        else if (number < 3) {
+        } else if (number < 3) {
             daysToFinishLabel.setId("under3Days");
+            task.setPriority(Priority.Eilt);
+        } else {
+            daysToFinishLabel.setId("underZero");
+            daysToFinishLabel.setText("!!! Überfällig !!!");
             task.setPriority(Priority.Eilt);
         }
 
