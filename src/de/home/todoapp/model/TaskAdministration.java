@@ -23,9 +23,23 @@ public class TaskAdministration {
     private final FilteredList<Task> viewableTasks = new FilteredList<>(tasks);
 
     public ReadOnlyObjectProperty<ObservableList<Task>> viewableTasksProperty() {
-
         return new SimpleObjectProperty<>(viewableTasks);
     }
+
+//    // 3. Wrap the FilteredList in a SortedList.
+//    private final SortedList<Task> sortedData = new SortedList<>(viewableTasks);
+//
+//    // 4. Bind the SortedList comperator to the ListView comperator.
+//    public ReadOnlyObjectProperty<ObservableList<Task>> sortedDataProperty() {
+//        sortedData.comparatorProperty().bind(viewableTasks.comparatorProperty());
+//        // 5. Add sorted (and filtered) data to the table.
+//        tasks.setItems(sortedData);
+//    }
+
+
+
+
+
 
     public ObjectProperty<Predicate<? super Task>> filterProperty() {
         return viewableTasks .predicateProperty();
@@ -52,7 +66,6 @@ public class TaskAdministration {
 
     }
 
-
     public FilteredList<Task> getViewableTasks() {
         return viewableTasks;
     }
@@ -60,5 +73,7 @@ public class TaskAdministration {
     public ObservableList<Task> getTasks() {
         return tasks;
     }
+
+
 }
 
