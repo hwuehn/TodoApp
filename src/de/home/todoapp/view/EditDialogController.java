@@ -4,7 +4,6 @@ import de.home.todoapp.model.Priority;
 import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class EditDialogController {
 
@@ -23,10 +21,9 @@ public class EditDialogController {
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
     @FXML
-    private ComboBox<Priority> priorityCombo;
-
+    private ComboBox<Priority> priorityCombo = new ComboBox<>();
     @FXML
-    private ComboBox<Sort> sortCombo;
+    private ComboBox<Sort> sortCombo = new ComboBox<>();
 
     private Stage dialogStage;
     private Task task;
@@ -36,30 +33,31 @@ public class EditDialogController {
     public void setModel( TaskAdministration model ) {
         this.model = model;
 
-        List<Priority> priorities =
-                this.model.tasksProperty().get()
-                        .stream()
-                        .map((task) -> task.getPriority())
-                        .distinct()
-                        .collect(Collectors.toList());
+        priorityCombo.getItems().setAll(Priority.values());
+        sortCombo.getItems().setAll(Sort.values());
+//        List<Priority> priorities =
+//                this.model.tasksProperty().get()
+//                        .stream()
+//                        .map((task) -> task.getPriority())
+//                        .distinct()
+//                        .collect(Collectors.toList());
 
-        priorityCombo.setItems(FXCollections.observableArrayList( priorities ) );
+        //  priorityCombo.setItems(FXCollections.observableArrayList( priorities ) );
 
-        List<Sort> sorts =
-                this.model.tasksProperty().get()
-                        .stream()
-                        .map((task) -> task.getSort())
-                        .distinct()
-                        .collect(Collectors.toList());
-
-        sortCombo.setItems(FXCollections.observableArrayList(sorts));
+//        List<Sort> sorts =
+//                this.model.tasksProperty().get()
+//                        .stream()
+//                        .map((task) -> task.getSort())
+//                        .distinct()
+//                        .collect(Collectors.toList());
+//
+//        sortCombo.setItems(FXCollections.observableArrayList(sorts));
 
 
     }
 
     @FXML
     private void initialize() {
-
     }
 
    public void setDialogStage(Stage dialogStage) {
@@ -75,10 +73,10 @@ public class EditDialogController {
     public void setPerson(Task task) {
         this.task = task;
         inputNameField.setText(task.getName());
-        sortCombo.setValue(task.getSort());
+        sortCombo.getItems().setAll(Sort.values());
         inputTextAreaField.setText(task.getInput());
         finishDatePicker.setValue(task.getFinishDate());
-        priorityCombo.setValue(task.getPriority());
+        priorityCombo.getItems().setAll(Priority.values());
     }
 
     public boolean isOkClicked() {

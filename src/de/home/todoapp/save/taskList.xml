@@ -5,7 +5,6 @@
         <finishDate>2019-10-28</finishDate>
         <input>Feature: sort list befor loading</input>
         <name>Henning Wuehn</name>
-        <priority>EILT</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -13,7 +12,6 @@
         <finishDate>2019-10-29</finishDate>
         <input>Feature: Change edit from bottombar to rightmousclick contextmenu</input>
         <name>Henning Wuehn</name>
-        <priority>EILT</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -21,7 +19,6 @@
         <finishDate>2019-10-30</finishDate>
         <input>Feature: Change edit dialog buttons. Use polymorphism. 2 different methods on 1 button</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -29,7 +26,6 @@
         <finishDate>2019-10-31</finishDate>
         <input>Fix: Make priorities in edit dialog comboBox changeable.</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -37,7 +33,6 @@
         <finishDate>2019-11-01</finishDate>
         <input>Refactor: Understand and make use of IAppState and IMainController</input>
         <name>Henning Wuehn</name>
-        <priority>EILT</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -45,7 +40,6 @@
         <finishDate>2019-11-02</finishDate>
         <input>Refactor: A togglegroup for priority buttons to avoid redundance.</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -53,7 +47,6 @@
         <finishDate>2019-11-03</finishDate>
         <input>Feature: Build a native app for desktop installation</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-26</today>
     </tasks>
     <tasks>
@@ -61,7 +54,6 @@
         <finishDate>2019-10-31</finishDate>
         <input>Feature: All fxml files reziseable</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -69,7 +61,6 @@
         <finishDate>2019-11-04</finishDate>
         <input>Fix: ListView smaller so that scrollable content fits to size</input>
         <name>Henning Wuehn</name>
-        <priority>EILT</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -77,7 +68,6 @@
         <finishDate>2019-11-03</finishDate>
         <input>Userstory: User login, security, authentification, automatic setName</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -85,7 +75,6 @@
         <finishDate>2019-11-04</finishDate>
         <input>Fix: Close edit dialog after adding or editing</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -93,7 +82,6 @@
         <finishDate>2019-11-05</finishDate>
         <input>Feature: Add a label "Project" in ListCellItem.</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -101,7 +89,6 @@
         <finishDate>2019-11-10</finishDate>
         <input>Feature: Add a filter for different projects.</input>
         <name>Hennning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -110,7 +97,6 @@
         <input>Feature: Sync list with different clients. 1 list on server and sync with clients while in wlan range.
         </input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -118,7 +104,6 @@
         <finishDate>2019-11-10</finishDate>
         <input>Feature: ListView with different userdata viewable</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -126,7 +111,6 @@
         <finishDate>2019-11-10</finishDate>
         <input>Feature: Filter for different users in the view.</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -134,7 +118,6 @@
         <finishDate>2019-11-04</finishDate>
         <input>Feature: Share list via email.</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -142,7 +125,6 @@
         <finishDate>2019-11-17</finishDate>
         <input>Feature: Userdocumentation</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -150,7 +132,6 @@
         <finishDate>2019-11-17</finishDate>
         <input>Feature: Systemdocumentation</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -158,7 +139,6 @@
         <finishDate>2019-12-08</finishDate>
         <input>Feature: Create comboBox in edit dialog for default choice "Feature, Fix, Refactor..."</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -166,7 +146,6 @@
         <finishDate>2019-11-30</finishDate>
         <input>Feature: Dashboard to choose different lists "todolist, userstoryboard or visions"</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -174,7 +153,6 @@
         <finishDate>2019-11-10</finishDate>
         <input>Feature: Add a filter for comboBox entry sorts "Refactor, Fix, Feature"</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -182,7 +160,6 @@
         <finishDate>2019-12-08</finishDate>
         <input>Feature: Choose features for todo classic (open source) and for todo business (closed source)</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -190,7 +167,6 @@
         <finishDate>2019-12-08</finishDate>
         <input>Feature: Integrate update process</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -198,7 +174,6 @@
         <finishDate>2019-12-08</finishDate>
         <input>Feature: Integrate upgrade process</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -206,7 +181,6 @@
         <finishDate>2019-11-10</finishDate>
         <input>Feature: Copy and Paste contextmenu for a task to switch data between different lists.</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -214,7 +188,6 @@
         <finishDate>2019-11-30</finishDate>
         <input>Feature: Automatic divide of an userstory to single tasks</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -222,7 +195,6 @@
         <finishDate>2019-12-01</finishDate>
         <input>Feature: Create kanban board GUI</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -230,7 +202,6 @@
         <finishDate>2019-12-02</finishDate>
         <input>Feature: Add userstory to kanban board</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -238,7 +209,6 @@
         <finishDate>2019-12-03</finishDate>
         <input>Feature: Integrate todo's to kanban board</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -246,7 +216,6 @@
         <finishDate>2019-12-08</finishDate>
         <input>Feature: Count todo's and add the count to filter buttons</input>
         <name>Henning Wuehn</name>
-        <priority>EILT_Nicht</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -254,7 +223,6 @@
         <finishDate>2019-12-08</finishDate>
         <input>Feature: Add a "more details" filter to choose different things.</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -262,7 +230,6 @@
         <finishDate>2019-12-01</finishDate>
         <input>Feature: Drag and drop todo's an change order</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -270,7 +237,6 @@
         <finishDate>2019-10-28</finishDate>
         <input>Feature: Change css style of urgent todo's to bold red</input>
         <name>Henning Wuehn</name>
-        <priority>EILT</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -278,7 +244,6 @@
         <finishDate>2019-10-31</finishDate>
         <input>Feature: Add a readonly list with finished tasks.</input>
         <name>Henning Wuehn</name>
-        <priority>EILT</priority>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -286,7 +251,15 @@
         <finishDate>2019-12-31</finishDate>
         <input>Feature: Start building an android addaption.</input>
         <name>Henning Wuehn</name>
-        <priority>OFFEN</priority>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-27</finishDate>
+        <input>Trolls anschauen</input>
+        <name>ALva</name>
+        <priority>Offen</priority>
+        <sort>Refactor</sort>
         <today>2019-10-27</today>
     </tasks>
 </tasks>
