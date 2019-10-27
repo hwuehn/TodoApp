@@ -45,11 +45,11 @@ public class Data
     {
 
         if (sortLabel != null) {
-            sortLabel.setId("name");
+            //sortLabel.setId("name");
             sortLabel.setText(String.valueOf(task.getSort()));
         }
 
-        toLabel.setText("von");
+        toLabel.setText(" von ");
 
         nameLabel.setId("name");
         nameLabel.setText(task.getName());
@@ -67,8 +67,9 @@ public class Data
             task.setPriority(Priority.Offen);
         }
         else if ((number < 3) & (number >= 2)) {
-            daysToFinishLabel.setId("under3Days");
+            daysToFinishLabel.setId("under3DaysAnd");
             daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
+            task.setPriority(Priority.Eilt);
         }
         else if (number < 3) {
             daysToFinishLabel.setId("under3Days");

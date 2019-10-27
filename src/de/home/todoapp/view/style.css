@@ -48,6 +48,11 @@
 
 #under3Days {
     -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+
+#under3DaysAnd {
+    -fx-text-fill: red;
 }
 
 #name {
