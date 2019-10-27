@@ -15,7 +15,7 @@
    <children>
        <HBox>
            <children>
-               <Label fx:id="sortLabel" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0"
+               <Label fx:id="sortLabel" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="61.0"
                       text="Sort">
                    <font>
                        <Font name="System Italic" size="13.0"/>
