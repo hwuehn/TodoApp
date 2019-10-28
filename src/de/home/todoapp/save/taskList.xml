@@ -14,6 +14,7 @@
         <finishDate>2019-10-29</finishDate>
         <input>Change edit from bottombar to rightmousclick contextmenu</input>
         <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
         <sort>Feature</sort>
         <today>2019-10-26</today>
     </tasks>
@@ -22,7 +23,7 @@
         <finishDate>2019-10-30</finishDate>
         <input>Change edit dialog buttons. Use polymorphism. 2 different methods on 1 button</input>
         <name>Henning Wuehn</name>
-        <priority>Offen</priority>
+        <priority>Eilt</priority>
         <sort>Feature</sort>
         <today>2019-10-26</today>
     </tasks>
@@ -58,7 +59,7 @@
         <finishDate>2019-11-03</finishDate>
         <input>Build a native app for desktop installation</input>
         <name>Henning Wuehn</name>
-        <priority>Eilt_nicht</priority>
+        <priority>Offen</priority>
         <sort>Feature</sort>
         <today>2019-10-26</today>
     </tasks>
@@ -85,7 +86,7 @@
         <finishDate>2019-11-03</finishDate>
         <input>Userstory: User login, security, authentification, automatic setName</input>
         <name>Henning Wuehn</name>
-        <priority>Eilt_nicht</priority>
+        <priority>Offen</priority>
         <sort>Feature</sort>
         <today>2019-10-27</today>
     </tasks>
@@ -299,10 +300,10 @@
     </tasks>
     <tasks>
         <daysToFinish>1</daysToFinish>
-        <finishDate>2019-10-28</finishDate>
+        <finishDate>2019-11-03</finishDate>
         <input>Change css style of urgent todo's to bold red</input>
         <name>Henning Wuehn</name>
-        <priority>Eilt</priority>
+        <priority>Offen</priority>
         <sort>Feature</sort>
         <today>2019-10-27</today>
     </tasks>
@@ -326,11 +327,38 @@
     </tasks>
     <tasks>
         <daysToFinish>0</daysToFinish>
-        <finishDate>2019-10-27</finishDate>
+        <finishDate>2019-12-08</finishDate>
         <input>Trolls anschauen</input>
         <name>ALva</name>
-        <priority>Eilt</priority>
+        <priority>Eilt_nicht</priority>
         <sort>Refactor</sort>
         <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-28</finishDate>
+        <input>make remove task work</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort>Fix</sort>
+        <today>2019-10-28</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-28</finishDate>
+        <input>make remove task work</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort>Fix</sort>
+        <today>2019-10-28</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-28</finishDate>
+        <input>make remove task work</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort>Fix</sort>
+        <today>2019-10-28</today>
     </tasks>
 </tasks>

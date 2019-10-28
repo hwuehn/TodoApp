@@ -22,6 +22,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.prefs.Preferences;
@@ -132,6 +133,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton)event.getSource();
         Predicate<Task> filter = (Predicate<Task>)tb.getUserData();
+        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
         taskAdministration.filterProperty().set( filter );
     };
 
@@ -427,7 +429,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             // Wrapping our task data.
             try {
                 XMLWrapper wrapper = new XMLWrapper();
-                wrapper.setTasks(taskAdministration.getViewableTasks());
+                wrapper.setTasks(taskAdministration.getTasks());
                 // Marshalling and saving XML to the file.
                 m.marshal(wrapper, file);
 

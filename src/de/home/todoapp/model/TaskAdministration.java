@@ -11,6 +11,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 public class TaskAdministration implements IMainController, IAppState {
@@ -23,17 +24,18 @@ public class TaskAdministration implements IMainController, IAppState {
 
     }
 
-    private final FilteredList<Task> viewableTasks = new FilteredList<>(tasks);
-
-    public ReadOnlyObjectProperty<ObservableList<Task>> viewableTasksProperty() {
-        return new SimpleObjectProperty<>(viewableTasks);
-    }
-
-    // Wrap the FilteredList in a SortedList.
-    private final SortedList<Task> sortedTasks = new SortedList<>(viewableTasks);
+    private final SortedList<Task> sortedTasks = new SortedList<>(tasks);
 
     public ReadOnlyObjectProperty<ObservableList<Task>> sortedTasksProperty() {
         return new SimpleObjectProperty<>(sortedTasks);
+    }
+
+    public ObjectProperty<Comparator<? super Task>> sortProperty() { return sortedTasks .comparatorProperty(); }
+
+    private final FilteredList<Task> viewableTasks = new FilteredList<>(sortedTasks);
+
+    public ReadOnlyObjectProperty<ObservableList<Task>> viewableTasksProperty() {
+        return new SimpleObjectProperty<>(viewableTasks);
     }
 
     public ObjectProperty<Predicate<? super Task>> filterProperty() {
@@ -64,6 +66,11 @@ public class TaskAdministration implements IMainController, IAppState {
         add(new Task("Henning", Sort.Feature, "Aufgabe 4", LocalDate.of(2019, 11, 10)));
         add(new Task("Henning", Sort.Refactor, "Aufgabe 5", LocalDate.of(2019, 12, 31)));
 
+        sortedTasks.comparatorProperty().set(Comparator.comparing( task -> task.getDaysBetween()));
+    }
+
+    public SortedList<Task> getSortedTasks() {
+        return sortedTasks;
     }
 
     public FilteredList<Task> getViewableTasks() {
