@@ -2,13 +2,19 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.util.Dispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,53 +30,61 @@ public class EditDialogController {
     @FXML
     private ComboBox<Sort> sortCombo = new ComboBox<>();
 
-    private Stage dialogStage;
-    private Task task;
+    //private Task task;
     private boolean okClicked = false;
-    private TaskAdministration model;
 
-    public void setModel( TaskAdministration model ) {
-        this.model = model;
+    public void showAddPlayer() {
 
-        // priorityCombo.getItems().setAll(Priority.values());
-        sortCombo.getItems().setAll(Sort.values());
-//        List<Priority> priorities =
-//                this.model.tasksProperty().get()
-//                        .stream()
-//                        .map((task) -> task.getPriority())
-//                        .distinct()
-//                        .collect(Collectors.toList());
+        EditDialogController controller = showView("Edit Task", null);
+    }
 
-        //  priorityCombo.setItems(FXCollections.observableArrayList( priorities ) );
+    public boolean showEditDialog(Task task) {
 
-//        List<Sort> sorts =
-//                this.model.tasksProperty().get()
-//                        .stream()
-//                        .map((task) -> task.getSort())
-//                        .distinct()
-//                        .collect(Collectors.toList());
-//
-//        sortCombo.setItems(FXCollections.observableArrayList(sorts));
+        EditDialogController controller = showView("Edit Task", task);
+        return controller.isOkClicked();
 
+    }
 
+    public EditDialogController showView(String title, Task task) {
+
+        try {
+
+            FXMLLoader loader =
+                    new FXMLLoader(EditDialogController.class.getResource("EditDialog.fxml"));
+
+            Parent p = loader.load();
+
+            Scene scene = new Scene(p);
+
+            Stage dialogStage = new Stage();
+            dialogStage.setScene( scene );
+            dialogStage.setTitle(title);
+            dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
+
+            EditDialogController controller = loader.getController();
+
+            if (task != null) controller.setTask(task);
+
+            dialogStage.showAndWait();
+            return  controller;
+        } catch(IOException exc) {
+            exc.printStackTrace();
+            return null;
+        }
     }
 
     @FXML
     private void initialize() {
     }
 
-   public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-        this.dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
-    }
 
     /**
      * Sets the task to be edited in the dialog.
      *
      * @param task
      */
-    public void setPerson(Task task) {
-        this.task = task;
+    public void setTask(Task task) {
+        //this.task = task;
         inputNameField.setText(task.getName());
         sortCombo.getItems().setAll(Sort.values());
         inputTextAreaField.setText(task.getInput());
@@ -86,16 +100,17 @@ public class EditDialogController {
      * Called when the user clicks ok.
      */
     @FXML
-    private void handleOk() {
+    private void handleOk(ActionEvent evt) {
         if (isInputValid()) {
-            task.setName(inputNameField.getText());
+           /* task.setName(inputNameField.getText());
             task.setSort(sortCombo.getSelectionModel().getSelectedItem());
             task.setInput(inputTextAreaField.getText());
             task.setFinishDate(finishDatePicker.getValue());
-            //task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());
+            //task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());*/
 
             okClicked = true;
-            dialogStage.close();
+            hide(evt);
+            //dialogStage.close();
         }
     }
 
@@ -105,13 +120,14 @@ public class EditDialogController {
         List<String> validationErrors = validate();
 
         if( validationErrors.isEmpty() ) {
-            model.add( new Task(
+            Dispatcher.getInstance().addNewTask(
+             new Task(
                     inputNameField.getText(),
                     sortCombo.getSelectionModel().getSelectedItem(),
                     inputTextAreaField.getText(),
                     finishDatePicker.getValue()));
             // priorityCombo.getSelectionModel().getSelectedItem()));
-            dialogStage.hide();
+            hide(evt);
         }
     }
 
@@ -155,7 +171,7 @@ public class EditDialogController {
         } else {
             // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
+            //alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);

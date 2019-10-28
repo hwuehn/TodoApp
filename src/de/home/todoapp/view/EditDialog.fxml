@@ -30,7 +30,7 @@
         <ButtonBar buttonMinWidth="50.0" layoutX="176.0" layoutY="233.0" maxWidth="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <buttons>
             <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addPlayer" text="Add to list" />
-                <Button fx:id="okBtn" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleOk" prefWidth="50.0" text="Edit entry" />
+                <Button fx:id="okBtn" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleOk" prefWidth="50.0" text="Ok" />
                 <Button fx:id="cancelBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefWidth="65.0" text="Cancel" />
             </buttons>
         </ButtonBar>

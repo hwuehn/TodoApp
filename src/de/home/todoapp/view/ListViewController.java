@@ -2,6 +2,7 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.*;
+import de.home.todoapp.util.Dispatcher;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,29 +28,28 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.prefs.Preferences;
 
-public class ListViewController implements Initializable, IAppState, IMainController {
+public class ListViewController implements Initializable {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML public ListView<Task> listView;
 
     @FXML private HBox hBoxFilters;
-    @FXML public ToggleButton allBtn;
+    @FXML private ToggleButton allBtn;
     @FXML public ToggleButton hurryBtn;
     @FXML public ToggleButton openBtn;
     @FXML public ToggleButton noHurryBtn;
     @FXML public MenuButton otherBtn;
 
-    @FXML private MenuItem newMenuBtn;
+    /*@FXML private MenuItem newMenuBtn;
     @FXML private MenuItem loadMenuBtn;
     @FXML private MenuItem saveMenuBtn;
     @FXML private MenuItem saveAsMenuBtn;
     @FXML private MenuItem aboutMenuBtn;
-    @FXML private MenuItem exitMenuBtn;
+    @FXML private MenuItem exitMenuBtn;*/
 
-    private ObservableList<Task> items;
-    
-    private TaskAdministration taskAdministration = new TaskAdministration();
+
+    private TaskAdministration taskAdministration ;
     private ToggleGroup filtersGroup = new ToggleGroup();
 
     public void setCellFactory() {
@@ -75,13 +75,14 @@ public class ListViewController implements Initializable, IAppState, IMainContro
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("init listview");
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
         //setAppState(new TaskAdministration());
 
-        taskAdministration.loadTestData();
+        //taskAdministration.loadTestData();
         setCellFactory();
-        listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
+        //listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
 
         allBtn.setUserData(new PriorityMatcher(Priority.Alle)); // "*"
@@ -106,26 +107,11 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         MenuItem finish = new MenuItem("Finish");
         MenuItem edit = new MenuItem("Edit");
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
-        finish.setOnAction((evt) -> {
-            System.out.println("before taskAdministration.remove");
-            //if (selectedTask != null) {
-                taskAdministration.remove(selectedTask);
-                System.out.println("between taskAdministration.remove");
-            //}
-            System.out.println("after taskAdministration.remove");
-        });
+        finish.setOnAction((evt) -> Dispatcher.getInstance().removeTask(selectedTask));
         edit.setOnAction((evt) -> {
-            mainController.showEditDialog(selectedTask);
+            //mainController.showEditDialog(selectedTask);
 
-//                boolean okClicked = mainController.showEditDialog(selectedTask);
-//                if (okClicked) {
-//                    selectedTask.setName(selectedTask.getName());
-//                    selectedTask.setInput(selectedTask.getInput());
-//                    selectedTask.setFinishDate(selectedTask.getFinishDate());
-//                    selectedTask.setPriority(selectedTask.getPriority());
-//                    listView.refresh();
-//                }
-//            }
+//
         });
         cm.getItems().add(finish);
         cm.getItems().add(edit);
@@ -143,28 +129,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     @FXML
     public void showAddPlayer() {
 
-        try {
+        Dispatcher.getInstance().newTask();
 
-            FXMLLoader fxmlLoader =
-                    new FXMLLoader(ListViewController.class.getResource("EditDialog.fxml"));
-
-            Parent p = fxmlLoader.load();
-
-            EditDialogController c = fxmlLoader.getController();
-
-            Scene scene = new Scene(p);
-
-            Stage dialogStage = new Stage();
-            dialogStage.setScene( scene );
-            dialogStage.setTitle("Add Player");
-            dialogStage.setOnShown( (evt) -> {
-                c.setModel(taskAdministration);
-            });
-            dialogStage.show();
-
-        } catch(IOException exc) {
-            exc.printStackTrace();
-        }
     }
 
     /**
@@ -174,32 +140,19 @@ public class ListViewController implements Initializable, IAppState, IMainContro
      */
     public void setMainController(IMainController controller) {
         this.mainController = controller;
-        // Try to load last opened task file.
-        File file = getTaskFilePath();
-        if (file != null) {
-            loadTaskDataFromFile(file);
-        }
+
 
 
     }
 
-    public void setAppState(IAppState appState) {
-        items = appState.getViewableTasks();
-        listView.setItems(appState.getViewableTasks());
+    public void setAppState(TaskAdministration appState) {
+        taskAdministration= appState;
+        //listView.itemsProperty().bind(appState.viewableTasksProperty());
+        listView.setItems(appState.getTasks());
+
     }
 
-    /**
-     * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new task.
-     */
-    @FXML
-    private void handleNewTask() {
-        Task tempTask = new Task();
-        boolean okClicked = mainController.showEditDialog(tempTask);
-        if (okClicked) {
-          taskAdministration.add(tempTask);
-        }
-    }
+
 
     /**
      * Called when the user clicks the edit button. Opens a dialog to edit
@@ -208,17 +161,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     @FXML
     private void handleEditTask() {
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
-            if (selectedTask != null) {
-            boolean okClicked = mainController.showEditDialog(selectedTask);
-            if (okClicked) {
-                selectedTask.setName(selectedTask.getName());
-                selectedTask.setSort(selectedTask.getSort());
-                selectedTask.setInput(selectedTask.getInput());
-                selectedTask.setFinishDate(selectedTask.getFinishDate());
-                selectedTask.setPriority(selectedTask.getPriority());
-                listView.refresh();
-            }
-
+        if (selectedTask != null) {
+            Dispatcher.getInstance().editTask(listView.getSelectionModel().getSelectedItem());
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -304,7 +248,6 @@ public class ListViewController implements Initializable, IAppState, IMainContro
      */
     @FXML private void handleNewMenuBtn() {
         taskAdministration.getTasks().clear();
-        setTaskFilePath(null);
     }
 
     /**
@@ -322,7 +265,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         File file = fileChooser.showOpenDialog(mainController.getStage());
 
         if (file != null) {
-            loadTaskDataFromFile(file);
+            Dispatcher.getInstance().loadTaskDataFromFile(file);
         }
     }
 
@@ -375,30 +318,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
      *
      * @param file
      */
-    public void loadTaskDataFromFile(File file) {
-        try {
-            JAXBContext context = JAXBContext
-                    .newInstance(XMLWrapper.class);
-            Unmarshaller um = context.createUnmarshaller();
 
-            // Reading XML from the file and unmarshalling.
-            XMLWrapper wrapper = (XMLWrapper) um.unmarshal(file);
-
-            taskAdministration.getTasks().clear();
-            taskAdministration.getTasks().addAll(wrapper.getTasks());
-
-            // Save the file path to the registry.
-            setTaskFilePath(file);
-
-        } catch (Exception e) { // catches ANY exception
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load data");
-            alert.setContentText("Could not load data from file:\n" + file.getPath());
-
-            alert.showAndWait();
-        }
-    }
 
     /**
      * Returns the task file preference, i.e. the file that was last opened.
@@ -441,7 +361,6 @@ public class ListViewController implements Initializable, IAppState, IMainContro
             }
 
             // Save the file path to the registry.
-            setTaskFilePath(file);
         } catch (Exception e) { // catches ANY exception
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -452,39 +371,8 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         }
     }
 
-    /**
-     * Sets the file path of the currently loaded file. The path is persisted in
-     * the OS specific registry.
-     *
-     * @param file the file or null to remove the path
-     */
-    public void setTaskFilePath(File file) {
-        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        if (file != null) {
-            prefs.put("filePath", file.getPath());
 
-            // Update the stage title.
-            mainController.getStage().setTitle("TodoApp - " + file.getName());
-        } else {
-            prefs.remove("filePath");
 
-            // Update the stage title.
-            mainController.getStage().setTitle("TodoApp");
-        }
-    }
 
-    @Override
-    public ObservableList<Task> getViewableTasks() {
-        return null;
-    }
 
-    @Override
-    public Stage getStage() {
-        return null;
-    }
-
-    @Override
-    public boolean showEditDialog(Task task) {
-        return false;
-    }
 }

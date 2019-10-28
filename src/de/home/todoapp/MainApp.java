@@ -2,6 +2,8 @@ package de.home.todoapp;
 
 import de.home.todoapp.model.IAppState;
 import de.home.todoapp.model.Task;
+import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.util.Dispatcher;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.IMainController;
 import de.home.todoapp.view.ListViewController;
@@ -16,7 +18,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainApp extends Application implements IMainController, IAppState {
+public class MainApp extends Application implements IMainController {
+
+    //private TaskAdministration taskAdministration;
 
     public static void main(String[] args) {
         launch(args);
@@ -33,6 +37,7 @@ public class MainApp extends Application implements IMainController, IAppState {
         this.stage = stage;
         this.stage.setTitle("TodoApp");
         this.stage.getIcons().add(new Image("file:resources/images/todo.png"));
+        //taskAdministration = new TaskAdministration();
         initRootLayout();
     }
 
@@ -49,6 +54,10 @@ public class MainApp extends Application implements IMainController, IAppState {
             // Give the controller access to the main app.
             ListViewController controller = loader.getController();
             controller.setMainController(this);
+            controller.setAppState(Dispatcher.getInstance().getTaskAdministration());
+            Dispatcher.getInstance().loadTestData();
+
+            System.out.println("set main controller");
 
             stage.show();
 
@@ -57,47 +66,12 @@ public class MainApp extends Application implements IMainController, IAppState {
         }
     }
 
-    public boolean showEditDialog(Task task) {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/EditDialog.fxml"));
-            AnchorPane page = loader.load();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Task");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(stage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the task into the controller.
-            EditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPerson(task);
-
-            // Set the dialog icon.
-            dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public Stage getStage() {
         return stage;
     }
 
-    @Override
-    public ObservableList<Task> getViewableTasks() {
-        return null;
-    }
 }
 
 

@@ -5,5 +5,4 @@ import javafx.stage.Stage;
 
 public interface IMainController {
     Stage getStage();
-    boolean showEditDialog(Task task);
 }
