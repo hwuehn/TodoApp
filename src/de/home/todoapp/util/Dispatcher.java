@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.function.Predicate;
 import java.util.prefs.Preferences;
 
 public class Dispatcher {
@@ -58,6 +59,11 @@ public class Dispatcher {
 
             }
         }
+    }
+
+    public void filter(Predicate<Task> filter) {
+        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
+        taskAdministration.filterProperty().set( filter );
     }
 
     private static class Holder {

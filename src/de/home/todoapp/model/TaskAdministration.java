@@ -14,10 +14,9 @@ import java.util.function.Predicate;
 
 public class TaskAdministration implements IMainController, IAppState {
 
-    private final StringProperty title= new SimpleStringProperty();
-    private final ObjectProperty<Task> currentTask=new SimpleObjectProperty<Task>();
-    private final ObservableList<Task> tasks =
-            FXCollections.observableArrayList();
+    private final StringProperty title = new SimpleStringProperty();
+    private final ObjectProperty<Task> currentTask = new SimpleObjectProperty<Task>();
+    private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
     public ReadOnlyObjectProperty<ObservableList<Task>> tasksProperty() {
         return new SimpleObjectProperty<>(tasks);

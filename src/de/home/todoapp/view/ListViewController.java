@@ -122,8 +122,7 @@ public class ListViewController implements Initializable {
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton)event.getSource();
         Predicate<Task> filter = (Predicate<Task>)tb.getUserData();
-        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
-        taskAdministration.filterProperty().set( filter );
+        Dispatcher.getInstance().filter(filter);
     };
 
     @FXML
@@ -148,7 +147,7 @@ public class ListViewController implements Initializable {
     public void setAppState(TaskAdministration appState) {
         taskAdministration= appState;
         //listView.itemsProperty().bind(appState.viewableTasksProperty());
-        listView.setItems(appState.getTasks());
+        listView.setItems(appState.getViewableTasks());
 
     }
 
