@@ -77,7 +77,7 @@ public class ListViewController implements Initializable, IAppState, IMainContro
     public void initialize(URL location, ResourceBundle resources) {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
-        setAppState(new TaskAdministration());
+        //setAppState(new TaskAdministration());
 
         taskAdministration.loadTestData();
         setCellFactory();
@@ -107,9 +107,12 @@ public class ListViewController implements Initializable, IAppState, IMainContro
         MenuItem edit = new MenuItem("Edit");
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
         finish.setOnAction((evt) -> {
-            if (selectedTask != null) {
+            System.out.println("before taskAdministration.remove");
+            //if (selectedTask != null) {
                 taskAdministration.remove(selectedTask);
-            }
+                System.out.println("between taskAdministration.remove");
+            //}
+            System.out.println("after taskAdministration.remove");
         });
         edit.setOnAction((evt) -> {
             mainController.showEditDialog(selectedTask);

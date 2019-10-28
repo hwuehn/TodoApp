@@ -47,7 +47,9 @@ public class TaskAdministration implements IMainController, IAppState {
     }
 
     public void remove(Task task) {
+        System.out.println("vor remove");
         tasks.remove(task);
+        System.out.println("nach remove");
     }
 
     public void edit(Task task) {
@@ -57,8 +59,8 @@ public class TaskAdministration implements IMainController, IAppState {
     public void loadTestData() {
 
         tasks.clear();
-        viewableTasks.clear();
         sortedTasks.clear();
+        viewableTasks.clear();
 
         add(new Task("Henning", Sort.Feature, "Aufgabe 1", LocalDate.of(2019, 10, 26)));
         add(new Task("Henning", Sort.Fix, "Aufgabe 2", LocalDate.of(2019, 10, 26)));
