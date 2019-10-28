@@ -75,8 +75,6 @@ public class TaskAdministration implements IMainController, IAppState {
         return null;
     }
 
-
-
     public void setTitle(String s) {
         title.setValue(s);
     }

@@ -3,27 +3,19 @@ package de.home.todoapp.view;
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.*;
 import de.home.todoapp.util.Dispatcher;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.prefs.Preferences;
@@ -40,14 +32,6 @@ public class ListViewController implements Initializable {
     @FXML public ToggleButton openBtn;
     @FXML public ToggleButton noHurryBtn;
     @FXML public MenuButton otherBtn;
-
-    /*@FXML private MenuItem newMenuBtn;
-    @FXML private MenuItem loadMenuBtn;
-    @FXML private MenuItem saveMenuBtn;
-    @FXML private MenuItem saveAsMenuBtn;
-    @FXML private MenuItem aboutMenuBtn;
-    @FXML private MenuItem exitMenuBtn;*/
-
 
     private TaskAdministration taskAdministration ;
     private ToggleGroup filtersGroup = new ToggleGroup();
@@ -78,9 +62,6 @@ public class ListViewController implements Initializable {
         System.out.println("init listview");
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
-        //setAppState(new TaskAdministration());
-
-        //taskAdministration.loadTestData();
         setCellFactory();
         //listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
@@ -111,7 +92,6 @@ public class ListViewController implements Initializable {
         edit.setOnAction((evt) -> {
             //mainController.showEditDialog(selectedTask);
 
-//
         });
         cm.getItems().add(finish);
         cm.getItems().add(edit);
@@ -139,19 +119,13 @@ public class ListViewController implements Initializable {
      */
     public void setMainController(IMainController controller) {
         this.mainController = controller;
-
-
-
     }
 
     public void setAppState(TaskAdministration appState) {
         taskAdministration= appState;
         //listView.itemsProperty().bind(appState.viewableTasksProperty());
         listView.setItems(appState.getViewableTasks());
-
     }
-
-
 
     /**
      * Called when the user clicks the edit button. Opens a dialog to edit
@@ -222,8 +196,6 @@ public class ListViewController implements Initializable {
         allBtn.setId("buttonNotSelected");
         noHurryBtn.setId("buttonNotSelected");
         otherBtn.setId("buttonNotSelected");
-
-
     }
 
     public void handleNoHurry() {
@@ -312,14 +284,6 @@ public class ListViewController implements Initializable {
     }
 
     /**
-     * Loads task data from the specified file. The current task data will
-     * be replaced.
-     *
-     * @param file
-     */
-
-
-    /**
      * Returns the task file preference, i.e. the file that was last opened.
      * The preference is read from the OS specific registry. If no such
      * preference can be found, null is returned.
@@ -365,13 +329,7 @@ public class ListViewController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Could not save data");
             alert.setContentText("Could not save data to file:\n" + file.getPath());
-
             alert.showAndWait();
         }
     }
-
-
-
-
-
 }

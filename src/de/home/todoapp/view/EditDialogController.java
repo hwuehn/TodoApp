@@ -10,8 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,8 +23,6 @@ public class EditDialogController {
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
-    //  @FXML
-    // private ComboBox<Priority> priorityCombo = new ComboBox<>();
     @FXML
     private ComboBox<Sort> sortCombo = new ComboBox<>();
 
@@ -76,7 +72,6 @@ public class EditDialogController {
     @FXML
     private void initialize() {
     }
-
 
     /**
      * Sets the task to be edited in the dialog.
@@ -144,21 +139,11 @@ public class EditDialogController {
 
         if( inputTextAreaField.getText() == null ||
                 inputTextAreaField.getText().isEmpty() ) {
-            validationErrors.add("Player Name is required.");
+            validationErrors.add("Input is required.");
         }
-
-//        if( priorityCombo.getSelectionModel().getSelectedItem() == null ) {
-//            validationErrors.add("Team is required.");
-//        }
-
         return validationErrors;
     }
 
-    /**
-     * Validates the user input in the text fields.
-     *
-     * @return true if the input is valid
-     */
     private boolean isInputValid() {
         String errorMessage = "";
 
@@ -169,9 +154,7 @@ public class EditDialogController {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            //alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);
