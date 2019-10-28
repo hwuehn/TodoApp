@@ -1,12 +1,110 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasks>
     <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-28</finishDate>
+        <input>sort list befor loading</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort>Feature</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-29</finishDate>
+        <input>Change edit from bottombar to rightmousclick contextmenu</input>
+        <name>Henning Wuehn</name>
+        <sort>Feature</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>4</daysToFinish>
+        <finishDate>2019-10-30</finishDate>
+        <input>Change edit dialog buttons. Use polymorphism. 2 different methods on 1 button</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort>Feature</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>66</daysToFinish>
+        <finishDate>2019-10-31</finishDate>
+        <input>Make priorities in edit dialog comboBox changeable.</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort>Fix</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-11-01</finishDate>
+        <input>Understand and make use of IAppState and IMainController</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort>Refactor</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>8</daysToFinish>
+        <finishDate>2019-11-02</finishDate>
+        <input>A togglegroup for priority buttons to avoid redundance.</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort>Refactor</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>7</daysToFinish>
+        <finishDate>2019-11-03</finishDate>
+        <input>Build a native app for desktop installation</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt_nicht</priority>
+        <sort>Feature</sort>
+        <today>2019-10-26</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>4</daysToFinish>
+        <finishDate>2019-10-31</finishDate>
+        <input>All fxml files reziseable</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort>Feature</sort>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
         <daysToFinish>8</daysToFinish>
         <finishDate>2019-11-04</finishDate>
         <input>ListView smaller so that scrollable content fits to size</input>
         <name>Henning Wuehn</name>
         <priority>Eilt_nicht</priority>
         <sort>Fix</sort>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>7</daysToFinish>
+        <finishDate>2019-11-03</finishDate>
+        <input>Userstory: User login, security, authentification, automatic setName</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt_nicht</priority>
+        <sort>Feature</sort>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>8</daysToFinish>
+        <finishDate>2019-11-04</finishDate>
+        <input>Close edit dialog after adding or editing</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt_nicht</priority>
+        <sort>Fix</sort>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>9</daysToFinish>
+        <finishDate>2019-11-05</finishDate>
+        <input>Add a label "Project" in ListCellItem.</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt_nicht</priority>
+        <sort>Feature</sort>
         <today>2019-10-27</today>
     </tasks>
     <tasks>
@@ -174,10 +272,10 @@
     </tasks>
     <tasks>
         <daysToFinish>42</daysToFinish>
-        <finishDate>2019-10-29</finishDate>
+        <finishDate>2019-12-08</finishDate>
         <input>Count todo's and add the count to filter buttons</input>
         <name>Henning Wuehn</name>
-        <priority>Eilt</priority>
+        <priority>Eilt_nicht</priority>
         <sort>Feature</sort>
         <today>2019-10-27</today>
     </tasks>
@@ -200,6 +298,24 @@
         <today>2019-10-27</today>
     </tasks>
     <tasks>
+        <daysToFinish>1</daysToFinish>
+        <finishDate>2019-10-28</finishDate>
+        <input>Change css style of urgent todo's to bold red</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort>Feature</sort>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
+        <daysToFinish>4</daysToFinish>
+        <finishDate>2019-10-31</finishDate>
+        <input>Add a readonly list with finished tasks.</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort>Feature</sort>
+        <today>2019-10-27</today>
+    </tasks>
+    <tasks>
         <daysToFinish>65</daysToFinish>
         <finishDate>2019-12-31</finishDate>
         <input>Start building an android addaption.</input>
@@ -210,10 +326,10 @@
     </tasks>
     <tasks>
         <daysToFinish>0</daysToFinish>
-        <finishDate>2019-12-08</finishDate>
+        <finishDate>2019-10-27</finishDate>
         <input>Trolls anschauen</input>
         <name>ALva</name>
-        <priority>Eilt_nicht</priority>
+        <priority>Eilt</priority>
         <sort>Refactor</sort>
         <today>2019-10-27</today>
     </tasks>
