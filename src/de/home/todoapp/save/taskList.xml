@@ -361,4 +361,12 @@
         <sort>Fix</sort>
         <today>2019-10-28</today>
     </tasks>
+    <tasks>
+        <daysToFinish>0</daysToFinish>
+        <finishDate>2019-10-28</finishDate>
+        <input>messengerservice, newTaskService, editTaskService etc., receive message method in dispatcher</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <today>2019-10-28</today>
+    </tasks>
 </tasks>
