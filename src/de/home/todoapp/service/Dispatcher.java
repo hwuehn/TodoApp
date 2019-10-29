@@ -27,8 +27,11 @@ public class Dispatcher {
     }
 
     public void newTask() {
-        EditDialogController controller = new EditDialogController();
-        controller.showAddPlayer();
+
+        Task newTask = EditDialogController.showAddPlayer();
+        if (newTask != null){
+            taskAdministration.getTasks().add(newTask);
+        }
     }
 
     public void addNewTask(Task task) {

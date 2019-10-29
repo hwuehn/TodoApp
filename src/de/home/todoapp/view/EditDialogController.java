@@ -72,6 +72,7 @@ public class EditDialogController {
 
     @FXML
     private void initialize() {
+        sortCombo.getItems().setAll(Sort.values());
     }
 
     /**
@@ -81,7 +82,7 @@ public class EditDialogController {
      */
     public void setTask(Task task) {
         inputNameField.setText(task.getName());
-        sortCombo.getItems().setAll(Sort.values());
+        sortCombo.getSelectionModel().select(task.getSort());
         inputTextAreaField.setText(task.getInput());
         finishDatePicker.setValue(task.getFinishDate());
     }
@@ -107,22 +108,7 @@ public class EditDialogController {
         }
     }
 
-    @FXML
-    public void addPlayer(ActionEvent evt) {
 
-        List<String> validationErrors = validate();
-
-        if( validationErrors.isEmpty() ) {
-            Dispatcher.getInstance().addNewTask(
-             new Task(
-                    inputNameField.getText(),
-                    sortCombo.getSelectionModel().getSelectedItem(),
-                    inputTextAreaField.getText(),
-                    finishDatePicker.getValue()));
-
-            hide(evt);
-        }
-    }
 
     @FXML
     public void cancel(ActionEvent evt) { hide(evt); }
@@ -131,16 +117,7 @@ public class EditDialogController {
         ((Button)evt.getSource()).getScene().getWindow().hide();
     }
 
-    private List<String> validate() {
 
-        List<String> validationErrors = new ArrayList<>();
-
-        if( inputTextAreaField.getText() == null ||
-                inputTextAreaField.getText().isEmpty() ) {
-            validationErrors.add("Input is required.");
-        }
-        return validationErrors;
-    }
 
     private boolean isInputValid() {
         String errorMessage = "";
@@ -161,35 +138,5 @@ public class EditDialogController {
         }
     }
 
-    public TextField getInputNameField() {
-        return inputNameField;
-    }
 
-    public void setInputNameField(TextField inputNameField) {
-        this.inputNameField = inputNameField;
-    }
-
-    public TextArea getInputTextAreaField() {
-        return inputTextAreaField;
-    }
-
-    public void setInputTextAreaField(TextArea inputTextAreaField) {
-        this.inputTextAreaField = inputTextAreaField;
-    }
-
-    public DatePicker getFinishDatePicker() {
-        return finishDatePicker;
-    }
-
-    public void setFinishDatePicker(DatePicker finishDatePicker) {
-        this.finishDatePicker = finishDatePicker;
-    }
-
-    public ComboBox<Sort> getSortCombo() {
-        return sortCombo;
-    }
-
-    public void setSortCombo(ComboBox<Sort> sortCombo) {
-        this.sortCombo = sortCombo;
-    }
 }

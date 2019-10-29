@@ -16,6 +16,8 @@ import javafx.util.Callback;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -39,7 +41,6 @@ public class ListViewController implements Initializable {
     private HBox hBoxFilters;
     @FXML
     private ToggleButton allBtn;
-    private TaskAdministration taskAdministration;
     private ToggleGroup filtersGroup = new ToggleGroup();
 
     public void setCellFactory() {
@@ -53,9 +54,7 @@ public class ListViewController implements Initializable {
         );
     }
 
-    public ListView<Task> getListView() {
-        return listView;
-    }
+
 
     // Reference to the main application.
     private IMainController mainController;
@@ -76,10 +75,7 @@ public class ListViewController implements Initializable {
         MenuItem edit = new MenuItem("Edit");
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
         finish.setOnAction((evt) -> Dispatcher.getInstance().removeTask(selectedTask));
-        edit.setOnAction((evt) -> {
-            //mainController.showEditDialog(selectedTask);
-
-        });
+        edit.setOnAction((evt) -> handleEditTask());
         menu.getItems().add(finish);
         menu.getItems().add(edit);
         return menu;
@@ -126,8 +122,6 @@ public class ListViewController implements Initializable {
     }
 
     public void setAppState(TaskAdministration appState) {
-        taskAdministration = appState;
-        //listView.itemsProperty().bind(appState.viewableTasksProperty());
         listView.setItems(appState.getViewableTasks());
     }
 
@@ -156,44 +150,34 @@ public class ListViewController implements Initializable {
      * Showing all of the content.
      * All other buttons will have a grey color.
      */
+    private void resetToggles(){
+        List<ButtonBase> tggles = Arrays.asList(allBtn, hurryBtn, openBtn, noHurryBtn, otherBtn);
+        tggles.stream().forEach(btn -> btn.setId("buttonNotSelected"));
+    }
     public void handleAll() {
+       resetToggles();
         allBtn.setId("buttonSelected");
-        hurryBtn.setId("buttonNotSelected");
-        openBtn.setId("buttonNotSelected");
-        noHurryBtn.setId("buttonNotSelected");
-        otherBtn.setId("buttonNotSelected");
+
     }
 
     public void handleHurry() {
+        resetToggles();
         hurryBtn.setId("buttonSelected");
-        allBtn.setId("buttonNotSelected");
-        openBtn.setId("buttonNotSelected");
-        noHurryBtn.setId("buttonNotSelected");
-        otherBtn.setId("buttonNotSelected");
     }
 
     public void handleOpen() {
+        resetToggles();
         openBtn.setId("buttonSelected");
-        hurryBtn.setId("buttonNotSelected");
-        allBtn.setId("buttonNotSelected");
-        noHurryBtn.setId("buttonNotSelected");
-        otherBtn.setId("buttonNotSelected");
     }
 
     public void handleNoHurry() {
+        resetToggles();
         noHurryBtn.setId("buttonSelected");
-        openBtn.setId("buttonNotSelected");
-        hurryBtn.setId("buttonNotSelected");
-        allBtn.setId("buttonNotSelected");
-        otherBtn.setId("buttonNotSelected");
     }
 
     public void handleOther() {
+        resetToggles();
         otherBtn.setId("buttonSelected");
-        noHurryBtn.setId("buttonNotSelected");
-        openBtn.setId("buttonNotSelected");
-        hurryBtn.setId("buttonNotSelected");
-        allBtn.setId("buttonNotSelected");
     }
 
     /**
