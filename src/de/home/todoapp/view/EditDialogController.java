@@ -97,16 +97,14 @@ public class EditDialogController {
     @FXML
     private void handleOk(ActionEvent evt) {
         if (isInputValid()) {
-            Task selectedTask = Dispatcher.getInstance().getTaskAdministration().getCurrentTask();
-            selectedTask.setName(inputNameField.getText());
-            selectedTask.setSort(sortCombo.getSelectionModel().getSelectedItem());
-            selectedTask.setInput(inputTextAreaField.getText());
-            selectedTask.setFinishDate(finishDatePicker.getValue());
-
+            Task task = new Task();
+            task.setName(inputNameField.getText());
+            task.setSort(sortCombo.getSelectionModel().getSelectedItem());
+            task.setInput(inputTextAreaField.getText());
+            task.setFinishDate(finishDatePicker.getValue());
 
             okClicked = true;
             hide(evt);
-            //dialogStage.close();
         }
     }
 

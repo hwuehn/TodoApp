@@ -47,11 +47,11 @@ public class Dispatcher {
     }
 
     public void setEditedTask(Task selectedTask) {
-        EditDialogController controller = new EditDialogController();
-        selectedTask.setName(controller.getInputNameField().getText());
-        selectedTask.setInput(controller.getInputTextAreaField().getText());
-        selectedTask.setSort(controller.getSortCombo().getSelectionModel().getSelectedItem());
-        selectedTask.setFinishDate(controller.getFinishDatePicker().getValue());
+        //EditDialogController controller = new EditDialogController();
+//        selectedTask.setName();
+//        selectedTask.setInput(controller.getInputTextAreaField().getText());
+//        selectedTask.setSort(controller.getSortCombo().getSelectionModel().getSelectedItem());
+//        selectedTask.setFinishDate(controller.getFinishDatePicker().getValue());
     }
 
     public void filter(Predicate<Task> filter) {
