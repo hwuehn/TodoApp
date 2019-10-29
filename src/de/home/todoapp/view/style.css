@@ -48,7 +48,7 @@
 
 #under3Days {
     -fx-text-fill: red;
-    -fx-font-weight: bold;
+    
 }
 
 #under3DaysAnd {
@@ -57,7 +57,7 @@
 
 #underZero {
     -fx-text-fill: red;
-    -fx-font-weight: bold;
+
 }
 
 #name {

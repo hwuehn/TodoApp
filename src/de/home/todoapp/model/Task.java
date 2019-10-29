@@ -1,12 +1,14 @@
 package de.home.todoapp.model;
 
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Model class for a Task.
@@ -19,7 +21,7 @@ public class Task {
     private StringProperty input;
     private SimpleObjectProperty<LocalDate> finishDate;
     private SimpleObjectProperty<LocalDate> today;
-    private SimpleIntegerProperty daysToFinish;
+    private SimpleLongProperty daysToFinish;
     private SimpleObjectProperty<Priority> priority;
     private SimpleObjectProperty<Sort> sort;
 
@@ -32,7 +34,7 @@ public class Task {
         this.priority = new SimpleObjectProperty<Priority>();
         this.today = new SimpleObjectProperty<LocalDate>();
         this.finishDate = new SimpleObjectProperty<LocalDate>();
-        this.daysToFinish = new SimpleIntegerProperty();
+        this.daysToFinish = new SimpleLongProperty();
         this.sort = new SimpleObjectProperty<Sort>();
 
     }
@@ -44,23 +46,11 @@ public class Task {
         this.priority = new SimpleObjectProperty<Priority>();
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>(date);
-        this.daysToFinish = new SimpleIntegerProperty(getDaysBetween());
+        this.daysToFinish = new SimpleLongProperty(getDaysBetween());
     }
 
-    public int getDaysBetween() {
-        int endDate = getFinishDate().getDayOfYear();
-        int nowDate = LocalDate.now().getDayOfYear();
-        int days = 0;
-
-        if (endDate > nowDate) {
-            days = endDate - nowDate;
-        } else {
-            days = -(nowDate - endDate);
-
-        }
-
-
-
+    public long getDaysBetween() {
+        long days = DAYS.between(LocalDate.now(), getFinishDate());
         return days;
     }
 
@@ -142,7 +132,7 @@ public class Task {
         return daysToFinish.get();
     }
 
-    public SimpleIntegerProperty daysToFinishProperty() {
+    public SimpleLongProperty daysToFinishProperty() {
         return daysToFinish;
     }
 

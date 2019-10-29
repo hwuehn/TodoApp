@@ -41,9 +41,9 @@
         <finishDate>2019-11-01</finishDate>
         <input>Understand and make use of IAppState and IMainController</input>
         <name>Henning Wuehn</name>
-        <priority>Offen</priority>
+        <priority>Eilt</priority>
         <sort>Refactor</sort>
-        <today>2019-10-26</today>
+        <today>2019-10-24</today>
     </tasks>
     <tasks>
         <daysToFinish>8</daysToFinish>

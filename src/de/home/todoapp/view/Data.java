@@ -58,34 +58,42 @@ public class Data
 
         if (number >= 7) {
             daysToFinishLabel.setId("over6Days");
-            daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
+            daysToFinishLabel.setText("In " + number + " Tagen");
             task.setPriority(Priority.Eilt_nicht);
         }
         else if ((number > 2) & (number < 7)) {
             daysToFinishLabel.setId("over2Days");
-            daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
+            daysToFinishLabel.setText("In " + number + " Tagen");
             task.setPriority(Priority.Offen);
         }
         else if ((number < 3) & (number >= 2)) {
             daysToFinishLabel.setId("under3DaysAnd");
-            daysToFinishLabel.setText("In " + task.getDaysBetween() + " Tagen");
+            daysToFinishLabel.setText("In " + number + " Tagen");
             task.setPriority(Priority.Eilt);
         } else if (number < 3) {
             daysToFinishLabel.setId("under3Days");
             task.setPriority(Priority.Eilt);
-        } else if ((number > -100) & (number < -1)) {
+        }
+
+        if ((number > -100) & (number < -1)) {
             daysToFinishLabel.setId("underZero");
             daysToFinishLabel.setText("!!! \u00dcberf\u00e4llig !!!");
             task.setPriority(Priority.Eilt);
         }
 
-        switch (task.getDaysBetween()) {
+        switch ((int) task.getDaysBetween()) {
             case -1: daysToFinishLabel.setText("Gestern"); break;
-            case 0: daysToFinishLabel.setText("Heute"); break;
-            case 1: daysToFinishLabel.setText("Morgen"); break;
+            case 0:
+                daysToFinishLabel.setText("Heute");
+                break;
+            case 1:
+                daysToFinishLabel.setText("Morgen");
+                break;
+            case 2:
+                daysToFinishLabel.setText("In " + number + " Tagen");
+                break;
         }
 
-        //daysToFinishLabel.setText("In " + String.valueOf(task.getDaysBetween()) + " Tagen");
         inputLabel.setText(task.getInput());
         finishLabel.setText(String.valueOf(task.getFinishDate()));
 
