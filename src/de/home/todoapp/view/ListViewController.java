@@ -225,7 +225,7 @@ public class ListViewController implements Initializable {
      */
     @FXML
     private void handleNewMenuBtn() {
-        taskAdministration.getTasks().clear();
+        Dispatcher.getInstance().clearView();
     }
 
     /**

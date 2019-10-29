@@ -104,6 +104,9 @@ public class Dispatcher {
         }
     }
 
+    public void clearView() {
+        taskAdministration.getTasks().clear();
+    }
 
 
     private static class Holder {
