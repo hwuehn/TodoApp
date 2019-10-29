@@ -73,13 +73,13 @@ public class Data
         } else if (number < 3) {
             daysToFinishLabel.setId("under3Days");
             task.setPriority(Priority.Eilt);
-        } else {
+        } else if ((number > -100) & (number < -1)) {
             daysToFinishLabel.setId("underZero");
             daysToFinishLabel.setText("!!! \u00dcberf\u00e4llig !!!");
             task.setPriority(Priority.Eilt);
         }
 
-        switch ((int) task.getDaysBetween()) {
+        switch (task.getDaysBetween()) {
             case -1: daysToFinishLabel.setText("Gestern"); break;
             case 0: daysToFinishLabel.setText("Heute"); break;
             case 1: daysToFinishLabel.setText("Morgen"); break;

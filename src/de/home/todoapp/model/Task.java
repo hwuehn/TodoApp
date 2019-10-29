@@ -48,7 +48,19 @@ public class Task {
     }
 
     public int getDaysBetween() {
-        int days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
+        int endDate = getFinishDate().getDayOfYear();
+        int nowDate = LocalDate.now().getDayOfYear();
+        int days = 0;
+
+        if (endDate > nowDate) {
+            days = endDate - nowDate;
+        } else {
+            days = -(nowDate - endDate);
+
+        }
+
+
+
         return days;
     }
 
