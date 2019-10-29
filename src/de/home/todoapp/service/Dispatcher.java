@@ -5,7 +5,6 @@ import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.XMLWrapper;
 import de.home.todoapp.view.EditDialogController;
-import javafx.scene.control.Alert;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -80,13 +79,31 @@ public class Dispatcher {
 
             // Save the file path to the registry.
         } catch (Exception e) { // catches ANY exception
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not save data");
-            alert.setContentText("Could not save data to file:\n" + file.getPath());
-            alert.showAndWait();
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Error");
+//            alert.setHeaderText("Could not save data");
+//            alert.setContentText("Could not save data to file:\n" + file.getPath());
+//            alert.showAndWait();
         }
     }
+
+    /**
+     * Returns the task file preference, i.e. the file that was last opened.
+     * The preference is read from the OS specific registry. If no such
+     * preference can be found, null is returned.
+     *
+     * @return
+     */
+    public File getTaskFilePath() {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null) {
+            return new File(filePath);
+        } else {
+            return null;
+        }
+    }
+
 
 
     private static class Holder {

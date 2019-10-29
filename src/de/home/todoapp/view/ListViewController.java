@@ -1,6 +1,5 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.MainApp;
 import de.home.todoapp.model.Priority;
 import de.home.todoapp.model.PriorityMatcher;
 import de.home.todoapp.model.Task;
@@ -19,7 +18,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import java.util.prefs.Preferences;
 
 public class ListViewController implements Initializable {
 
@@ -256,7 +254,7 @@ public class ListViewController implements Initializable {
      */
     @FXML
     private void handleSaveMenuBtn() {
-        File taskFile = getTaskFilePath();
+        File taskFile = Dispatcher.getInstance().getTaskFilePath();
         if (taskFile != null) {
             Dispatcher.getInstance().saveTaskDataToFile(taskFile);
         } else {
@@ -298,23 +296,6 @@ public class ListViewController implements Initializable {
     @FXML
     private void handleExitMenuBtn() {
         System.exit(0);
-    }
-
-    /**
-     * Returns the task file preference, i.e. the file that was last opened.
-     * The preference is read from the OS specific registry. If no such
-     * preference can be found, null is returned.
-     *
-     * @return
-     */
-    public File getTaskFilePath() {
-        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        String filePath = prefs.get("filePath", null);
-        if (filePath != null) {
-            return new File(filePath);
-        } else {
-            return null;
-        }
     }
 
 
