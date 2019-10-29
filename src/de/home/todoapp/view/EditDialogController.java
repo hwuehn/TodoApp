@@ -26,12 +26,12 @@ public class EditDialogController {
     @FXML
     private ComboBox<Sort> sortCombo = new ComboBox<>();
 
-    //private Task task;
     private boolean okClicked = false;
 
-    public void showAddPlayer() {
+    public static Task showAddPlayer() {
 
-        showView("Edit Task", null);
+        EditDialogController controller = showView("Edit Task", null);
+        return controller.getTask();
 
     }
 
@@ -80,13 +80,12 @@ public class EditDialogController {
      * @param task
      */
     public void setTask(Task task) {
-        //this.task = task;
         inputNameField.setText(task.getName());
         sortCombo.getItems().setAll(Sort.values());
         inputTextAreaField.setText(task.getInput());
         finishDatePicker.setValue(task.getFinishDate());
-        //priorityCombo.getItems().setAll(Priority.values());
     }
+
     public Task getTask() {
         Task task = new Task();
         task.setName(inputNameField.getText());
@@ -95,8 +94,6 @@ public class EditDialogController {
         task.setFinishDate(finishDatePicker.getValue());
         return okClicked ? task : null;
     }
-
-
 
     /**
      * Called when the user clicks ok.
@@ -122,7 +119,7 @@ public class EditDialogController {
                     sortCombo.getSelectionModel().getSelectedItem(),
                     inputTextAreaField.getText(),
                     finishDatePicker.getValue()));
-            // priorityCombo.getSelectionModel().getSelectedItem()));
+
             hide(evt);
         }
     }
