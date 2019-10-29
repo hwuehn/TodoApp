@@ -1,6 +1,6 @@
 package de.home.todoapp.model;
 
-import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,7 +19,7 @@ public class Task {
     private StringProperty input;
     private SimpleObjectProperty<LocalDate> finishDate;
     private SimpleObjectProperty<LocalDate> today;
-    private SimpleLongProperty daysToFinish;
+    private SimpleIntegerProperty daysToFinish;
     private SimpleObjectProperty<Priority> priority;
     private SimpleObjectProperty<Sort> sort;
 
@@ -32,7 +32,7 @@ public class Task {
         this.priority = new SimpleObjectProperty<Priority>();
         this.today = new SimpleObjectProperty<LocalDate>();
         this.finishDate = new SimpleObjectProperty<LocalDate>();
-        this.daysToFinish = new SimpleLongProperty();
+        this.daysToFinish = new SimpleIntegerProperty();
         this.sort = new SimpleObjectProperty<Sort>();
 
     }
@@ -44,11 +44,11 @@ public class Task {
         this.priority = new SimpleObjectProperty<Priority>();
         this.today = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.finishDate = new SimpleObjectProperty<LocalDate>(date);
-        this.daysToFinish = new SimpleLongProperty(getDaysBetween());
+        this.daysToFinish = new SimpleIntegerProperty(getDaysBetween());
     }
 
-    public long getDaysBetween() {
-        long days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
+    public int getDaysBetween() {
+        int days = getFinishDate().getDayOfYear() - LocalDate.now().getDayOfYear();
         return days;
     }
 
@@ -130,11 +130,11 @@ public class Task {
         return daysToFinish.get();
     }
 
-    public SimpleLongProperty daysToFinishProperty() {
+    public SimpleIntegerProperty daysToFinishProperty() {
         return daysToFinish;
     }
 
-    public void setDaysToFinish(long daysToFinish) {
+    public void setDaysToFinish(int daysToFinish) {
         this.daysToFinish.set(daysToFinish);
     }
 }
