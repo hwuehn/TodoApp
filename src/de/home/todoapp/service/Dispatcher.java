@@ -1,22 +1,14 @@
-package de.home.todoapp.util;
+package de.home.todoapp.service;
 
 import de.home.todoapp.MainApp;
-import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.XMLWrapper;
 import de.home.todoapp.view.EditDialogController;
-import de.home.todoapp.view.ListViewController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.prefs.Preferences;

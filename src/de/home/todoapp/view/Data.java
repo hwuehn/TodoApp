@@ -75,7 +75,7 @@ public class Data
             task.setPriority(Priority.Eilt);
         } else {
             daysToFinishLabel.setId("underZero");
-            daysToFinishLabel.setText("!!! Überfällig !!!");
+            daysToFinishLabel.setText("!!! \u00dcberf\u00e4llig !!!");
             task.setPriority(Priority.Eilt);
         }
 

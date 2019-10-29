@@ -1,6 +1,6 @@
 package de.home.todoapp;
 
-import de.home.todoapp.util.Dispatcher;
+import de.home.todoapp.service.Dispatcher;
 import de.home.todoapp.view.IMainController;
 import de.home.todoapp.view.ListViewController;
 import javafx.application.Application;

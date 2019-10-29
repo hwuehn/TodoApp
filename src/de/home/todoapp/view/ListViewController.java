@@ -2,7 +2,7 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.*;
-import de.home.todoapp.util.Dispatcher;
+import de.home.todoapp.service.Dispatcher;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -107,6 +107,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     public void showAddPlayer() {
+
 
         Dispatcher.getInstance().newTask();
 

@@ -2,7 +2,7 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.util.Dispatcher;
+import de.home.todoapp.service.Dispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
