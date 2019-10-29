@@ -16,8 +16,6 @@ import java.util.prefs.Preferences;
 
 public class Dispatcher {
 
-
-
     private final TaskAdministration taskAdministration;
 
     private Dispatcher(){
@@ -42,16 +40,18 @@ public class Dispatcher {
         if (selectedTask != null) {
             EditDialogController controller = new EditDialogController();
             boolean okClicked = controller.showEditDialog(selectedTask);
-
             if (okClicked) {
-                selectedTask.setName(selectedTask.getName());
-                selectedTask.setSort(selectedTask.getSort());
-                selectedTask.setInput(selectedTask.getInput());
-                selectedTask.setFinishDate(selectedTask.getFinishDate());
-                selectedTask.setPriority(selectedTask.getPriority());
-
+                setEditedTask(selectedTask);
             }
         }
+    }
+
+    public void setEditedTask(Task selectedTask) {
+        EditDialogController controller = new EditDialogController();
+        selectedTask.setName(controller.getInputNameField().getText());
+        selectedTask.setInput(controller.getInputTextAreaField().getText());
+        selectedTask.setSort(controller.getSortCombo().getSelectionModel().getSelectedItem());
+        selectedTask.setFinishDate(controller.getFinishDatePicker().getValue());
     }
 
     public void filter(Predicate<Task> filter) {
@@ -107,7 +107,6 @@ public class Dispatcher {
     public void clearView() {
         taskAdministration.getTasks().clear();
     }
-
 
     private static class Holder {
         private static final Dispatcher INSTANCE = new Dispatcher();

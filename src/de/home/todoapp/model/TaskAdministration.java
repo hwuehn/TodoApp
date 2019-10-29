@@ -97,5 +97,13 @@ public class TaskAdministration implements IMainController, IAppState {
     public void setCurrentTask(Task selectedTask) {
         currentTask.setValue(selectedTask);
     }
+
+    public Task getCurrentTask() {
+        return currentTask.get();
+    }
+
+    public ObjectProperty<Task> currentTaskProperty() {
+        return currentTask;
+    }
 }
 

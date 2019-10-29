@@ -97,11 +97,12 @@ public class EditDialogController {
     @FXML
     private void handleOk(ActionEvent evt) {
         if (isInputValid()) {
-           /* task.setName(inputNameField.getText());
-            task.setSort(sortCombo.getSelectionModel().getSelectedItem());
-            task.setInput(inputTextAreaField.getText());
-            task.setFinishDate(finishDatePicker.getValue());
-            //task.setPriority(priorityCombo.getSelectionModel().getSelectedItem());*/
+            Task selectedTask = Dispatcher.getInstance().getTaskAdministration().getCurrentTask();
+            selectedTask.setName(inputNameField.getText());
+            selectedTask.setSort(sortCombo.getSelectionModel().getSelectedItem());
+            selectedTask.setInput(inputTextAreaField.getText());
+            selectedTask.setFinishDate(finishDatePicker.getValue());
+
 
             okClicked = true;
             hide(evt);
@@ -161,5 +162,37 @@ public class EditDialogController {
             alert.showAndWait();
             return false;
         }
+    }
+
+    public TextField getInputNameField() {
+        return inputNameField;
+    }
+
+    public void setInputNameField(TextField inputNameField) {
+        this.inputNameField = inputNameField;
+    }
+
+    public TextArea getInputTextAreaField() {
+        return inputTextAreaField;
+    }
+
+    public void setInputTextAreaField(TextArea inputTextAreaField) {
+        this.inputTextAreaField = inputTextAreaField;
+    }
+
+    public DatePicker getFinishDatePicker() {
+        return finishDatePicker;
+    }
+
+    public void setFinishDatePicker(DatePicker finishDatePicker) {
+        this.finishDatePicker = finishDatePicker;
+    }
+
+    public ComboBox<Sort> getSortCombo() {
+        return sortCombo;
+    }
+
+    public void setSortCombo(ComboBox<Sort> sortCombo) {
+        this.sortCombo = sortCombo;
     }
 }

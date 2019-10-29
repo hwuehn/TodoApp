@@ -71,7 +71,7 @@ public class ListViewController implements Initializable {
     };
 
     private ContextMenu createContextMenu() {
-        ContextMenu cm = new ContextMenu();
+        ContextMenu menu = new ContextMenu();
         MenuItem finish = new MenuItem("Finish");
         MenuItem edit = new MenuItem("Edit");
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
@@ -80,9 +80,9 @@ public class ListViewController implements Initializable {
             //mainController.showEditDialog(selectedTask);
 
         });
-        cm.getItems().add(finish);
-        cm.getItems().add(edit);
-        return cm;
+        menu.getItems().add(finish);
+        menu.getItems().add(edit);
+        return menu;
     }
 
     @Override
@@ -113,10 +113,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     public void showAddPlayer() {
-
-
         Dispatcher.getInstance().newTask();
-
     }
 
     /**
@@ -142,7 +139,7 @@ public class ListViewController implements Initializable {
     private void handleEditTask() {
         Task selectedTask = listView.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
-            Dispatcher.getInstance().editTask(listView.getSelectionModel().getSelectedItem());
+            Dispatcher.getInstance().editTask(selectedTask);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -150,27 +147,6 @@ public class ListViewController implements Initializable {
             alert.setTitle("No Selection");
             alert.setHeaderText("No Task Selected");
             alert.setContentText("Please select a task in the table.");
-            alert.showAndWait();
-        }
-    }
-
-    /**
-     * Called when the user clicks on the delete button.
-     */
-    @FXML
-    private void handleDeleteTask() {
-        int selectedIndex = listView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            listView.getItems().remove(selectedIndex);
-
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainController.getStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
             alert.showAndWait();
         }
     }
@@ -297,6 +273,4 @@ public class ListViewController implements Initializable {
     private void handleExitMenuBtn() {
         System.exit(0);
     }
-
-
 }
