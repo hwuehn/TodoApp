@@ -31,17 +31,18 @@ public class EditDialogController {
 
     public void showAddPlayer() {
 
-        EditDialogController controller = showView("Edit Task", null);
+        showView("Edit Task", null);
+
     }
 
-    public boolean showEditDialog(Task task) {
+    public static Task showEditDialog(Task task) {
 
         EditDialogController controller = showView("Edit Task", task);
-        return controller.isOkClicked();
+        return controller.getTask();
 
     }
 
-    public EditDialogController showView(String title, Task task) {
+    public static EditDialogController showView(String title, Task task) {
 
         try {
 
@@ -86,10 +87,16 @@ public class EditDialogController {
         finishDatePicker.setValue(task.getFinishDate());
         //priorityCombo.getItems().setAll(Priority.values());
     }
-
-    public boolean isOkClicked() {
-        return okClicked;
+    public Task getTask() {
+        Task task = new Task();
+        task.setName(inputNameField.getText());
+        task.setSort(sortCombo.getSelectionModel().getSelectedItem());
+        task.setInput(inputTextAreaField.getText());
+        task.setFinishDate(finishDatePicker.getValue());
+        return okClicked ? task : null;
     }
+
+
 
     /**
      * Called when the user clicks ok.
@@ -97,11 +104,6 @@ public class EditDialogController {
     @FXML
     private void handleOk(ActionEvent evt) {
         if (isInputValid()) {
-            Task task = new Task();
-            task.setName(inputNameField.getText());
-            task.setSort(sortCombo.getSelectionModel().getSelectedItem());
-            task.setInput(inputTextAreaField.getText());
-            task.setFinishDate(finishDatePicker.getValue());
 
             okClicked = true;
             hide(evt);
