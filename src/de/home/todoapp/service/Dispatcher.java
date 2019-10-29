@@ -5,8 +5,10 @@ import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.XMLWrapper;
 import de.home.todoapp.view.EditDialogController;
+import javafx.scene.control.Alert;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Comparator;
@@ -57,6 +59,35 @@ public class Dispatcher {
         taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
         taskAdministration.filterProperty().set( filter );
     }
+
+    public void saveTaskDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(XMLWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our task data.
+            try {
+                XMLWrapper wrapper = new XMLWrapper();
+                wrapper.setTasks(taskAdministration.getTasks());
+                // Marshalling and saving XML to the file.
+                m.marshal(wrapper, file);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Save the file path to the registry.
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
+            alert.showAndWait();
+        }
+    }
+
 
     private static class Holder {
         private static final Dispatcher INSTANCE = new Dispatcher();
