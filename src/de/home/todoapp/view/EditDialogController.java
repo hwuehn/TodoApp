@@ -2,7 +2,6 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.model.Sort;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.service.Dispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EditDialogController {
 
@@ -29,23 +26,17 @@ public class EditDialogController {
     private boolean okClicked = false;
 
     public static Task showAddPlayer() {
-
         EditDialogController controller = showView("Edit Task", null);
         return controller.getTask();
-
     }
 
     public static Task showEditDialog(Task task) {
-
         EditDialogController controller = showView("Edit Task", task);
         return controller.getTask();
-
     }
 
     public static EditDialogController showView(String title, Task task) {
-
         try {
-
             FXMLLoader loader =
                     new FXMLLoader(EditDialogController.class.getResource("EditDialog.fxml"));
 
@@ -96,19 +87,13 @@ public class EditDialogController {
         return okClicked ? task : null;
     }
 
-    /**
-     * Called when the user clicks ok.
-     */
     @FXML
     private void handleOk(ActionEvent evt) {
         if (isInputValid()) {
-
             okClicked = true;
             hide(evt);
         }
     }
-
-
 
     @FXML
     public void cancel(ActionEvent evt) { hide(evt); }
@@ -117,11 +102,8 @@ public class EditDialogController {
         ((Button)evt.getSource()).getScene().getWindow().hide();
     }
 
-
-
     private boolean isInputValid() {
         String errorMessage = "";
-
 
         if (inputTextAreaField.getText() == null || inputTextAreaField.getText().length() == 0) {
             errorMessage += "No valid input!\n";
@@ -137,6 +119,4 @@ public class EditDialogController {
             return false;
         }
     }
-
-
 }

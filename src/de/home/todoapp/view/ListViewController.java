@@ -54,8 +54,6 @@ public class ListViewController implements Initializable {
         );
     }
 
-
-
     // Reference to the main application.
     private IMainController mainController;
 
@@ -87,7 +85,6 @@ public class ListViewController implements Initializable {
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
         setCellFactory();
-        //listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
         listView.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> {
            Dispatcher.getInstance().selectTask(newValue);
@@ -129,53 +126,32 @@ public class ListViewController implements Initializable {
         listView.setItems(appState.getViewableTasks());
     }
 
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
     @FXML
     private void handleEditTask() {
          Dispatcher.getInstance().editTask();
     }
 
-    /**
-     * Is set as the standard selection.
-     * Showing all of the content.
-     * All other buttons will have a grey color.
-     */
     private void resetToggles(){
-        List<ButtonBase> tggles = Arrays.asList(allBtn, hurryBtn, openBtn, noHurryBtn, otherBtn);
+        List<ButtonBase> tggles = Arrays.asList(allBtn, hurryBtn, openBtn, noHurryBtn);
         tggles.stream().forEach(btn -> btn.setId("buttonNotSelected"));
     }
     public void handleAll() {
        resetToggles();
         allBtn.setId("buttonSelected");
-
     }
-
     public void handleHurry() {
         resetToggles();
         hurryBtn.setId("buttonSelected");
     }
-
     public void handleOpen() {
         resetToggles();
         openBtn.setId("buttonSelected");
     }
-
     public void handleNoHurry() {
         resetToggles();
         noHurryBtn.setId("buttonSelected");
     }
 
-    public void handleOther() {
-        resetToggles();
-        otherBtn.setId("buttonSelected");
-    }
-
-    /**
-     * Creates an empty todoList.
-     */
     @FXML
     private void handleNewMenuBtn() {
         Dispatcher.getInstance().clearView();
@@ -242,7 +218,6 @@ public class ListViewController implements Initializable {
         alert.setTitle("TodoApp");
         alert.setHeaderText("About");
         alert.setContentText("Author: Henning Wuehn");
-
         alert.showAndWait();
     }
 
