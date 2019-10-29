@@ -22,8 +22,9 @@ public class Dispatcher {
         taskAdministration = new TaskAdministration();
     }
 
-    public void removeTask(Task selectedTask) {
-        taskAdministration.remove(selectedTask);
+    public void removeTask() {
+
+        taskAdministration.remove(taskAdministration.getCurrentTask());
     }
 
     public void newTask() {
@@ -34,12 +35,8 @@ public class Dispatcher {
         }
     }
 
-    public void addNewTask(Task task) {
-        taskAdministration.add(task);
-    }
-
-    public void editTask(Task selectedTask) {
-        taskAdministration.setCurrentTask(selectedTask);
+    public void editTask() {
+        Task selectedTask = taskAdministration.getCurrentTask();
         if (selectedTask != null) {
             Task newTask = EditDialogController.showEditDialog(selectedTask);
             if (newTask != null) {
@@ -79,12 +76,7 @@ public class Dispatcher {
             }
 
             // Save the file path to the registry.
-        } catch (Exception e) { // catches ANY exception
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error");
-//            alert.setHeaderText("Could not save data");
-//            alert.setContentText("Could not save data to file:\n" + file.getPath());
-//            alert.showAndWait();
+        } catch (Exception e) {
         }
     }
 
@@ -98,15 +90,15 @@ public class Dispatcher {
     public File getTaskFilePath() {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         String filePath = prefs.get("filePath", null);
-        if (filePath != null) {
-            return new File(filePath);
-        } else {
-            return null;
-        }
+        return filePath != null ? new File(filePath) : null;
     }
 
     public void clearView() {
         taskAdministration.getTasks().clear();
+    }
+
+    public void selectTask(Task newValue) {
+        taskAdministration.setCurrentTask(newValue);
     }
 
     private static class Holder {

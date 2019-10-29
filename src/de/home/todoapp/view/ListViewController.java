@@ -73,8 +73,8 @@ public class ListViewController implements Initializable {
         ContextMenu menu = new ContextMenu();
         MenuItem finish = new MenuItem("Finish");
         MenuItem edit = new MenuItem("Edit");
-        Task selectedTask = listView.getSelectionModel().getSelectedItem();
-        finish.setOnAction((evt) -> Dispatcher.getInstance().removeTask(selectedTask));
+
+        finish.setOnAction((evt) -> Dispatcher.getInstance().removeTask());
         edit.setOnAction((evt) -> handleEditTask());
         menu.getItems().add(finish);
         menu.getItems().add(edit);
@@ -89,6 +89,10 @@ public class ListViewController implements Initializable {
         setCellFactory();
         //listView.itemsProperty().bind(taskAdministration.viewableTasksProperty());
         listView.setContextMenu(createContextMenu());
+        listView.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> {
+           Dispatcher.getInstance().selectTask(newValue);
+
+        });
 
         allBtn.setUserData(new PriorityMatcher(Priority.Alle)); // "*"
         allBtn.setOnAction(toggleHandler);
@@ -131,18 +135,7 @@ public class ListViewController implements Initializable {
      */
     @FXML
     private void handleEditTask() {
-        Task selectedTask = listView.getSelectionModel().getSelectedItem();
-        if (selectedTask != null) {
-            Dispatcher.getInstance().editTask(selectedTask);
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainController.getStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Task Selected");
-            alert.setContentText("Please select a task in the table.");
-            alert.showAndWait();
-        }
+         Dispatcher.getInstance().editTask();
     }
 
     /**
