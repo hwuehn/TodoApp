@@ -139,4 +139,17 @@ public class Task {
     public void setDaysToFinish(int daysToFinish) {
         this.daysToFinish.set(daysToFinish);
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "name=" + name.getValue() +
+                ", input=" + input.getValue() +
+                ", finishDate=" + finishDate.getValue() +
+                ", today=" + today.getValue() +
+                ", daysToFinish=" + daysToFinish.getValue() +
+                ", priority=" + priority.getValue() +
+                ", sort=" + sort.getValue() +
+                '}';
+    }
 }

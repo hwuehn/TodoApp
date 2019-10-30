@@ -5,6 +5,7 @@ import de.home.todoapp.model.PriorityMatcher;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.service.Dispatcher;
+import de.home.todoapp.service.TaskMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -72,7 +73,7 @@ public class ListViewController implements Initializable {
         MenuItem finish = new MenuItem("Finish");
         MenuItem edit = new MenuItem("Edit");
 
-        finish.setOnAction((evt) -> Dispatcher.getInstance().removeTask());
+        finish.setOnAction((evt) -> Dispatcher.getInstance().dispatch(new TaskMessage("remove_task")));
         edit.setOnAction((evt) -> handleEditTask());
         menu.getItems().add(finish);
         menu.getItems().add(edit);
@@ -87,7 +88,8 @@ public class ListViewController implements Initializable {
         setCellFactory();
         listView.setContextMenu(createContextMenu());
         listView.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> {
-           Dispatcher.getInstance().selectTask(newValue);
+           //Dispatcher.getInstance().selectTask(newValue);
+           Dispatcher.getInstance().dispatch(new TaskMessage("select_task", newValue));
 
         });
 
@@ -110,7 +112,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     public void showAddPlayer() {
-        Dispatcher.getInstance().newTask();
+        Dispatcher.getInstance().dispatch(new TaskMessage("add_task"));
     }
 
     /**
@@ -128,7 +130,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleEditTask() {
-         Dispatcher.getInstance().editTask();
+         Dispatcher.getInstance().dispatch(new TaskMessage("edit_task"));
     }
 
     private void resetToggles(){
