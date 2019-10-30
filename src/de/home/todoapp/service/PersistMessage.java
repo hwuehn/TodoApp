@@ -18,7 +18,6 @@ public class PersistMessage implements IMsg {
 
     public PersistMessage(String msgType, File file) {
         this.msgType = msgType;
-
         this.file = file;
     }
 

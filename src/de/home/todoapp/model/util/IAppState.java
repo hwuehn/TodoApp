@@ -6,6 +6,5 @@ import javafx.collections.ObservableList;
 
 public interface IAppState {
     ObservableList<Task> getViewableTasks();
-
     ObservableValue<? extends ObservableList<Task>> viewableTasksProperty();
 }

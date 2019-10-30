@@ -24,7 +24,6 @@ public class TaskMessage implements IMsg {
     public TaskMessage(String msgType) {
         this(msgType, null,null );
     }
-
     public String getMsgType() {
         return msgType;
     }

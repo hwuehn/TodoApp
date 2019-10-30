@@ -23,12 +23,10 @@ public class Dispatcher {
     }
 
     private void removeTask() {
-
         administration.remove(administration.getCurrentTask());
     }
 
     private void newTask() {
-
         Task newTask = EditDialogController.showAddPlayer();
         if (newTask != null){
             administration.getTasks().add(newTask);
@@ -46,7 +44,6 @@ public class Dispatcher {
     }
 
     private void setEditedTask(Task oldT, Task newT) {
-
         int stelle = administration.getTasks().indexOf(oldT);
         administration.getTasks().set(stelle, newT);
         administration.setCurrentTask(newT);
@@ -124,12 +121,12 @@ public class Dispatcher {
                 break;
             case PersistMessage.EXIT:
                 System.exit(0);
+                break;
 
 
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
-
     }
 
     private static class Holder {
@@ -160,7 +157,6 @@ public class Dispatcher {
             setTaskFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
-
         }
     }
     public void setTaskFilePath(File file) {
@@ -179,9 +175,6 @@ public class Dispatcher {
     }
 
     public void loadTestData() {
-
         administration.loadTestData();
     }
-
-
 }

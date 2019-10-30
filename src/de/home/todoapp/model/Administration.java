@@ -51,13 +51,6 @@ public class Administration implements IMainController, IAppState {
         tasks.remove(task);
     }
 
-    //todo: auslagern in persistenz service
-
-
-    public SortedList<Task> getSortedTasks() {
-        return sortedTasks;
-    }
-
     public FilteredList<Task> getViewableTasks() {
         return viewableTasks;
     }
@@ -96,10 +89,6 @@ public class Administration implements IMainController, IAppState {
 
     public Task getCurrentTask() {
         return currentTask.get();
-    }
-
-    public ObjectProperty<Task> currentTaskProperty() {
-        return currentTask;
     }
 }
 

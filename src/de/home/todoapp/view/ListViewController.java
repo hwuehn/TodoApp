@@ -93,7 +93,6 @@ public class ListViewController implements Initializable {
         setCellFactory();
         listView.setContextMenu(createContextMenu());
         listView.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> {
-           //Dispatcher.getInstance().selectTask(newValue);
            Dispatcher.getInstance().dispatch(new TaskMessage("select_task", newValue));
 
         });

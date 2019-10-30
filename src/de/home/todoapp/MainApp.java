@@ -14,8 +14,6 @@ import java.io.IOException;
 
 public class MainApp extends Application implements IMainController {
 
-    //private Administration taskAdministration;
-
     public static void main(String[] args) {
         launch(args);
     }

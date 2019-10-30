@@ -12,11 +12,6 @@ import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-/**
- * Model class for a Task.
- *
- * @author Henning Wuehn
- */
 public class Task {
 
     private StringProperty name;
@@ -27,9 +22,6 @@ public class Task {
     private SimpleObjectProperty<Priority> priority;
     private SimpleObjectProperty<Sort> sort;
 
-    /**
-     * Default constructor.
-     */
     public Task() {
         this.name = new SimpleStringProperty();
         this.input = new SimpleStringProperty();
@@ -38,7 +30,6 @@ public class Task {
         this.finishDate = new SimpleObjectProperty<LocalDate>();
         this.daysToFinish = new SimpleLongProperty();
         this.sort = new SimpleObjectProperty<Sort>();
-
     }
 
     public Task(String name, Sort sort, String input, LocalDate date) {
@@ -64,16 +55,8 @@ public class Task {
         this.sort.set(sort);
     }
 
-    public SimpleObjectProperty<Sort> sortProperty() {
-        return sort;
-    }
-
     public Priority getPriority() {
         return priority.get();
-    }
-
-    public SimpleObjectProperty<Priority> priorityProperty() {
-        return priority;
     }
 
     public void setPriority(Priority priority) {
@@ -84,20 +67,12 @@ public class Task {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
     }
 
     public String getInput() {
         return input.get();
-    }
-
-    public StringProperty inputProperty() {
-        return input;
     }
 
     public void setInput(String input) {
@@ -109,37 +84,8 @@ public class Task {
         return finishDate.get();
     }
 
-    public SimpleObjectProperty<LocalDate> finishDateProperty() {
-        return finishDate;
-    }
-
     public void setFinishDate(LocalDate finishDate) {
         this.finishDate.set(finishDate);
-    }
-
-    @XmlJavaTypeAdapter(de.home.todoapp.model.util.LocalDateAdapter.class)
-    public LocalDate getToday() {
-        return today.get();
-    }
-
-    public SimpleObjectProperty<LocalDate> todayProperty() {
-        return today;
-    }
-
-    public void setToday(LocalDate today) {
-        this.today.set(today);
-    }
-
-    public long getDaysToFinish() {
-        return daysToFinish.get();
-    }
-
-    public SimpleLongProperty daysToFinishProperty() {
-        return daysToFinish;
-    }
-
-    public void setDaysToFinish(int daysToFinish) {
-        this.daysToFinish.set(daysToFinish);
     }
 
     @Override

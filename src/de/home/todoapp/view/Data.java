@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
-
 public class Data
 {
     @FXML
@@ -43,14 +42,11 @@ public class Data
 
     public void setInfo(Task task)
     {
-
         if (sortLabel != null) {
-            //sortLabel.setId("name");
             sortLabel.setText(String.valueOf(task.getSort()));
         }
 
-        toLabel.setText(" von ");
-
+        toLabel.setText("|");
         nameLabel.setId("name");
         nameLabel.setText(task.getName());
 
@@ -96,7 +92,6 @@ public class Data
 
         inputLabel.setText(task.getInput());
         finishLabel.setText(String.valueOf(task.getFinishDate()));
-
     }
 
     public GridPane getBox()
