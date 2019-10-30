@@ -1,5 +1,6 @@
-package de.home.todoapp.model;
+package de.home.todoapp.model.util;
 
+import de.home.todoapp.model.Task;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 

@@ -1,9 +1,11 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.model.Priority;
-import de.home.todoapp.model.PriorityMatcher;
+import de.home.todoapp.model.Administration;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.util.IMainController;
+import de.home.todoapp.model.util.ListViewCell;
+import de.home.todoapp.model.util.Priority;
+import de.home.todoapp.model.util.PriorityMatcher;
 import de.home.todoapp.service.Dispatcher;
 import de.home.todoapp.service.FilterMessage;
 import de.home.todoapp.service.PersistMessage;
@@ -127,7 +129,7 @@ public class ListViewController implements Initializable {
         this.mainController = controller;
     }
 
-    public void setAppState(TaskAdministration appState) {
+    public void setAppState(Administration appState) {
         listView.setItems(appState.getViewableTasks());
     }
 

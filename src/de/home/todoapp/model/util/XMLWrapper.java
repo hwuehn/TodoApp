@@ -1,4 +1,6 @@
-package de.home.todoapp.model;
+package de.home.todoapp.model.util;
+
+import de.home.todoapp.model.Task;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

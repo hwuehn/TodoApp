@@ -1,6 +1,8 @@
 package de.home.todoapp.model;
 
-import de.home.todoapp.view.IMainController;
+import de.home.todoapp.model.util.IAppState;
+import de.home.todoapp.model.util.IMainController;
+import de.home.todoapp.model.util.Sort;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-public class TaskAdministration implements IMainController, IAppState {
+public class Administration implements IMainController, IAppState {
 
     private final StringProperty title = new SimpleStringProperty();
     private final ObjectProperty<Task> currentTask = new SimpleObjectProperty<Task>();

@@ -1,4 +1,4 @@
-package de.home.todoapp.model;
+package de.home.todoapp.model.util;
 
 public enum Sort {
 

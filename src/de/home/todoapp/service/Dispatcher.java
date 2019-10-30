@@ -1,9 +1,9 @@
 package de.home.todoapp.service;
 
 import de.home.todoapp.MainApp;
+import de.home.todoapp.model.Administration;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
-import de.home.todoapp.model.XMLWrapper;
+import de.home.todoapp.model.util.XMLWrapper;
 import de.home.todoapp.view.EditDialogController;
 
 import javax.xml.bind.JAXBContext;
@@ -16,27 +16,27 @@ import java.util.prefs.Preferences;
 
 public class Dispatcher {
 
-    private final TaskAdministration taskAdministration;
+    private final Administration administration;
 
     private Dispatcher(){
-        taskAdministration = new TaskAdministration();
+        administration = new Administration();
     }
 
     private void removeTask() {
 
-        taskAdministration.remove(taskAdministration.getCurrentTask());
+        administration.remove(administration.getCurrentTask());
     }
 
     private void newTask() {
 
         Task newTask = EditDialogController.showAddPlayer();
         if (newTask != null){
-            taskAdministration.getTasks().add(newTask);
+            administration.getTasks().add(newTask);
         }
     }
 
     private void editTask() {
-        Task selectedTask = taskAdministration.getCurrentTask();
+        Task selectedTask = administration.getCurrentTask();
         if (selectedTask != null) {
             Task newTask = EditDialogController.showEditDialog(selectedTask);
             if (newTask != null) {
@@ -47,14 +47,14 @@ public class Dispatcher {
 
     private void setEditedTask(Task oldT, Task newT) {
 
-        int stelle= taskAdministration.getTasks().indexOf(oldT);
-        taskAdministration.getTasks().set(stelle,newT);
-        taskAdministration.setCurrentTask(newT);
+        int stelle = administration.getTasks().indexOf(oldT);
+        administration.getTasks().set(stelle, newT);
+        administration.setCurrentTask(newT);
     }
 
     public void filter(Predicate<Task> filter) {
-        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
-        taskAdministration.filterProperty().set( filter );
+        administration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
+        administration.filterProperty().set(filter);
     }
 
     public void saveTaskDataToFile(File file) {
@@ -67,7 +67,7 @@ public class Dispatcher {
             // Wrapping our task data.
             try {
                 XMLWrapper wrapper = new XMLWrapper();
-                wrapper.setTasks(taskAdministration.getTasks());
+                wrapper.setTasks(administration.getTasks());
                 // Marshalling and saving XML to the file.
                 m.marshal(wrapper, file);
 
@@ -94,11 +94,11 @@ public class Dispatcher {
     }
 
     public void clearView() {
-        taskAdministration.getTasks().clear();
+        administration.getTasks().clear();
     }
 
     private void selectTask(Task newValue) {
-        taskAdministration.setCurrentTask(newValue);
+        administration.setCurrentTask(newValue);
     }
 
     public void dispatch(IMsg msg) {
@@ -140,8 +140,8 @@ public class Dispatcher {
         return Holder.INSTANCE;
     }
 
-    public TaskAdministration getTaskAdministration() {
-        return taskAdministration;
+    public Administration getAdministration() {
+        return administration;
     }
 
     public void loadTaskDataFromFile(File file) {
@@ -153,8 +153,8 @@ public class Dispatcher {
             // Reading XML from the file and unmarshalling.
             XMLWrapper wrapper = (XMLWrapper) um.unmarshal(file);
 
-            taskAdministration.getTasks().clear();
-            taskAdministration.getTasks().addAll(wrapper.getTasks());
+            administration.getTasks().clear();
+            administration.getTasks().addAll(wrapper.getTasks());
 
             // Save the file path to the registry.
             setTaskFilePath(file);
@@ -169,18 +169,18 @@ public class Dispatcher {
             prefs.put("filePath", file.getPath());
 
             // Update the stage title.
-            taskAdministration.setTitle("TodoApp - " + file.getName());
+            administration.setTitle("TodoApp - " + file.getName());
         } else {
             prefs.remove("filePath");
 
             // Update the stage title.
-            taskAdministration.setTitle("TodoApp");
+            administration.setTitle("TodoApp");
         }
     }
 
     public void loadTestData() {
 
-         taskAdministration.loadTestData();
+        administration.loadTestData();
     }
 
 

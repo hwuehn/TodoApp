@@ -1,5 +1,7 @@
 package de.home.todoapp.model;
 
+import de.home.todoapp.model.util.Priority;
+import de.home.todoapp.model.util.Sort;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -102,7 +104,7 @@ public class Task {
         this.input.set(input);
     }
 
-    @XmlJavaTypeAdapter(de.home.todoapp.util.LocalDateAdapter.class)
+    @XmlJavaTypeAdapter(de.home.todoapp.model.util.LocalDateAdapter.class)
     public LocalDate getFinishDate() {
         return finishDate.get();
     }
@@ -115,7 +117,7 @@ public class Task {
         this.finishDate.set(finishDate);
     }
 
-    @XmlJavaTypeAdapter(de.home.todoapp.util.LocalDateAdapter.class)
+    @XmlJavaTypeAdapter(de.home.todoapp.model.util.LocalDateAdapter.class)
     public LocalDate getToday() {
         return today.get();
     }

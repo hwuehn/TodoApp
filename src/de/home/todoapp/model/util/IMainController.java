@@ -1,6 +1,5 @@
-package de.home.todoapp.view;
+package de.home.todoapp.model.util;
 
-import de.home.todoapp.model.Task;
 import javafx.stage.Stage;
 
 public interface IMainController {

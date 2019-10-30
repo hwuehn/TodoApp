@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.ListViewController">
    <children>
       <VBox prefHeight="500.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="hBoxFilters" stylesheets="@style.css">
+            <HBox fx:id="hBoxFilters" stylesheets="@style/style.css">
                <children>
-                     <ToggleButton fx:id="allBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAll" prefHeight="44.0" prefWidth="48.0" styleClass="button" stylesheets="@style.css" text="Alle">
+                  <ToggleButton fx:id="allBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                onAction="#handleAll" prefHeight="44.0" prefWidth="48.0" styleClass="button"
+                                stylesheets="@style/style.css" text="Alle">
                      <toggleGroup>
                            <ToggleGroup fx:id="ColorToggleGroup" />
                      </toggleGroup>
                   </ToggleButton>
-                     <ToggleButton fx:id="hurryBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleHurry" prefHeight="44.0" prefWidth="43.0" styleClass="button" stylesheets="@style.css" text="Eilt" toggleGroup="$ColorToggleGroup" />
-                     <ToggleButton fx:id="openBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleOpen" prefHeight="44.0" prefWidth="61.0" styleClass="button" stylesheets="@style.css" text="Offen" toggleGroup="$ColorToggleGroup" />
-                     <ToggleButton fx:id="noHurryBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNoHurry" prefHeight="44.0" prefWidth="82.0" styleClass="button" stylesheets="@style.css" text="Eilt nicht" toggleGroup="$ColorToggleGroup" />
+                  <ToggleButton fx:id="hurryBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                onAction="#handleHurry" prefHeight="44.0" prefWidth="43.0" styleClass="button"
+                                stylesheets="@style/style.css" text="Eilt" toggleGroup="$ColorToggleGroup"/>
+                  <ToggleButton fx:id="openBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                onAction="#handleOpen" prefHeight="44.0" prefWidth="61.0" styleClass="button"
+                                stylesheets="@style/style.css" text="Offen" toggleGroup="$ColorToggleGroup"/>
+                  <ToggleButton fx:id="noHurryBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                onAction="#handleNoHurry" prefHeight="44.0" prefWidth="82.0" styleClass="button"
+                                stylesheets="@style/style.css" text="Eilt nicht" toggleGroup="$ColorToggleGroup"/>
                   <Region maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="126.0" />
-                     <MenuButton fx:id="otherBtn" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="button" stylesheets="@style.css">
+                  <MenuButton fx:id="otherBtn" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity"
+                              mnemonicParsing="false" prefWidth="90.0" styleClass="button"
+                              stylesheets="@style/style.css">
                         <items>
                            <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn" text="New" />
                            <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn" text="Load..." />
@@ -41,14 +41,13 @@
                      </MenuButton>
                </children>
             </HBox>
-
-
-
-
-            <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="450.0" stylesheets="@style.css" />
+            <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="517.0"
+                      prefWidth="450.0" stylesheets="@style/style.css"/>
             <ButtonBar buttonMinWidth="35.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="450.0">
                   <buttons>
-                     <ToggleButton fx:id="emailBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="emailBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                   prefHeight="35.0" prefWidth="35.0" styleClass="button"
+                                   stylesheets="@style/style.css">
                         <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -63,7 +62,9 @@
                   <Region layoutX="397.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
                   <Region layoutX="382.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
-                     <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditTask" prefHeight="35.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                   onAction="#handleEditTask" prefHeight="35.0" prefWidth="35.0" styleClass="button"
+                                   stylesheets="@style/style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -74,7 +75,9 @@
                               </effect>
                         </ImageView>
                      </graphic></ToggleButton>
-                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddPlayer" prefHeight="35.0" prefWidth="35.0" styleClass="button" stylesheets="@style.css">
+                     <ToggleButton fx:id="addBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                   onAction="#showAddPlayer" prefHeight="35.0" prefWidth="35.0" styleClass="button"
+                                   stylesheets="@style/style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>

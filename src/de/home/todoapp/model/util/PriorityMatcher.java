@@ -1,4 +1,6 @@
-package de.home.todoapp.model;
+package de.home.todoapp.model.util;
+
+import de.home.todoapp.model.Task;
 
 import java.util.function.Predicate;
 

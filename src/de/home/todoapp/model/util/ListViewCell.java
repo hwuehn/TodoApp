@@ -1,4 +1,4 @@
-package de.home.todoapp.view;
+package de.home.todoapp.model.util;
 
 import de.home.todoapp.model.Task;
 import de.home.todoapp.view.Data;

@@ -1,7 +1,7 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.model.Priority;
 import de.home.todoapp.model.Task;
+import de.home.todoapp.model.util.Priority;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

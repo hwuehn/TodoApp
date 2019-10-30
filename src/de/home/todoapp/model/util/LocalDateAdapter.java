@@ -1,4 +1,4 @@
-package de.home.todoapp.util;
+package de.home.todoapp.model.util;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDate;

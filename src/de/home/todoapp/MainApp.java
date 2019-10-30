@@ -1,7 +1,7 @@
 package de.home.todoapp;
 
+import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.service.Dispatcher;
-import de.home.todoapp.view.IMainController;
 import de.home.todoapp.view.ListViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class MainApp extends Application implements IMainController {
 
-    //private TaskAdministration taskAdministration;
+    //private Administration taskAdministration;
 
     public static void main(String[] args) {
         launch(args);
@@ -47,7 +47,7 @@ public class MainApp extends Application implements IMainController {
             // Give the controller access to the main app.
             ListViewController controller = loader.getController();
             controller.setMainController(this);
-            controller.setAppState(Dispatcher.getInstance().getTaskAdministration());
+            controller.setAppState(Dispatcher.getInstance().getAdministration());
             Dispatcher.getInstance().loadTestData();
 
             System.out.println("set main controller");

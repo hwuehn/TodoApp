@@ -1,6 +1,4 @@
-package de.home.todoapp.util;
-
-import javafx.util.StringConverter;
+package de.home.todoapp.model.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +43,7 @@ public class DateUtil {
      */
     public static LocalDate parse(String dateString) {
         try {
-            return (LocalDate) DATE_FORMATTER.parse(dateString, LocalDate::from);
+            return DATE_FORMATTER.parse(dateString, LocalDate::from);
         } catch (DateTimeParseException e) {
             return null;
         }
