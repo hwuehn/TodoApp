@@ -5,7 +5,7 @@ import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.XMLWrapper;
 import de.home.todoapp.view.EditDialogController;
-import org.omg.CORBA.Request;
+import de.home.todoapp.view.IMainController;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -102,31 +102,31 @@ public class Dispatcher {
         taskAdministration.setCurrentTask(newValue);
     }
 
+    private IMainController mainController;
+
     public void dispatch(IMsg msg) {
         System.out.println(msg);
         switch (msg.getMsgType()){
-            case "select_task": selectTask(((TaskMessage) msg).newTask);break;
-            case "edit_task": editTask();break;
-            case "remove_task": removeTask();break;
-            case "add_task": newTask();break;
-
-
+            case "select_task":
+                selectTask(((TaskMessage) msg).newTask);
+                break;
+            case "edit_task":
+                editTask();
+                break;
+            case "remove_task":
+                removeTask();
+                break;
+            case "add_task":
+                newTask();
+                break;
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
 
     }
 
-    private static class Holder {
-        private static final Dispatcher INSTANCE = new Dispatcher();
-    }
-
-    public static Dispatcher getInstance() {
-        return Holder.INSTANCE;
-    }
-
-    public TaskAdministration getTaskAdministration() {
-        return taskAdministration;
+    public void setMainController(IMainController controller) {
+        this.mainController = controller;
     }
 
     public void loadTaskDataFromFile(File file) {
@@ -148,6 +148,21 @@ public class Dispatcher {
 
         }
     }
+
+
+
+    private static class Holder {
+        private static final Dispatcher INSTANCE = new Dispatcher();
+    }
+
+    public static Dispatcher getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    public TaskAdministration getTaskAdministration() {
+        return taskAdministration;
+    }
+    
     public void setTaskFilePath(File file) {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
@@ -167,9 +182,4 @@ public class Dispatcher {
 
          taskAdministration.loadTestData();
     }
-
-    public void dispatch(Request request) {
-        request.send_oneway();
-    }
-
 }

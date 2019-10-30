@@ -11,9 +11,6 @@ public class TaskMessage implements IMsg {
     public final Task oldTask;
     public final Task newTask;
 
-
-
-
     public TaskMessage(String msgType, Task newTask, Task oldTask) {
         this.msgType = msgType;
         this.oldTask = oldTask;

@@ -20,7 +20,7 @@ public class MainApp extends Application implements IMainController {
         launch(args);
     }
 
-    private Stage stage;
+    private static Stage stage;
     private AnchorPane rootLayout;
 
     public MainApp() {
@@ -28,10 +28,9 @@ public class MainApp extends Application implements IMainController {
 
     @Override
     public void start(Stage stage) throws Exception {
-        this.stage = stage;
-        this.stage.setTitle("TodoApp");
-        this.stage.getIcons().add(new Image("file:resources/images/todo.png"));
-        //taskAdministration = new TaskAdministration();
+        MainApp.stage = stage;
+        MainApp.stage.setTitle("TodoApp");
+        MainApp.stage.getIcons().add(new Image("file:resources/images/todo.png"));
         initRootLayout();
     }
 
