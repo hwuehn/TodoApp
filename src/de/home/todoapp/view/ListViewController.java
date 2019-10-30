@@ -5,6 +5,8 @@ import de.home.todoapp.model.PriorityMatcher;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.service.Dispatcher;
+import de.home.todoapp.service.FilterMessage;
+import de.home.todoapp.service.PersistMessage;
 import de.home.todoapp.service.TaskMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,8 +67,8 @@ public class ListViewController implements Initializable {
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton) event.getSource();
         Predicate<Task> filter = (Predicate<Task>) tb.getUserData();
-        //Dispatcher.getInstance().dispatch(new FilterMessage("filter"));
-        Dispatcher.getInstance().filter(filter);
+        //Dispatcher.getInstance().filter(filter);
+        Dispatcher.getInstance().dispatch(new FilterMessage(FilterMessage.FILTER,filter));
     };
 
     private ContextMenu createContextMenu() {
@@ -75,7 +77,7 @@ public class ListViewController implements Initializable {
         MenuItem edit = new MenuItem("Edit");
 
         finish.setOnAction((evt) -> Dispatcher.getInstance().dispatch(new TaskMessage("remove_task")));
-        edit.setOnAction((evt) -> Dispatcher.getInstance().dispatch(new TaskMessage("edit_task")));
+        edit.setOnAction((evt) -> handleEditTask());
         menu.getItems().add(finish);
         menu.getItems().add(edit);
         return menu;
@@ -165,25 +167,19 @@ public class ListViewController implements Initializable {
      */
     @FXML
     private void handleOpenMenuBtn() {
-
-        FileChooser fileChooser = getFileChooser();
-
-        // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainController.getStage());
-
-        if (file != null) {
-            Dispatcher.getInstance().loadTaskDataFromFile(file);
-        }
-    }
-
-    private FileChooser getFileChooser() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
-        return fileChooser;
+
+        // Show save file dialog
+        File file = fileChooser.showOpenDialog(mainController.getStage());
+
+        if (file != null) {
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD,file));
+        }
     }
 
     /**
@@ -194,7 +190,9 @@ public class ListViewController implements Initializable {
     private void handleSaveMenuBtn() {
         File taskFile = Dispatcher.getInstance().getTaskFilePath();
         if (taskFile != null) {
-            Dispatcher.getInstance().saveTaskDataToFile(taskFile);
+            //Dispatcher.getInstance().saveTaskDataToFile(taskFile);
+
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE));
         } else {
             handleSaveAsMenuBtn();
         }
@@ -202,7 +200,12 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleSaveAsMenuBtn() {
-        FileChooser fileChooser = getFileChooser();
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
         File file = fileChooser.showSaveDialog(mainController.getStage());
@@ -212,7 +215,6 @@ public class ListViewController implements Initializable {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            // Dispatcher.getInstance().dispatch(new PersistenceMessage("saveToFile_persistence"));
             Dispatcher.getInstance().saveTaskDataToFile(file);
         }
     }

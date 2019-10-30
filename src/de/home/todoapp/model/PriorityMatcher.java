@@ -18,4 +18,11 @@ public class PriorityMatcher implements Predicate<Task> {
         }
         return priority.equals(task.getPriority());
     }
+
+    @Override
+    public String toString() {
+        return "PriorityMatcher{" +
+                "priority=" + priority +
+                '}';
+    }
 }
