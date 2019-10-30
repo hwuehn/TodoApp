@@ -22,12 +22,12 @@ public class Dispatcher {
         taskAdministration = new TaskAdministration();
     }
 
-    public void removeTask() {
+    private void removeTask() {
 
         taskAdministration.remove(taskAdministration.getCurrentTask());
     }
 
-    public void newTask() {
+    private void newTask() {
 
         Task newTask = EditDialogController.showAddPlayer();
         if (newTask != null){
@@ -35,7 +35,7 @@ public class Dispatcher {
         }
     }
 
-    public void editTask() {
+    private void editTask() {
         Task selectedTask = taskAdministration.getCurrentTask();
         if (selectedTask != null) {
             Task newTask = EditDialogController.showEditDialog(selectedTask);
@@ -45,7 +45,7 @@ public class Dispatcher {
         }
     }
 
-    public void setEditedTask(Task oldT,Task newT) {
+    private void setEditedTask(Task oldT, Task newT) {
 
         int stelle= taskAdministration.getTasks().indexOf(oldT);
         taskAdministration.getTasks().set(stelle,newT);
@@ -97,8 +97,23 @@ public class Dispatcher {
         taskAdministration.getTasks().clear();
     }
 
-    public void selectTask(Task newValue) {
+    private void selectTask(Task newValue) {
         taskAdministration.setCurrentTask(newValue);
+    }
+
+    public void dispatch(IMsg msg) {
+        System.out.println(msg);
+        switch (msg.getMsgType()){
+            case "select_task": selectTask(((TaskMessage) msg).newTask);break;
+            case "edit_task": editTask();break;
+            case "remove_task": removeTask();break;
+            case "add_task": newTask();break;
+
+
+            default:
+                throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+
     }
 
     private static class Holder {
