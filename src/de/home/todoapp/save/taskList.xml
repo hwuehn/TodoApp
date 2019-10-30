@@ -171,4 +171,13 @@
         <priority>Eilt</priority>
         <sort>Feature</sort>
     </tasks>
+    <tasks>
+        <finishDate>2019-10-30</finishDate>
+        <input>MVC + Observer Pattern + Command Query separation and using the mantra ‘Shared mutable state is the root
+            of all evil’.
+        </input>
+        <name>Henning Wühn</name>
+        <priority>Eilt</priority>
+        <sort>Feature</sort>
+    </tasks>
 </tasks>

@@ -46,13 +46,7 @@ public class TaskAdministration implements IMainController, IAppState {
     }
 
     public void remove(Task task) {
-        System.out.println("vor remove");
         tasks.remove(task);
-        System.out.println("nach remove");
-    }
-
-    public void edit(Task task) {
-
     }
 
     //todo: auslagern in persistenz service

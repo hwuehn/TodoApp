@@ -5,6 +5,7 @@ import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.XMLWrapper;
 import de.home.todoapp.view.EditDialogController;
+import org.omg.CORBA.Request;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -152,5 +153,8 @@ public class Dispatcher {
          taskAdministration.loadTestData();
     }
 
+    public void dispatch(Request request) {
+        request.send_oneway();
+    }
 
 }
