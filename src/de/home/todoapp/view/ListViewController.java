@@ -159,12 +159,9 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleNewMenuBtn() {
-        Dispatcher.getInstance().clearView();
+        Dispatcher.getInstance().dispatch(new PersistMessage("new_project"));
     }
 
-    /**
-     * Opens a FileChooser to let the user select an task list to load.
-     */
     @FXML
     private void handleOpenMenuBtn() {
         FileChooser fileChooser = new FileChooser();
@@ -190,8 +187,6 @@ public class ListViewController implements Initializable {
     private void handleSaveMenuBtn() {
         File taskFile = Dispatcher.getInstance().getTaskFilePath();
         if (taskFile != null) {
-            //Dispatcher.getInstance().saveTaskDataToFile(taskFile);
-
             Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE));
         } else {
             handleSaveAsMenuBtn();
@@ -215,7 +210,7 @@ public class ListViewController implements Initializable {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            Dispatcher.getInstance().saveTaskDataToFile(file);
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE));
         }
     }
 
@@ -230,6 +225,6 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleExitMenuBtn() {
-        System.exit(0);
+        Dispatcher.getInstance().dispatch(new PersistMessage("exit_project"));
     }
 }

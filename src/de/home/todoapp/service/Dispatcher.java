@@ -104,13 +104,26 @@ public class Dispatcher {
     public void dispatch(IMsg msg) {
         System.out.println(msg);
         switch (msg.getMsgType()){
-            case "select_task": selectTask(((TaskMessage) msg).newTask);break;
-            case "edit_task": editTask();break;
-            case "remove_task": removeTask();break;
-            case "add_task": newTask();break;
+            case TaskMessage.SELECT:
+                selectTask(((TaskMessage) msg).newTask);
+                break;
+            case TaskMessage.EDIT:
+                editTask();
+                break;
+            case TaskMessage.REMOVE:
+                removeTask();
+                break;
+            case TaskMessage.ADD:
+                newTask();
+                break;
             case FilterMessage.FILTER: filter(((FilterMessage) msg).filter ); break;
             case PersistMessage.SAVE: saveTaskDataToFile(getTaskFilePath());break;
             case PersistMessage.LOAD: loadTaskDataFromFile(((PersistMessage) msg).file);break;
+            case PersistMessage.NEW:
+                clearView();
+                break;
+            case PersistMessage.EXIT:
+                System.exit(0);
 
 
             default:

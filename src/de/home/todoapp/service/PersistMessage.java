@@ -5,6 +5,10 @@ import java.io.File;
 public class PersistMessage implements IMsg {
     public static final String SAVE = "save_project";
     public static final String LOAD = "load_project";
+    //public static final String SAVEAS = "saveAs_project";
+    public static final String NEW = "new_project";
+    public static final String EXIT = "exit_project";
+
     private final String msgType;
     public final File file;
 

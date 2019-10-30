@@ -3,9 +3,11 @@ package de.home.todoapp.service;
 import de.home.todoapp.model.Task;
 
 public class TaskMessage implements IMsg {
-    public String getMsgType() {
-        return msgType;
-    }
+
+    public static final String SELECT = "select_task";
+    public static final String EDIT = "edit_task";
+    public static final String REMOVE = "remove_task";
+    public static final String ADD = "add_task";
 
     public final String msgType;
     public final Task oldTask;
@@ -21,6 +23,10 @@ public class TaskMessage implements IMsg {
     }
     public TaskMessage(String msgType) {
         this(msgType, null,null );
+    }
+
+    public String getMsgType() {
+        return msgType;
     }
 
     @Override
