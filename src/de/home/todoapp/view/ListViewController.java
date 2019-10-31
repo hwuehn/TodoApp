@@ -87,7 +87,6 @@ public class ListViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("init listview");
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
         setCellFactory();

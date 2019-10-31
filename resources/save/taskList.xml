@@ -32,14 +32,14 @@
         <finishDate>2019-11-02</finishDate>
         <input>Systemdocumentation | JavaDoc</input>
         <name>Henning Wuehn</name>
-        <priority>Offen</priority>
+        <priority>Eilt</priority>
         <sort>Feature</sort>
     </tasks>
     <tasks>
         <finishDate>2019-11-02</finishDate>
         <input>Userdocumentation</input>
         <name>Henning Wuehn</name>
-        <priority>Offen</priority>
+        <priority>Eilt</priority>
         <sort>Feature</sort>
     </tasks>
     <tasks>

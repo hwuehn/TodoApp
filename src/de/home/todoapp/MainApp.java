@@ -2,6 +2,7 @@ package de.home.todoapp;
 
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.service.Dispatcher;
+import de.home.todoapp.service.PersistMessage;
 import de.home.todoapp.view.ListViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainApp extends Application implements IMainController {
@@ -30,6 +32,12 @@ public class MainApp extends Application implements IMainController {
         MainApp.stage.setTitle("TodoApp");
         MainApp.stage.getIcons().add(new Image("file:resources/images/todo.png"));
         initRootLayout();
+
+        // Try to load last opened person file.
+        File file = Dispatcher.getInstance().getTaskFilePath();
+        if (file != null) {
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file));
+        }
     }
 
     public void initRootLayout() {
@@ -48,7 +56,6 @@ public class MainApp extends Application implements IMainController {
             controller.setAppState(Dispatcher.getInstance().getAdministration());
             Dispatcher.getInstance().loadTestData();
 
-            System.out.println("set main controller");
             stage.show();
 
         } catch (IOException e) {

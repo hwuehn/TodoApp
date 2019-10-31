@@ -123,7 +123,6 @@ public class Dispatcher {
                 System.exit(0);
                 break;
 
-
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
