@@ -45,7 +45,7 @@
              <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="517.0"
                        prefWidth="450.0" stylesheets="@style/style.css"/>
              <ButtonBar buttonMinWidth="35.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT"
-                        prefHeight="50.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                        prefHeight="50.0" prefWidth="450.0" VBox.vgrow="NEVER">
                   <buttons>
                       <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
                                     onAction="#handleEditTask" prefHeight="35.0" prefWidth="37.0" styleClass="button"

@@ -8,13 +8,6 @@
         <sort>Feature</sort>
     </tasks>
     <tasks>
-        <finishDate>2019-10-31</finishDate>
-        <input>All fxml files reziseable</input>
-        <name>Henning Wuehn</name>
-        <priority>Eilt</priority>
-        <sort>Feature</sort>
-    </tasks>
-    <tasks>
         <finishDate>2019-11-01</finishDate>
         <input>Integrate update process</input>
         <name>Henning Wuehn</name>
