@@ -1,7 +1,7 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.model.Administration;
 import de.home.todoapp.model.Task;
+import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.ListViewCell;
 import de.home.todoapp.model.util.Priority;
@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -69,7 +70,6 @@ public class ListViewController implements Initializable {
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton) event.getSource();
         Predicate<Task> filter = (Predicate<Task>) tb.getUserData();
-        //Dispatcher.getInstance().filter(filter);
         Dispatcher.getInstance().dispatch(new FilterMessage(FilterMessage.FILTER,filter));
     };
 
@@ -118,6 +118,7 @@ public class ListViewController implements Initializable {
         Dispatcher.getInstance().dispatch(new TaskMessage("add_task"));
     }
 
+
     /**
      * Is called by the main application to give a reference back to itself.
      *
@@ -127,7 +128,7 @@ public class ListViewController implements Initializable {
         this.mainController = controller;
     }
 
-    public void setAppState(Administration appState) {
+    public void setAppState(TaskAdministration appState) {
         listView.setItems(appState.getViewableTasks());
     }
 
@@ -163,7 +164,7 @@ public class ListViewController implements Initializable {
     }
 
     @FXML
-    private void handleOpenMenuBtn() {
+    private void handleOpenMenuBtn() throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
@@ -175,7 +176,7 @@ public class ListViewController implements Initializable {
         File file = fileChooser.showOpenDialog(mainController.getStage());
 
         if (file != null) {
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD,file));
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
         }
     }
 

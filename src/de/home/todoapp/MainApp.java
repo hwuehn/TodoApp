@@ -20,6 +20,7 @@ public class MainApp extends Application implements IMainController {
         launch(args);
     }
 
+    private static final String SORTLIST_XML = "C:\\Users\\hensche\\Projekte\\TodoApp\\resources\\save\\sortList.xml";
     private static Stage stage;
     private AnchorPane rootLayout;
 
@@ -33,12 +34,21 @@ public class MainApp extends Application implements IMainController {
         MainApp.stage.getIcons().add(new Image("file:resources/images/todo.png"));
         initRootLayout();
 
-        // Try to load last opened person file.
+        // Try to load last used sort list from file.
+//        File fileSort = new File(SORTLIST_XML);
+//        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS, null, fileSort));
+//        System.out.println(Dispatcher.getInstance().getTaskAdministration().getSorts());
+
+
+        // Try to load last opened task file.
         File file = Dispatcher.getInstance().getTaskFilePath();
         if (file != null) {
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file));
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
         }
+
+
     }
+
 
     public void initRootLayout() {
         try {
@@ -53,8 +63,9 @@ public class MainApp extends Application implements IMainController {
             // Give the controller access to the main app.
             ListViewController controller = loader.getController();
             controller.setMainController(this);
-            controller.setAppState(Dispatcher.getInstance().getAdministration());
+            controller.setAppState(Dispatcher.getInstance().getTaskAdministration());
             Dispatcher.getInstance().loadTestData();
+
 
             stage.show();
 

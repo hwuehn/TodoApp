@@ -1,8 +1,8 @@
 package de.home.todoapp.model;
 
-import de.home.todoapp.model.util.IAppState;
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.Sort;
+import de.home.todoapp.model.util.SortList;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,15 +14,26 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-public class Administration implements IMainController, IAppState {
+public class TaskAdministration implements IMainController {
 
     private final StringProperty title = new SimpleStringProperty();
     private final ObjectProperty<Task> currentTask = new SimpleObjectProperty<Task>();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
+    private final ObjectProperty<SortList> sorts = new SimpleObjectProperty<>(new SortList());
+
+    public ObjectProperty<SortList> getSorts() {
+        return sorts;
+    }
+
+    public ObjectProperty<SortList> sortsProperty() {
+        return sorts;
+    }
+
+
+
     public ReadOnlyObjectProperty<ObservableList<Task>> tasksProperty() {
         return new SimpleObjectProperty<>(tasks);
-
     }
 
     private final SortedList<Task> sortedTasks = new SortedList<>(tasks);
@@ -74,13 +85,14 @@ public class Administration implements IMainController, IAppState {
         sortedTasks.clear();
         viewableTasks.clear();
 
-        add(new Task("Henning", Sort.Feature, "Aufgabe 1", LocalDate.of(2019, 10, 26)));
-        add(new Task("Henning", Sort.Fix, "Aufgabe 2", LocalDate.of(2019, 10, 26)));
-        add(new Task("Henning", Sort.Refactor, "Aufgabe 3", LocalDate.of(2019, 10, 30)));
-        add(new Task("Henning", Sort.Feature, "Aufgabe 4", LocalDate.of(2019, 11, 10)));
-        add(new Task("Henning", Sort.Refactor, "Aufgabe 5", LocalDate.of(2019, 12, 31)));
+        add(new Task("Henning", new Sort("Refactor"), "Aufgabe 1", LocalDate.of(2019, 10, 26)));
+        add(new Task("Henning", new Sort("Fix"), "Aufgabe 2", LocalDate.of(2019, 10, 26)));
+        add(new Task("Henning", new Sort("Refactor"), "Aufgabe 3", LocalDate.of(2019, 10, 30)));
+        add(new Task("Henning", new Sort("Feature"), "Aufgabe 4", LocalDate.of(2019, 11, 10)));
+        add(new Task("Henning", new Sort("Refactor"), "Aufgabe 5", LocalDate.of(2019, 12, 31)));
 
         sortedTasks.comparatorProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
+
     }
 
     public void setCurrentTask(Task selectedTask) {
@@ -90,5 +102,6 @@ public class Administration implements IMainController, IAppState {
     public Task getCurrentTask() {
         return currentTask.get();
     }
+
 }
 

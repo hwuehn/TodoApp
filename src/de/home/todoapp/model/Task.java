@@ -20,7 +20,7 @@ public class Task {
     private SimpleObjectProperty<LocalDate> today;
     private SimpleLongProperty daysToFinish;
     private SimpleObjectProperty<Priority> priority;
-    private SimpleObjectProperty<Sort> sort;
+    private SimpleObjectProperty<Sort> sort = new SimpleObjectProperty<Sort>();
 
     public Task() {
         this.name = new SimpleStringProperty();
@@ -49,6 +49,10 @@ public class Task {
 
     public Sort getSort() {
         return sort.get();
+    }
+
+    public SimpleObjectProperty<Sort> sortProperty() {
+        return sort;
     }
 
     public void setSort(Sort sort) {

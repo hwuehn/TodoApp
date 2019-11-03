@@ -34,6 +34,7 @@
                         <items>
                            <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn" text="New" />
                            <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn" text="Load..." />
+                            <MenuItem fx:id="editSortaBtn" mnemonicParsing="false" text="Edit sorts"/>
                            <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" onAction="#handleSaveMenuBtn" text="Save" />
                            <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" onAction="#handleSaveAsMenuBtn" text="Save As..." />
                            <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" onAction="#handleAboutMenuBtn" text="About" />

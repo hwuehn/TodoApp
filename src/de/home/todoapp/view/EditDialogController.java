@@ -2,9 +2,13 @@ package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.util.Sort;
+import de.home.todoapp.model.util.SortList;
+import de.home.todoapp.service.Dispatcher;
+import de.home.todoapp.service.TaskMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,14 +16,21 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class EditDialogController {
+public class EditDialogController implements Initializable {
 
+    private static final String SORTLIST_XML = "C:\\Users\\hensche\\Projekte\\TodoApp\\resources\\save\\sortList.xml";
     @FXML private TextField inputNameField;
     @FXML private TextArea inputTextAreaField;
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
+    SortList sortList = new SortList();
+    @FXML
+    private Button editSortsBtn;
+
     @FXML
     private ComboBox<Sort> sortCombo = new ComboBox<>();
 
@@ -62,8 +73,9 @@ public class EditDialogController {
     }
 
     @FXML
-    private void initialize() {
-        sortCombo.getItems().setAll(Sort.values());
+    public void initialize(URL location, ResourceBundle resources) {
+        Dispatcher.getInstance().loadSorts();
+        sortCombo.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
     }
 
     /**
@@ -96,6 +108,12 @@ public class EditDialogController {
     }
 
     @FXML
+    public void handleEditSortBtn(ActionEvent evt) {
+
+        Dispatcher.getInstance().dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
+    }
+
+    @FXML
     public void cancel(ActionEvent evt) { hide(evt); }
 
     private void hide(ActionEvent evt) {
@@ -119,4 +137,5 @@ public class EditDialogController {
             return false;
         }
     }
+
 }

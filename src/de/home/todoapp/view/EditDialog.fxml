@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="354.0" prefWidth="439.0" styleClass="background"
             stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/8.0.171"
@@ -24,15 +27,33 @@
             <Label fx:id="finishDateLabel" text="Finish date" GridPane.rowIndex="2" />
             <DatePicker fx:id="finishDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextArea fx:id="inputTextAreaField" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label text="Sort" GridPane.rowIndex="3"/>
-                <ComboBox fx:id="sortCombo" prefWidth="150.0" promptText="choose" GridPane.columnIndex="1"
-                          GridPane.rowIndex="3"/>
+                <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Sort" GridPane.rowIndex="3"/>
+                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <children>
+                        <ComboBox fx:id="sortCombo" prefWidth="150.0" promptText="choose"/>
+                        <Button fx:id="editSortsBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditSortBtn"
+                                prefHeight="35.0" prefWidth="35.0">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/edit.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <HBox.margin>
+                                <Insets left="5.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
             </children>
         </GridPane>
         <ButtonBar buttonMinWidth="50.0" layoutX="176.0" layoutY="233.0" maxWidth="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <buttons>
                 <Button fx:id="okBtn" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleOk" prefWidth="50.0" text="Ok" />
-                <Button fx:id="cancelBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefWidth="65.0" text="Cancel" />
+                <Button fx:id="cancelBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                        onAction="#cancel" prefHeight="31.0" prefWidth="104.0" text="Cancel"/>
             </buttons>
         </ButtonBar>
     </children>

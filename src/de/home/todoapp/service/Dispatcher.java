@@ -1,12 +1,15 @@
 package de.home.todoapp.service;
 
 import de.home.todoapp.MainApp;
-import de.home.todoapp.model.Administration;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.util.XMLWrapper;
+import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.util.SortList;
+import de.home.todoapp.model.util.TaskListXMLWrapper;
 import de.home.todoapp.view.EditDialogController;
+import de.home.todoapp.view.SetSortsController;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
@@ -16,25 +19,29 @@ import java.util.prefs.Preferences;
 
 public class Dispatcher {
 
-    private final Administration administration;
+    private static final String SORTLIST_XML = "./resources/save/sortList.xml";
+    private final TaskAdministration taskAdministration;
+
 
     private Dispatcher(){
-        administration = new Administration();
+
+        taskAdministration = new TaskAdministration();
+
     }
 
     private void removeTask() {
-        administration.remove(administration.getCurrentTask());
+        taskAdministration.remove(taskAdministration.getCurrentTask());
     }
 
     private void newTask() {
         Task newTask = EditDialogController.showAddPlayer();
         if (newTask != null){
-            administration.getTasks().add(newTask);
+            taskAdministration.getTasks().add(newTask);
         }
     }
 
     private void editTask() {
-        Task selectedTask = administration.getCurrentTask();
+        Task selectedTask = taskAdministration.getCurrentTask();
         if (selectedTask != null) {
             Task newTask = EditDialogController.showEditDialog(selectedTask);
             if (newTask != null) {
@@ -44,27 +51,27 @@ public class Dispatcher {
     }
 
     private void setEditedTask(Task oldT, Task newT) {
-        int stelle = administration.getTasks().indexOf(oldT);
-        administration.getTasks().set(stelle, newT);
-        administration.setCurrentTask(newT);
+        int stelle = taskAdministration.getTasks().indexOf(oldT);
+        taskAdministration.getTasks().set(stelle, newT);
+        taskAdministration.setCurrentTask(newT);
     }
 
     public void filter(Predicate<Task> filter) {
-        administration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
-        administration.filterProperty().set(filter);
+        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
+        taskAdministration.filterProperty().set(filter);
     }
 
     public void saveTaskDataToFile(File file) {
         try {
             JAXBContext context = JAXBContext
-                    .newInstance(XMLWrapper.class);
+                    .newInstance(TaskListXMLWrapper.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             // Wrapping our task data.
             try {
-                XMLWrapper wrapper = new XMLWrapper();
-                wrapper.setTasks(administration.getTasks());
+                TaskListXMLWrapper wrapper = new TaskListXMLWrapper();
+                wrapper.setTasks(taskAdministration.getTasks());
                 // Marshalling and saving XML to the file.
                 m.marshal(wrapper, file);
 
@@ -74,6 +81,7 @@ public class Dispatcher {
 
             // Save the file path to the registry.
         } catch (Exception e) {
+            setTaskFilePath(file);
         }
     }
 
@@ -91,11 +99,11 @@ public class Dispatcher {
     }
 
     public void clearView() {
-        administration.getTasks().clear();
+        taskAdministration.getTasks().clear();
     }
 
     private void selectTask(Task newValue) {
-        administration.setCurrentTask(newValue);
+        taskAdministration.setCurrentTask(newValue);
     }
 
     public void dispatch(IMsg msg) {
@@ -113,6 +121,9 @@ public class Dispatcher {
             case TaskMessage.ADD:
                 newTask();
                 break;
+            case TaskMessage.EDIT_SORTS:
+                showEditSorts();
+                break;
             case FilterMessage.FILTER: filter(((FilterMessage) msg).filter ); break;
             case PersistMessage.SAVE: saveTaskDataToFile(getTaskFilePath());break;
             case PersistMessage.LOAD: loadTaskDataFromFile(((PersistMessage) msg).file);break;
@@ -122,9 +133,33 @@ public class Dispatcher {
             case PersistMessage.EXIT:
                 System.exit(0);
                 break;
-
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+    }
+
+    private void showEditSorts() {
+        SetSortsController.showSorts();
+    }
+
+    public void loadSorts() {
+        try {
+            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortList.class).createUnmarshaller();
+
+            taskAdministration.getSorts().set((SortList) unmarshaller.unmarshal(new File(SORTLIST_XML)));
+
+        } catch (final JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveSorts() {
+        try {
+            final Marshaller marshaller = JAXBContext.newInstance(SortList.class).createMarshaller();
+
+            marshaller.marshal(taskAdministration.getSorts().get(), new File(SORTLIST_XML));
+        } catch (final JAXBException e) {
+            e.printStackTrace();
         }
     }
 
@@ -136,21 +171,21 @@ public class Dispatcher {
         return Holder.INSTANCE;
     }
 
-    public Administration getAdministration() {
-        return administration;
+    public TaskAdministration getTaskAdministration() {
+        return taskAdministration;
     }
 
     public void loadTaskDataFromFile(File file) {
         try {
             JAXBContext context = JAXBContext
-                    .newInstance(XMLWrapper.class);
+                    .newInstance(TaskListXMLWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
 
             // Reading XML from the file and unmarshalling.
-            XMLWrapper wrapper = (XMLWrapper) um.unmarshal(file);
+            TaskListXMLWrapper wrapper = (TaskListXMLWrapper) um.unmarshal(file);
 
-            administration.getTasks().clear();
-            administration.getTasks().addAll(wrapper.getTasks());
+            taskAdministration.getTasks().clear();
+            taskAdministration.getTasks().addAll(wrapper.getTasks());
 
             // Save the file path to the registry.
             setTaskFilePath(file);
@@ -158,22 +193,23 @@ public class Dispatcher {
         } catch (Exception e) { // catches ANY exception
         }
     }
+
     public void setTaskFilePath(File file) {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
 
             // Update the stage title.
-            administration.setTitle("TodoApp - " + file.getName());
+            taskAdministration.setTitle("TodoApp - " + file.getName());
         } else {
             prefs.remove("filePath");
 
             // Update the stage title.
-            administration.setTitle("TodoApp");
+            taskAdministration.setTitle("TodoApp");
         }
     }
 
     public void loadTestData() {
-        administration.loadTestData();
+        taskAdministration.loadTestData();
     }
 }
