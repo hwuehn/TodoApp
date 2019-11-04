@@ -18,10 +18,10 @@ import java.util.prefs.Preferences;
 public class PersistenceService {
 
     private static final String SORTLIST_XML = "./resources/save/sortList.xml";
-    private final TaskAdministration taskAdministration;
+    private static TaskAdministration taskAdministration;
 
-    public PersistenceService(TaskAdministration taskAdministration) {
-        this.taskAdministration = taskAdministration;
+    public PersistenceService() {
+        taskAdministration = new TaskAdministration();
     }
 
     public static void saveTaskDataToFile(File file, List<Task> tasks) {
@@ -44,7 +44,7 @@ public class PersistenceService {
 
             // Save the file path to the registry.
         } catch (Exception e) {
-            setTaskFilePath(file, new TaskAdministration());
+            setTaskFilePath(file, taskAdministration);
         }
     }
 
@@ -61,7 +61,7 @@ public class PersistenceService {
             tasks.addAll(wrapper.getTasks());
 
             // Save the file path to the registry.
-            setTaskFilePath(file, new TaskAdministration());
+            setTaskFilePath(file, taskAdministration);
 
         } catch (Exception e) { // catches ANY exception
         }
@@ -98,13 +98,13 @@ public class PersistenceService {
 
             // Update the stage title.
 
-            taskAdministration.setTitle("TodoApp - " + file.getName());
+            PersistenceService.taskAdministration.setTitle("TodoApp - " + file.getName());
 
         } else {
             prefs.remove("filePath");
 
             // Update the stage title.
-            taskAdministration.setTitle("TodoApp");
+            PersistenceService.taskAdministration.setTitle("TodoApp");
         }
     }
 
