@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="400.0"
             xmlns="http://javafx.com/javafx/8.0.171" fx:controller="de.home.todoapp.view.SetSortsController">
     <children>
-        <GridPane layoutX="172.0" layoutY="132.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+        <GridPane layoutX="172.0" layoutY="132.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0"
                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -22,7 +22,7 @@
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit sorts for easy task creation">
                     <font>
-                        <Font size="33.0"/>
+                        <Font size="28.0"/>
                     </font>
                     <GridPane.margin>
                         <Insets left="5.0"/>

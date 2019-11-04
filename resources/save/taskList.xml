@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasks>
     <tasks>
-        <finishDate>2019-11-10</finishDate>
+        <finishDate>2019-11-17</finishDate>
         <input>Build a native app for desktop installation</input>
         <name>Henning Wuehn</name>
         <priority>Eilt_nicht</priority>
@@ -11,7 +11,7 @@
         <finishDate>2019-11-06</finishDate>
         <input>Integrate update process</input>
         <name>Henning Wuehn</name>
-        <priority>Offen</priority>
+        <priority>Eilt</priority>
         <sort description="Feature"/>
     </tasks>
     <tasks>
@@ -33,6 +33,54 @@
         <input>Userdocumentation</input>
         <name>Henning Wuehn</name>
         <priority>Offen</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-05</finishDate>
+        <input>Add link between menubar and edit sorts</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-06</finishDate>
+        <input>Binding between edit sort list and edit combobox.</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-06</finishDate>
+        <input>Add sign in functionality</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-07</finishDate>
+        <input>Automatic name setting when signed in</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-08</finishDate>
+        <input>Share list feature via email</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-11</finishDate>
+        <input>Print list.</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt_nicht</priority>
+        <sort description="Feature"/>
+    </tasks>
+    <tasks>
+        <finishDate>2019-11-12</finishDate>
+        <input>Different color for different users</input>
+        <name>Henning Wuehn</name>
         <sort description="Feature"/>
     </tasks>
 </tasks>
