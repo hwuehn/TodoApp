@@ -3,6 +3,7 @@ package de.home.todoapp.service;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.view.EditDialogController;
+import de.home.todoapp.view.FinishedTasksController;
 
 public class TaskService {
 
@@ -35,5 +36,9 @@ public class TaskService {
 
     public static void selectTask(Task newValue, TaskAdministration taskAdministration) {
         taskAdministration.setCurrentTask(newValue);
+    }
+
+    public static void showFinishedTasks() {
+        FinishedTasksController.showFinished();
     }
 }

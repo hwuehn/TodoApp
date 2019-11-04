@@ -1,7 +1,6 @@
 package de.home.todoapp.service;
 
 import de.home.todoapp.model.TaskAdministration;
-import de.home.todoapp.view.FinishedTasksController;
 
 import java.io.File;
 
@@ -11,6 +10,14 @@ public class Dispatcher {
 
     private Dispatcher(){
         taskAdministration = new TaskAdministration();
+    }
+
+    public static Dispatcher getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    public TaskAdministration getTaskAdministration() {
+        return taskAdministration;
     }
 
     public File dispatch(IMsg msg) {
@@ -35,7 +42,7 @@ public class Dispatcher {
                 TaskService.newTask(getTaskAdministration());
                 break;
             case TaskMessage.FINISHED:
-                showFinishedTasks();
+                TaskService.showFinishedTasks();
                 break;
             case PersistMessage.LOAD_SORTS:
                 PersistenceService.loadSorts(getTaskAdministration().getSorts());
@@ -71,19 +78,8 @@ public class Dispatcher {
         return null;
     }
 
-    private void showFinishedTasks() {
-        FinishedTasksController.showFinished();
-    }
-
     private static class Holder {
         private static final Dispatcher INSTANCE = new Dispatcher();
     }
 
-    public static Dispatcher getInstance() {
-        return Holder.INSTANCE;
-    }
-
-    public TaskAdministration getTaskAdministration() {
-        return taskAdministration;
-    }
 }

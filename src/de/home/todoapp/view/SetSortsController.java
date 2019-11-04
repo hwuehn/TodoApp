@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -58,7 +57,6 @@ public class SetSortsController implements Initializable {
     public static void showSorts(ObservableList<Sort> sorts) {
         System.out.println(sorts);
         showView("Edit Sorts",sorts);
-
     }
 
     public static SetSortsController showView(String title, ObservableList<Sort> sorts) {
@@ -92,19 +90,7 @@ public class SetSortsController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-
-        //sortListView.setCellFactory(param -> new SortListCell());
-
         Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
-
-        //sortListView.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
-
-//        Dispatcher.getInstance().getTaskAdministration().getSorts().addListener((obs, oldVal, newVal) -> {
-//            if (newVal != null) {
-//                sortListView.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
-//            }
-//        });
-
     }
 
     @FXML
@@ -143,25 +129,12 @@ public class SetSortsController implements Initializable {
 //        }
     }
 
-//    @FXML void handleAdd(ActionEvent evt) {
-//        if (isInputValid())
-//        Dispatcher.getInstance().getTaskAdministration().getSorts()
-//                .add(inputTextField.getText());
-//    }
-//
-//    @FXML void handleRemove(ActionEvent evt) {
-//        Dispatcher.getInstance().getTaskAdministration().getSorts()
-//                .remove(sortListView.getSelectionModel().getSelectedItem());
-//    }
-
     @FXML
     private void handleOk(ActionEvent evt) {
-
         okClicked = true;
         if (okClicked) {
             hide(evt);
         }
-
     }
 
     @FXML
@@ -172,23 +145,4 @@ public class SetSortsController implements Initializable {
     private void hide(ActionEvent evt) {
         ((Button) evt.getSource()).getScene().getWindow().hide();
     }
-
-    private boolean isInputValid() {
-        String errorMessage = "";
-
-        if (inputTextField.getText() == null || inputTextField.getText().length() == 0) {
-            errorMessage += "No valid input!\n";
-        }
-        if (errorMessage.length() == 0) {
-            return true;
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
-            return false;
-        }
-    }
-
 }

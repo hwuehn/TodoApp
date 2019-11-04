@@ -26,4 +26,12 @@ public class SortMessage implements IMsg {
         return msgType;
     }
 
+    @Override
+    public String toString() {
+        return "SortMessage{" +
+                "msgType='" + msgType + '\'' +
+                ", oldSort='" + oldSort + '\'' +
+                ", newSort='" + newSort + '\'' +
+                '}';
+    }
 }

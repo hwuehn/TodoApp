@@ -4,9 +4,9 @@ import java.io.File;
 
 public class PersistMessage implements IMsg {
 
+    private static final String SORTLIST_XML = "./resources/save/sortList.xml";
 
     public static final String SET_PATH = "setPath_project";
-
     public static final String SAVE_SORTS = "saveSorts_project";
     public static final String SAVE = "save_project";
     public static final String LOAD_SORTS = "loadSorts_project";
@@ -16,7 +16,7 @@ public class PersistMessage implements IMsg {
     public static final String EXIT = "exit_project";
     public static final String LOAD_TESTDATA = "loadTestData_project";
     public static final String GET_PATH = "getPath_project";
-    private static final String SORTLIST_XML = "./resources/save/sortList.xml";
+
 
     public File file;
     public File sortFile = new File(SORTLIST_XML);
