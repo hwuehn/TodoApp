@@ -41,7 +41,7 @@ public class MainApp extends Application implements IMainController {
 
 
         // Try to load last opened task file.
-        File file = Dispatcher.getInstance().getTaskFilePath();
+        File file = Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.GET_PATH));
         if (file != null) {
             Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
         }
@@ -64,7 +64,7 @@ public class MainApp extends Application implements IMainController {
             ListViewController controller = loader.getController();
             controller.setMainController(this);
             controller.setAppState(Dispatcher.getInstance().getTaskAdministration());
-            Dispatcher.getInstance().loadTestData();
+            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_TESTDATA));
 
 
             stage.show();

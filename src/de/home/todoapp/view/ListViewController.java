@@ -202,7 +202,7 @@ public class ListViewController implements Initializable {
      */
     @FXML
     private void handleSaveMenuBtn() {
-        File taskFile = Dispatcher.getInstance().getTaskFilePath();
+        File taskFile = Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.GET_PATH));
         if (taskFile != null) {
             Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE));
         } else {

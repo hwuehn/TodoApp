@@ -134,7 +134,7 @@ public class SetSortsController implements Initializable {
 
     @FXML
     public void saveSorts(final ActionEvent event) {
-        Dispatcher.getInstance().saveSorts();
+        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE_SORTS));
 //        try {
 //            final Marshaller marshaller = JAXBContext.newInstance(SortList.class).createMarshaller();
 //            marshaller.marshal(sorts.get(), new File("sorts.xml"));

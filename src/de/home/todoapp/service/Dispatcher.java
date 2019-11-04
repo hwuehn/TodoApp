@@ -1,179 +1,78 @@
 package de.home.todoapp.service;
 
-import de.home.todoapp.MainApp;
-import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
-import de.home.todoapp.model.util.SortListXMLWrapper;
-import de.home.todoapp.model.util.TaskListXMLWrapper;
-import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.FinishedTasksController;
-import de.home.todoapp.view.SetSortsController;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.util.Comparator;
-import java.util.function.Predicate;
-import java.util.prefs.Preferences;
 
 public class Dispatcher {
 
-    private static final String SORTLIST_XML = "./resources/save/sortList.xml";
     private final TaskAdministration taskAdministration;
 
-
     private Dispatcher(){
-
         taskAdministration = new TaskAdministration();
-
     }
 
-    private void removeTask() {
-        taskAdministration.remove(taskAdministration.getCurrentTask());
-    }
-
-    private void newTask() {
-        Task newTask = EditDialogController.showAddPlayer( taskAdministration.getSorts());
-        if (newTask != null){
-            taskAdministration.getTasks().add(newTask);
-        }
-    }
-
-    private void editTask() {
-        Task selectedTask = taskAdministration.getCurrentTask();
-        if (selectedTask != null) {
-            Task newTask = EditDialogController.showEditDialog(selectedTask,taskAdministration.getSorts());
-            if (newTask != null) {
-                setEditedTask(selectedTask,newTask);
-            }
-        }
-    }
-
-    private void setEditedTask(Task oldT, Task newT) {
-        int stelle = taskAdministration.getTasks().indexOf(oldT);
-        taskAdministration.getTasks().set(stelle, newT);
-        taskAdministration.setCurrentTask(newT);
-    }
-
-    public void filter(Predicate<Task> filter) {
-        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
-        taskAdministration.filterProperty().set(filter);
-    }
-
-    public void saveTaskDataToFile(File file) {
-        try {
-            JAXBContext context = JAXBContext
-                    .newInstance(TaskListXMLWrapper.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            // Wrapping our task data.
-            try {
-                TaskListXMLWrapper wrapper = new TaskListXMLWrapper();
-                wrapper.setTasks(taskAdministration.getTasks());
-                // Marshalling and saving XML to the file.
-                m.marshal(wrapper, file);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // Save the file path to the registry.
-        } catch (Exception e) {
-            setTaskFilePath(file);
-        }
-    }
-
-    /**
-     * Returns the task file preference, i.e. the file that was last opened.
-     * The preference is read from the OS specific registry. If no such
-     * preference can be found, null is returned.
-     *
-     * @return
-     */
-    public File getTaskFilePath() {
-        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        String filePath = prefs.get("filePath", null);
-        return filePath != null ? new File(filePath) : null;
-    }
-
-    public void clearView() {
-        taskAdministration.getTasks().clear();
-    }
-
-    private void selectTask(Task newValue) {
-        taskAdministration.setCurrentTask(newValue);
-    }
-
-    public void dispatch(IMsg msg) {
+    public File dispatch(IMsg msg) {
         System.out.println(msg);
         switch (msg.getMsgType()){
+            case FilterMessage.FILTER:
+                FilterService.filter(((FilterMessage) msg).filter, getTaskAdministration());
+                break;
+            case SortMessage.EDIT_SORTS:
+                SortService.showEditSorts(getTaskAdministration());
+                break;
             case TaskMessage.SELECT:
-                selectTask(((TaskMessage) msg).newTask);
+                TaskService.selectTask(((TaskMessage) msg).newTask, getTaskAdministration());
                 break;
             case TaskMessage.EDIT:
-                editTask();
+                TaskService.editTask(getTaskAdministration());
                 break;
             case TaskMessage.REMOVE:
-                removeTask();
+                TaskService.removeTask(getTaskAdministration());
                 break;
             case TaskMessage.ADD:
-                newTask();
-                break;
-            case TaskMessage.EDIT_SORTS:
-                showEditSorts();
+                TaskService.newTask(getTaskAdministration());
                 break;
             case TaskMessage.FINISHED:
                 showFinishedTasks();
                 break;
-            case FilterMessage.FILTER: filter(((FilterMessage) msg).filter ); break;
-            case PersistMessage.LOAD_SORTS: loadSorts();break;
-            case PersistMessage.SAVE: saveTaskDataToFile(getTaskFilePath());break;
-            case PersistMessage.LOAD: loadTaskDataFromFile(((PersistMessage) msg).file);break;
+            case PersistMessage.LOAD_SORTS:
+                PersistenceService.loadSorts(getTaskAdministration().getSorts());
+                break;
+            case PersistMessage.SAVE:
+                PersistenceService.saveTaskDataToFile(PersistenceService.getTaskFilePath(), getTaskAdministration().getTasks());
+                break;
+            case PersistMessage.LOAD:
+                PersistenceService.loadTaskDataFromFile(((PersistMessage) msg).file, getTaskAdministration().getTasks());
+                break;
             case PersistMessage.NEW:
-                clearView();
+                PersistenceService.clearView(getTaskAdministration().getTasks());
                 break;
             case PersistMessage.EXIT:
-                System.exit(0);
+                PersistenceService.exit();
                 break;
+            case PersistMessage.GET_PATH:
+                PersistenceService.getTaskFilePath();
+                break;
+            case PersistMessage.SET_PATH:
+                PersistenceService.setTaskFilePath(((PersistMessage) msg).file, getTaskAdministration());
+                break;
+            case PersistMessage.LOAD_TESTDATA:
+                PersistenceService.loadTestData(getTaskAdministration());
+                break;
+            case PersistMessage.SAVE_SORTS:
+                PersistenceService.saveSorts(getTaskAdministration().getSorts());
+                break;
+
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
-    }
-
-    private void showEditSorts() {
-        SetSortsController.showSorts(taskAdministration.getSorts());
+        return null;
     }
 
     private void showFinishedTasks() {
         FinishedTasksController.showFinished();
-    }
-
-    private void loadSorts() {
-        try {
-            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createUnmarshaller();
-
-            SortListXMLWrapper sortListXMLWrapper = (SortListXMLWrapper) unmarshaller.unmarshal(new File(SORTLIST_XML));
-            taskAdministration.getSorts().removeAll();
-            taskAdministration.getSorts().setAll(sortListXMLWrapper.getSorts());
-
-        } catch (final JAXBException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void saveSorts() {
-        try {
-            final Marshaller marshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createMarshaller();
-            SortListXMLWrapper sortListXMLWrapper = new SortListXMLWrapper();
-            sortListXMLWrapper.setSorts(taskAdministration.getSorts());
-            marshaller.marshal(sortListXMLWrapper, new File(SORTLIST_XML));
-
-        } catch (final JAXBException e) {
-            e.printStackTrace();
-        }
     }
 
     private static class Holder {
@@ -186,43 +85,5 @@ public class Dispatcher {
 
     public TaskAdministration getTaskAdministration() {
         return taskAdministration;
-    }
-
-    public void loadTaskDataFromFile(File file) {
-        try {
-            JAXBContext context = JAXBContext
-                    .newInstance(TaskListXMLWrapper.class);
-            Unmarshaller um = context.createUnmarshaller();
-
-            // Reading XML from the file and unmarshalling.
-            TaskListXMLWrapper wrapper = (TaskListXMLWrapper) um.unmarshal(file);
-
-            taskAdministration.getTasks().clear();
-            taskAdministration.getTasks().addAll(wrapper.getTasks());
-
-            // Save the file path to the registry.
-            setTaskFilePath(file);
-
-        } catch (Exception e) { // catches ANY exception
-        }
-    }
-
-    public void setTaskFilePath(File file) {
-        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        if (file != null) {
-            prefs.put("filePath", file.getPath());
-
-            // Update the stage title.
-            taskAdministration.setTitle("TodoApp - " + file.getName());
-        } else {
-            prefs.remove("filePath");
-
-            // Update the stage title.
-            taskAdministration.setTitle("TodoApp");
-        }
-    }
-
-    public void loadTestData() {
-        taskAdministration.loadTestData();
     }
 }
