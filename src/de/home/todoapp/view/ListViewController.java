@@ -86,7 +86,7 @@ public class ListViewController implements Initializable {
             <ActionEvent> toggleHandler = event -> {
         ToggleButton tb = (ToggleButton) event.getSource();
         Predicate<Task> filter = (Predicate<Task>) tb.getUserData();
-        Dispatcher.getInstance().dispatch(new FilterMessage(FilterMessage.FILTER,filter));
+        Dispatcher.dispatch(new FilterMessage(FilterMessage.FILTER,filter));
     };
 
     private ContextMenu createContextMenu() {
@@ -94,7 +94,7 @@ public class ListViewController implements Initializable {
         MenuItem finish = new MenuItem("Finish");
         MenuItem edit = new MenuItem("Edit");
 
-        finish.setOnAction((evt) -> Dispatcher.getInstance().dispatch(new TaskMessage("remove_task")));
+        finish.setOnAction((evt) -> Dispatcher.dispatch(new TaskMessage("remove_task")));
         edit.setOnAction((evt) -> handleEditTask());
         menu.getItems().add(finish);
         menu.getItems().add(edit);
@@ -108,7 +108,7 @@ public class ListViewController implements Initializable {
         setCellFactory();
         listView.setContextMenu(createContextMenu());
         listView.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> {
-           Dispatcher.getInstance().dispatch(new TaskMessage("select_task", newValue));
+           Dispatcher.dispatch(new TaskMessage("select_task", newValue));
 
         });
 
@@ -131,7 +131,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     public void showAddPlayer() {
-        Dispatcher.getInstance().dispatch(new TaskMessage("add_task"));
+        Dispatcher.dispatch(new TaskMessage("add_task"));
     }
 
 
@@ -150,7 +150,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleEditTask() {
-         Dispatcher.getInstance().dispatch(new TaskMessage("edit_task"));
+         Dispatcher.dispatch(new TaskMessage("edit_task"));
     }
 
     private void resetToggles(){
@@ -176,7 +176,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleNewMenuBtn() {
-        Dispatcher.getInstance().dispatch(new PersistMessage("new_project"));
+        Dispatcher.dispatch(new PersistMessage("new_project"));
     }
 
     @FXML
@@ -192,7 +192,7 @@ public class ListViewController implements Initializable {
         File file = fileChooser.showOpenDialog(mainController.getStage());
 
         if (file != null) {
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
         }
     }
 
@@ -202,12 +202,8 @@ public class ListViewController implements Initializable {
      */
     @FXML
     private void handleSaveMenuBtn() {
-        File taskFile = Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.GET_PATH));
-        if (taskFile != null) {
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE));
-        } else {
-            handleSaveAsMenuBtn();
-        }
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
+            //handleSaveAsMenuBtn();
     }
 
     @FXML
@@ -227,13 +223,13 @@ public class ListViewController implements Initializable {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
         }
     }
 
     @FXML
     private void handleEditSortMenuBtn() {
-        Dispatcher.getInstance().dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
+        Dispatcher.dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
     }
 
     @FXML
@@ -247,14 +243,14 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleExitMenuBtn() {
-        Dispatcher.getInstance().dispatch(new PersistMessage("exit_project"));
+        Dispatcher.dispatch(new PersistMessage("exit_project"));
     }
 
     public void handleSignInMenuBtn(ActionEvent actionEvent) {
     }
 
     public void handleShowFinishedMenuBtn(ActionEvent actionEvent) {
-        Dispatcher.getInstance().dispatch(new TaskMessage(TaskMessage.FINISHED));
+        Dispatcher.dispatch(new TaskMessage(TaskMessage.FINISHED));
     }
 
     public void handlePrintMenuBtn(ActionEvent actionEvent) {

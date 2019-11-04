@@ -17,6 +17,7 @@ public class SortListXMLWrapper {
 
     private List<Sort> sorts;
 
+    @XmlElement(name = "sort")
     public List<Sort> getSorts() {
         return sorts;
     }

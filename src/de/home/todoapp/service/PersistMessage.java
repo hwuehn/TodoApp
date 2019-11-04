@@ -1,9 +1,11 @@
 package de.home.todoapp.service;
 
 import java.io.File;
+import java.util.List;
 
-public class PersistMessage implements IMsg {
+public class PersistMessage<T> implements IMsg {
 
+    public static final String LOADED_SORTS = "loadSorts_success";
     private static final String SORTLIST_XML = "./resources/save/sortList.xml";
 
     public static final String SET_PATH = "setPath_project";
@@ -19,17 +21,17 @@ public class PersistMessage implements IMsg {
 
 
     public File file;
-    public File sortFile = new File(SORTLIST_XML);
+    public List<T> payload;
     private String msgType;
 
     public PersistMessage(String msgType) {
         this(msgType, null, null);
     }
 
-    public PersistMessage(String msgType, File file, File sortFile) {
+    public  PersistMessage(String msgType, File file, List<T> payload) {
         this.msgType = msgType;
         this.file = file;
-        this.sortFile = sortFile;
+        this.payload = payload;
     }
 
     @Override
@@ -42,7 +44,6 @@ public class PersistMessage implements IMsg {
         return "PersistMessage{" +
                 "msgType='" + msgType + '\'' +
                 ", file=" + file +
-                ", sortFile=" + sortFile +
                 '}';
     }
 }

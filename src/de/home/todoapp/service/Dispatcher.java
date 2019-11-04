@@ -1,8 +1,11 @@
 package de.home.todoapp.service;
 
 import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.util.Sort;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 public class Dispatcher {
 
@@ -12,6 +15,10 @@ public class Dispatcher {
         taskAdministration = new TaskAdministration();
     }
 
+
+    private void dispatchTaskMsg(IMsg msg) {
+
+    }
     public static Dispatcher getInstance() {
         return Holder.INSTANCE;
     }
@@ -19,9 +26,13 @@ public class Dispatcher {
     public TaskAdministration getTaskAdministration() {
         return taskAdministration;
     }
+    public static void dispatch(IMsg msg){
+        getInstance().dispatch_(msg);
+    }
 
-    public File dispatch(IMsg msg) {
+    private void dispatch_(IMsg msg) {
         System.out.println(msg);
+
         switch (msg.getMsgType()){
             case FilterMessage.FILTER:
                 FilterService.filter(((FilterMessage) msg).filter, getTaskAdministration());
@@ -45,13 +56,16 @@ public class Dispatcher {
                 TaskService.showFinishedTasks();
                 break;
             case PersistMessage.LOAD_SORTS:
-                PersistenceService.loadSorts(getTaskAdministration().getSorts());
+                PersistenceService.loadSorts();
+                break;
+            case PersistMessage.LOADED_SORTS:
+                setSorts(((PersistMessage<Sort>) msg).payload);
                 break;
             case PersistMessage.SAVE:
                 PersistenceService.saveTaskDataToFile(PersistenceService.getTaskFilePath(), getTaskAdministration().getTasks());
                 break;
             case PersistMessage.LOAD:
-                PersistenceService.loadTaskDataFromFile(((PersistMessage) msg).file, getTaskAdministration().getTasks());
+                PersistenceService.loadTaskDataFromFile(PersistenceService.getTaskFilePath(), getTaskAdministration().getTasks());
                 break;
             case PersistMessage.NEW:
                 PersistenceService.clearView(getTaskAdministration().getTasks());
@@ -59,9 +73,9 @@ public class Dispatcher {
             case PersistMessage.EXIT:
                 PersistenceService.exit();
                 break;
-            case PersistMessage.GET_PATH:
-                PersistenceService.getTaskFilePath();
-                break;
+//            case PersistMessage.GET_PATH:
+//                PersistenceService.getTaskFilePath();
+//                break;
             case PersistMessage.SET_PATH:
                 PersistenceService.setTaskFilePath(((PersistMessage) msg).file, getTaskAdministration());
                 break;
@@ -75,7 +89,13 @@ public class Dispatcher {
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
-        return null;
+
+    }
+
+    private void setSorts(List<Sort> sortList) {
+        taskAdministration.getSorts().clear();
+        taskAdministration.getSorts().setAll(sortList);
+
     }
 
     private static class Holder {

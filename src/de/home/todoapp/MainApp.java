@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 
 public class MainApp extends Application implements IMainController {
@@ -20,11 +19,11 @@ public class MainApp extends Application implements IMainController {
         launch(args);
     }
 
-    private static final String SORTLIST_XML = "C:\\Users\\hensche\\Projekte\\TodoApp\\resources\\save\\sortList.xml";
     private static Stage stage;
     private AnchorPane rootLayout;
 
     public MainApp() {
+        //PersistenceService.CreateDummySorts();
     }
 
     @Override
@@ -36,15 +35,13 @@ public class MainApp extends Application implements IMainController {
 
         // Try to load last used sort list from file.
 //        File fileSort = new File(SORTLIST_XML);
-//        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS, null, fileSort));
+//        Dispatcher.dispatch2(new PersistMessage(PersistMessage.LOAD_SORTS, null, fileSort));
 //        System.out.println(Dispatcher.getInstance().getTaskAdministration().getSorts());
 
 
         // Try to load last opened task file.
-        File file = Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.GET_PATH));
-        if (file != null) {
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
-        }
+        Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD));
+        Dispatcher.dispatch(new PersistMessage( PersistMessage.LOAD_SORTS));
 
 
     }
@@ -64,7 +61,7 @@ public class MainApp extends Application implements IMainController {
             ListViewController controller = loader.getController();
             controller.setMainController(this);
             controller.setAppState(Dispatcher.getInstance().getTaskAdministration());
-            Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_TESTDATA));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_TESTDATA));
 
 
             stage.show();

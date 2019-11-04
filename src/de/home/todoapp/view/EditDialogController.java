@@ -1,10 +1,8 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.Sort;
 import de.home.todoapp.service.Dispatcher;
-import de.home.todoapp.service.PersistMessage;
 import de.home.todoapp.service.TaskMessage;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -81,7 +79,6 @@ public class EditDialogController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
     }
 
 
@@ -118,7 +115,7 @@ public class EditDialogController implements Initializable {
     @FXML
     public void handleEditSortBtn(ActionEvent evt) {
 
-        Dispatcher.getInstance().dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
+        Dispatcher.dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
     }
 
     @FXML

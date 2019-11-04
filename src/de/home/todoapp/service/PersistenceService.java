@@ -12,8 +12,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 public class PersistenceService {
 
@@ -25,6 +27,7 @@ public class PersistenceService {
     }
 
     public static void saveTaskDataToFile(File file, List<Task> tasks) {
+        if (file == null) return;
         try {
             JAXBContext context = JAXBContext
                     .newInstance(TaskListXMLWrapper.class);
@@ -49,6 +52,7 @@ public class PersistenceService {
     }
 
     public static void loadTaskDataFromFile(File file, List<Task> tasks) {
+        if (file == null) return;
         try {
             JAXBContext context = JAXBContext
                     .newInstance(TaskListXMLWrapper.class);
@@ -75,16 +79,14 @@ public class PersistenceService {
         System.exit(0);
     }
 
-    public static void loadSorts(List<Sort> sorts) {
+    public static void loadSorts() {
 
         try {
             final Unmarshaller unmarshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createUnmarshaller();
 
             SortListXMLWrapper sortListXMLWrapper = (SortListXMLWrapper) unmarshaller.unmarshal(new File(SORTLIST_XML));
-            sorts.clear();
-            //taskAdministration.getSorts().removeAll();
-            sorts.addAll(sortListXMLWrapper.getSorts());
-            //taskAdministration.getSorts().setAll(sortListXMLWrapper.getSorts());
+            List<Sort> sorts = sortListXMLWrapper.getSorts();
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOADED_SORTS,null, sorts));
 
         } catch (final JAXBException e) {
             e.printStackTrace();
@@ -112,6 +114,7 @@ public class PersistenceService {
         taskAdministration.loadTestData();
     }
 
+
     public static void saveSorts(List<Sort> sorts) {
         try {
             final Marshaller marshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createMarshaller();
@@ -138,4 +141,9 @@ public class PersistenceService {
     }
 
 
+    public static void CreateDummySorts() {
+        List<String> sortnames = Arrays.asList("Feature", "Refactor", "Privat", "Fix");
+        List<Sort> dummysorts = sortnames.stream().map(Sort::new).collect(Collectors.toList());
+        saveSorts(dummysorts);
+    }
 }

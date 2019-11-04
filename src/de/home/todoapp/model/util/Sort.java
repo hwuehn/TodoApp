@@ -18,6 +18,7 @@ public class Sort {
     }
 
     public Sort(String s) {
+        description.setValue(s);
     }
 
     public final StringProperty descriptionProperty() {

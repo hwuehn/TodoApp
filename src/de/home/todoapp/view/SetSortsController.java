@@ -90,13 +90,11 @@ public class SetSortsController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
     }
 
     @FXML
     public void addSort(final ActionEvent event) {
-        final Sort newSort = new Sort();
-        newSort.setDescription(inputTextField.getText());
+        final Sort newSort = new Sort(inputTextField.getText());
         sortListView.getItems().add(newSort);
     }
 
@@ -109,7 +107,7 @@ public class SetSortsController implements Initializable {
 
     @FXML
     public void loadSorts(final ActionEvent event) {
-        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
+        Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
 //        try {
 //            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortList.class).createUnmarshaller();
 //            sorts.set((SortList) unmarshaller.unmarshal(new File("sorts.xml")));
@@ -120,7 +118,7 @@ public class SetSortsController implements Initializable {
 
     @FXML
     public void saveSorts(final ActionEvent event) {
-        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.SAVE_SORTS));
+        Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE_SORTS));
 //        try {
 //            final Marshaller marshaller = JAXBContext.newInstance(SortList.class).createMarshaller();
 //            marshaller.marshal(sorts.get(), new File("sorts.xml"));

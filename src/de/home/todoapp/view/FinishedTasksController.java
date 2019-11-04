@@ -77,7 +77,7 @@ public class FinishedTasksController implements Initializable {
         assert finishListView != null : "fx:id\"finishListView\" was not injected: check your FXML file 'FinishedTasks.fxml'.";
         setCellFactory();
         finishListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            Dispatcher.getInstance().dispatch(new TaskMessage("select_task", newValue));
+            Dispatcher.dispatch(new TaskMessage("select_task", newValue));
         });
     }
 
