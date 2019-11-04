@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -39,6 +40,9 @@
                                     <image>
                                         <Image url="@/images/edit.png"/>
                                     </image>
+                                    <effect>
+                                        <ColorAdjust brightness="0.6"/>
+                                    </effect>
                                 </ImageView>
                             </graphic>
                             <HBox.margin>

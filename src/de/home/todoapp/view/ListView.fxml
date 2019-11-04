@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.home.todoapp.view.ListViewController">
    <children>
@@ -32,24 +31,62 @@
                                mnemonicParsing="false" prefWidth="90.0" styleClass="button"
                                stylesheets="@style/style.css">
                         <items>
-                           <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn" text="New" />
-                           <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn" text="Load..." />
-                            <MenuItem fx:id="editSortaBtn" mnemonicParsing="false" text="Edit sorts"/>
-                           <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" onAction="#handleSaveMenuBtn" text="Save" />
-                           <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" onAction="#handleSaveAsMenuBtn" text="Save As..." />
-                           <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" onAction="#handleAboutMenuBtn" text="About" />
-                           <MenuItem fx:id="exitMenuBtn" mnemonicParsing="false" onAction="#handleExitMenuBtn" text="Exit" />
+                            <MenuItem fx:id="signInMenuBtn" mnemonicParsing="false" onAction="#handleSignInMenuBtn"
+                                      text="Sign in"/>
+                            <MenuItem fx:id="newMenuBtn" mnemonicParsing="false" onAction="#handleNewMenuBtn"
+                                      text="New"/>
+                            <MenuItem fx:id="loadMenuBtn" mnemonicParsing="false" onAction="#handleOpenMenuBtn"
+                                      text="Load..."/>
+                            <MenuItem fx:id="editSortMenuBtn" mnemonicParsing="false" onAction="#handleEditSortMenuBtn"
+                                      text="Edit sorts"/>
+                            <MenuItem fx:id="saveMenuBtn" mnemonicParsing="false" onAction="#handleSaveMenuBtn"
+                                      text="Save"/>
+                            <MenuItem fx:id="saveAsMenuBtn" mnemonicParsing="false" onAction="#handleSaveAsMenuBtn"
+                                      text="Save as..."/>
+                            <MenuItem fx:id="showFinishedMenuBtn" mnemonicParsing="false"
+                                      onAction="#handleShowFinishedMenuBtn" text="Show finished"/>
+                            <MenuItem fx:id="printMenuBtn" mnemonicParsing="false" onAction="#handlePrintMenuBtn"
+                                      text="Print"/>
+                            <MenuItem fx:id="syncMenuBtn" mnemonicParsing="false" onAction="#handleSyncMenuBtn"
+                                      text="Sync"/>
+                            <MenuItem fx:id="aboutMenuBtn" mnemonicParsing="false" onAction="#handleAboutMenuBtn"
+                                      text="About"/>
+                            <MenuItem fx:id="exitMenuBtn" mnemonicParsing="false" onAction="#handleExitMenuBtn"
+                                      text="Exit"/>
                         </items>
                      </MenuButton>
                </children>
             </HBox>
-             <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="517.0"
+             <ListView fx:id="listView" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="586.0"
                        prefWidth="450.0" stylesheets="@style/style.css"/>
              <ButtonBar buttonMinWidth="35.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT"
-                        prefHeight="50.0" prefWidth="450.0" VBox.vgrow="NEVER">
+                        prefHeight="28.0" prefWidth="450.0" VBox.vgrow="NEVER">
                   <buttons>
+                      <ToggleButton fx:id="mailBtn" layoutX="425.0" layoutY="14.0" maxWidth="-Infinity"
+                                    minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0"
+                                    styleClass="button" stylesheets="@style/style.css">
+                          <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@/images/email.png"/>
+                                  </image>
+                                  <effect>
+                                      <ColorAdjust brightness="0.6"/>
+                                  </effect>
+                              </ImageView>
+                          </graphic>
+                      </ToggleButton>
+                      <Region maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="183.0"/>
+                      <Region layoutX="140.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0"
+                              prefWidth="183.0"/>
+                      <Region layoutX="118.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0"
+                              prefWidth="183.0"/>
+                      <Region layoutX="249.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0"
+                              prefWidth="183.0"/>
+                      <Region layoutX="282.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0"
+                              prefWidth="183.0"/>
                       <ToggleButton fx:id="editBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                    onAction="#handleEditTask" prefHeight="35.0" prefWidth="37.0" styleClass="button"
+                                    onAction="#handleEditTask" prefHeight="35.0" prefWidth="35.0" styleClass="button"
                                     stylesheets="@style/style.css">
                      <graphic>
                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">

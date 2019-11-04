@@ -47,6 +47,22 @@ public class ListViewController implements Initializable {
     private HBox hBoxFilters;
     @FXML
     private ToggleButton allBtn;
+
+    @FXML
+    private MenuItem editSortMenuBtn;
+
+    @FXML
+    private ToggleButton showFinishedTasksBtn;
+
+    @FXML
+    private ToggleButton signInBtn;
+
+    @FXML
+    private ToggleButton printBtn;
+
+    @FXML
+    private ToggleButton mailBtn;
+
     private ToggleGroup filtersGroup = new ToggleGroup();
 
     public void setCellFactory() {
@@ -216,6 +232,11 @@ public class ListViewController implements Initializable {
     }
 
     @FXML
+    private void handleEditSortMenuBtn() {
+        Dispatcher.getInstance().dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
+    }
+
+    @FXML
     private void handleAboutMenuBtn() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TodoApp");
@@ -227,5 +248,17 @@ public class ListViewController implements Initializable {
     @FXML
     private void handleExitMenuBtn() {
         Dispatcher.getInstance().dispatch(new PersistMessage("exit_project"));
+    }
+
+    public void handleSignInMenuBtn(ActionEvent actionEvent) {
+    }
+
+    public void handleShowFinishedMenuBtn(ActionEvent actionEvent) {
+    }
+
+    public void handlePrintMenuBtn(ActionEvent actionEvent) {
+    }
+
+    public void handleSyncMenuBtn(ActionEvent actionEvent) {
     }
 }
