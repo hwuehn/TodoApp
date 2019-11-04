@@ -2,7 +2,6 @@ package de.home.todoapp.model;
 
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.Sort;
-import de.home.todoapp.model.util.SortList;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,14 +19,9 @@ public class TaskAdministration implements IMainController {
     private final ObjectProperty<Task> currentTask = new SimpleObjectProperty<Task>();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final ObservableList<Task> finished = FXCollections.observableArrayList();
+    private final ObservableList<Sort> sorts = FXCollections.observableArrayList();
 
-    private final ObjectProperty<SortList> sorts = new SimpleObjectProperty<>(new SortList());
-
-    public ObjectProperty<SortList> getSorts() {
-        return sorts;
-    }
-
-    public ObjectProperty<SortList> sortsProperty() {
+    public ObservableList<Sort> getSorts() {
         return sorts;
     }
 

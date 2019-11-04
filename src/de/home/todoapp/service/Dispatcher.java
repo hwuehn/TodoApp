@@ -3,7 +3,7 @@ package de.home.todoapp.service;
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.TaskAdministration;
-import de.home.todoapp.model.util.SortList;
+import de.home.todoapp.model.util.SortListXMLWrapper;
 import de.home.todoapp.model.util.TaskListXMLWrapper;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.FinishedTasksController;
@@ -35,7 +35,7 @@ public class Dispatcher {
     }
 
     private void newTask() {
-        Task newTask = EditDialogController.showAddPlayer();
+        Task newTask = EditDialogController.showAddPlayer( taskAdministration.getSorts());
         if (newTask != null){
             taskAdministration.getTasks().add(newTask);
         }
@@ -44,7 +44,7 @@ public class Dispatcher {
     private void editTask() {
         Task selectedTask = taskAdministration.getCurrentTask();
         if (selectedTask != null) {
-            Task newTask = EditDialogController.showEditDialog(selectedTask);
+            Task newTask = EditDialogController.showEditDialog(selectedTask,taskAdministration.getSorts());
             if (newTask != null) {
                 setEditedTask(selectedTask,newTask);
             }
@@ -129,6 +129,7 @@ public class Dispatcher {
                 showFinishedTasks();
                 break;
             case FilterMessage.FILTER: filter(((FilterMessage) msg).filter ); break;
+            case PersistMessage.LOAD_SORTS: loadSorts();break;
             case PersistMessage.SAVE: saveTaskDataToFile(getTaskFilePath());break;
             case PersistMessage.LOAD: loadTaskDataFromFile(((PersistMessage) msg).file);break;
             case PersistMessage.NEW:
@@ -143,18 +144,20 @@ public class Dispatcher {
     }
 
     private void showEditSorts() {
-        SetSortsController.showSorts();
+        SetSortsController.showSorts(taskAdministration.getSorts());
     }
 
     private void showFinishedTasks() {
         FinishedTasksController.showFinished();
     }
 
-    public void loadSorts() {
+    private void loadSorts() {
         try {
-            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortList.class).createUnmarshaller();
+            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createUnmarshaller();
 
-            taskAdministration.getSorts().set((SortList) unmarshaller.unmarshal(new File(SORTLIST_XML)));
+            SortListXMLWrapper sortListXMLWrapper = (SortListXMLWrapper) unmarshaller.unmarshal(new File(SORTLIST_XML));
+            taskAdministration.getSorts().removeAll();
+            taskAdministration.getSorts().setAll(sortListXMLWrapper.getSorts());
 
         } catch (final JAXBException e) {
             e.printStackTrace();
@@ -163,9 +166,11 @@ public class Dispatcher {
 
     public void saveSorts() {
         try {
-            final Marshaller marshaller = JAXBContext.newInstance(SortList.class).createMarshaller();
+            final Marshaller marshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createMarshaller();
+            SortListXMLWrapper sortListXMLWrapper = new SortListXMLWrapper();
+            sortListXMLWrapper.setSorts(taskAdministration.getSorts());
+            marshaller.marshal(sortListXMLWrapper, new File(SORTLIST_XML));
 
-            marshaller.marshal(taskAdministration.getSorts().get(), new File(SORTLIST_XML));
         } catch (final JAXBException e) {
             e.printStackTrace();
         }

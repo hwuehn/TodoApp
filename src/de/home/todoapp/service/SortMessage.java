@@ -4,6 +4,7 @@ public class SortMessage implements IMsg {
 
     public static final String EDIT_SORTS = "editSorts_task";
 
+
     public final String msgType;
     public final String oldSort;
     public final String newSort;

@@ -9,24 +9,19 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name = "sorts")
-public class SortList {
+public class SortListXMLWrapper {
 
-    ListProperty<Sort> sorts = new SimpleListProperty<>(FXCollections.observableArrayList());
+    private List<Sort> sorts;
 
-    public ListProperty<Sort> sortsProperty() {
-        return this.sorts;
+    public List<Sort> getSorts() {
+        return sorts;
     }
 
-    @XmlElement(name = "sort")
-    public ObservableList<Sort> getSorts() {
-        return sorts.get();
+    public void setSorts(List<Sort> sorts) {
+        this.sorts = sorts;
     }
-
-    public void setSorts(final ObservableList<Sort> sorts) {
-        this.sorts.set(sorts);
-    }
-
 }

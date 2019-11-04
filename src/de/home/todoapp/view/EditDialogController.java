@@ -1,10 +1,12 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
+import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.Sort;
-import de.home.todoapp.model.util.SortList;
 import de.home.todoapp.service.Dispatcher;
+import de.home.todoapp.service.PersistMessage;
 import de.home.todoapp.service.TaskMessage;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +29,6 @@ public class EditDialogController implements Initializable {
     @FXML private DatePicker finishDatePicker;
     @FXML private Button okBtn;
     @FXML private Button cancelBtn;
-    SortList sortList = new SortList();
     @FXML
     private Button editSortsBtn;
 
@@ -36,17 +37,17 @@ public class EditDialogController implements Initializable {
 
     private boolean okClicked = false;
 
-    public static Task showAddPlayer() {
-        EditDialogController controller = showView("Edit Task", null);
+    public static Task showAddPlayer(ObservableList<Sort> sorts) {
+        EditDialogController controller = showView("Edit Task", null, sorts);
         return controller.getTask();
     }
 
-    public static Task showEditDialog(Task task) {
-        EditDialogController controller = showView("Edit Task", task);
+    public static Task showEditDialog(Task task, ObservableList<Sort> sorts) {
+        EditDialogController controller = showView("Edit Task", task,sorts);
         return controller.getTask();
     }
 
-    public static EditDialogController showView(String title, Task task) {
+    public static EditDialogController showView(String title, Task task, ObservableList<Sort> sorts) {
         try {
             FXMLLoader loader =
                     new FXMLLoader(EditDialogController.class.getResource("EditDialog.fxml"));
@@ -63,7 +64,7 @@ public class EditDialogController implements Initializable {
             EditDialogController controller = loader.getController();
 
             if (task != null) controller.setTask(task);
-
+            if (sorts != null) controller.setSorts(sorts);
             dialogStage.showAndWait();
             return  controller;
         } catch(IOException exc) {
@@ -72,11 +73,18 @@ public class EditDialogController implements Initializable {
         }
     }
 
+    private void setSorts(ObservableList<Sort> sorts) {
+        System.out.println("set sorts");
+        System.out.println(sorts);
+        sortCombo.setItems(sorts);
+    }
+
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        Dispatcher.getInstance().loadSorts();
-        sortCombo.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
+        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
     }
+
+
 
     /**
      * Sets the task to be edited in the dialog.

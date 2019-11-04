@@ -3,6 +3,8 @@ package de.home.todoapp.view;
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.Sort;
 import de.home.todoapp.service.Dispatcher;
+import de.home.todoapp.service.PersistMessage;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,13 +55,13 @@ public class SetSortsController implements Initializable {
     public SetSortsController() {
     }
 
-    public static void showSorts() {
-        SetSortsController controller = new SetSortsController();
-        showView("Edit Sorts");
+    public static void showSorts(ObservableList<Sort> sorts) {
+        System.out.println(sorts);
+        showView("Edit Sorts",sorts);
 
     }
 
-    public static SetSortsController showView(String title) {
+    public static SetSortsController showView(String title, ObservableList<Sort> sorts) {
         try {
             FXMLLoader loader =
                     new FXMLLoader(SetSortsController.class.getResource("SetSorts.fxml"));
@@ -74,7 +76,7 @@ public class SetSortsController implements Initializable {
             dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
 
             SetSortsController controller = loader.getController();
-
+            controller.setSorts(sorts);
             dialogStage.showAndWait();
             return controller;
 
@@ -84,20 +86,24 @@ public class SetSortsController implements Initializable {
         }
     }
 
+    private void setSorts(ObservableList<Sort> sorts) {
+        sortListView.setItems(sorts);
+    }
+
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
 
         //sortListView.setCellFactory(param -> new SortListCell());
 
-        Dispatcher.getInstance().loadSorts();
+        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
 
-        sortListView.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
+        //sortListView.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
 
-        Dispatcher.getInstance().getTaskAdministration().getSorts().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                sortListView.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
-            }
-        });
+//        Dispatcher.getInstance().getTaskAdministration().getSorts().addListener((obs, oldVal, newVal) -> {
+//            if (newVal != null) {
+//                sortListView.itemsProperty().bind(Dispatcher.getInstance().getTaskAdministration().getSorts().get().sortsProperty());
+//            }
+//        });
 
     }
 
@@ -117,7 +123,7 @@ public class SetSortsController implements Initializable {
 
     @FXML
     public void loadSorts(final ActionEvent event) {
-        Dispatcher.getInstance().loadSorts();
+        Dispatcher.getInstance().dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
 //        try {
 //            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortList.class).createUnmarshaller();
 //            sorts.set((SortList) unmarshaller.unmarshal(new File("sorts.xml")));
