@@ -6,6 +6,7 @@ import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.SortList;
 import de.home.todoapp.model.util.TaskListXMLWrapper;
 import de.home.todoapp.view.EditDialogController;
+import de.home.todoapp.view.FinishedTasksController;
 import de.home.todoapp.view.SetSortsController;
 
 import javax.xml.bind.JAXBContext;
@@ -124,6 +125,9 @@ public class Dispatcher {
             case TaskMessage.EDIT_SORTS:
                 showEditSorts();
                 break;
+            case TaskMessage.FINISHED:
+                showFinishedTasks();
+                break;
             case FilterMessage.FILTER: filter(((FilterMessage) msg).filter ); break;
             case PersistMessage.SAVE: saveTaskDataToFile(getTaskFilePath());break;
             case PersistMessage.LOAD: loadTaskDataFromFile(((PersistMessage) msg).file);break;
@@ -140,6 +144,10 @@ public class Dispatcher {
 
     private void showEditSorts() {
         SetSortsController.showSorts();
+    }
+
+    private void showFinishedTasks() {
+        FinishedTasksController.showFinished();
     }
 
     public void loadSorts() {

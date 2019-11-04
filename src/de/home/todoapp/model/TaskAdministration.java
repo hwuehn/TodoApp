@@ -19,6 +19,7 @@ public class TaskAdministration implements IMainController {
     private final StringProperty title = new SimpleStringProperty();
     private final ObjectProperty<Task> currentTask = new SimpleObjectProperty<Task>();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private final ObservableList<Task> finished = FXCollections.observableArrayList();
 
     private final ObjectProperty<SortList> sorts = new SimpleObjectProperty<>(new SortList());
 
@@ -30,7 +31,13 @@ public class TaskAdministration implements IMainController {
         return sorts;
     }
 
+    public ReadOnlyObjectProperty<ObservableList<Task>> finishedProperty() {
+        return new SimpleObjectProperty<>(finished);
+    }
 
+    public ObservableList<Task> getFinished() {
+        return finished;
+    }
 
     public ReadOnlyObjectProperty<ObservableList<Task>> tasksProperty() {
         return new SimpleObjectProperty<>(tasks);

@@ -254,6 +254,7 @@ public class ListViewController implements Initializable {
     }
 
     public void handleShowFinishedMenuBtn(ActionEvent actionEvent) {
+        Dispatcher.getInstance().dispatch(new TaskMessage(TaskMessage.FINISHED));
     }
 
     public void handlePrintMenuBtn(ActionEvent actionEvent) {
