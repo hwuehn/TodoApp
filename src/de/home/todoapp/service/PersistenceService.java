@@ -66,8 +66,8 @@ public class PersistenceService {
             tasks.addAll(wrapper.getTasks());
 
             //todo: Save the file path to the registry via dispatch path
-            //setTaskFilePath(file, appDB);
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
+            //setTaskFilePath(file);
+            //Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
 
         } catch (Exception e) { // catches ANY exception
         }
@@ -95,7 +95,7 @@ public class PersistenceService {
         }
     }
 
-    public static void setTaskFilePath(File file, AppDB appDB) {
+    public static void setTaskFilePath(File file) {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
@@ -103,12 +103,13 @@ public class PersistenceService {
             // todo: Update the stage title. via dispatch
 
             //PersistenceService.appDB.setTitle("TodoApp - " + file.getName());
-
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_TITLE));
         } else {
             prefs.remove("filePath");
 
             // todo: Update the stage title. via dispatch
             //PersistenceService.appDB.setTitle("TodoApp");
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_TITLE));
         }
     }
 
@@ -148,5 +149,6 @@ public class PersistenceService {
         List<Sort> dummysorts = sortnames.stream().map(Sort::new).collect(Collectors.toList());
         saveSorts(dummysorts);
     }
+
 
 }

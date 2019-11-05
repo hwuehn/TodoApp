@@ -18,6 +18,7 @@ public class PersistMessage<T> implements IMsg {
     public static final String EXIT = "exit_project";
     public static final String LOAD_TESTDATA = "loadTestData_project";
     public static final String GET_PATH = "getPath_project";
+    public static final String SET_TITLE = "setTitle_project";
 
 
     public File file;

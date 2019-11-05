@@ -76,13 +76,16 @@ public class Dispatcher {
                 break;
 
             case PersistMessage.SET_PATH:
-                PersistenceService.setTaskFilePath(msg.file, appDB);
+                PersistenceService.setTaskFilePath(msg.file);
                 break;
             case PersistMessage.LOAD_TESTDATA:
                 PersistenceService.loadTestData(appDB);
                 break;
             case PersistMessage.SAVE_SORTS:
                 PersistenceService.saveSorts(appDB.getSorts());
+                break;
+            case PersistMessage.SET_TITLE:
+                setTitle(msg.file);
                 break;
 
             default:
@@ -154,6 +157,14 @@ public class Dispatcher {
         appDB.getSorts().clear();
         appDB.getSorts().setAll(sortList);
 
+    }
+
+    private void setTitle(File file) {
+        if (file != null) {
+            appDB.setTitle("TodoApp - " + file.getName());
+        } else {
+            appDB.setTitle("TodoApp");
+        }
     }
 
     private static class Holder {
