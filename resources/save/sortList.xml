@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><sorts><sort description="Feature"/><sort description="Refactor"/><sort description="Privat"/><sort description="Fix"/></sorts>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sorts>
+    <sort description="Feature"/>
+    <sort description="Refactor"/>
+    <sort description="Privat"/>
+    <sort description="Fix"/>
+    <sort description="Vision"/>
+</sorts>

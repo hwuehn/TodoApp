@@ -55,10 +55,6 @@
                                 stylesheets="@style/style.css" text="Add"/>
                         <Button fx:id="removeSortBtn" mnemonicParsing="false" onAction="#removeSort"
                                 stylesheets="@style/style.css" text="Remove"/>
-                        <Button fx:id="loadSortBtn" mnemonicParsing="false" onAction="#loadSorts"
-                                stylesheets="@style/style.css" text="Load"/>
-                        <Button fx:id="saveSortBtn" mnemonicParsing="false" onAction="#saveSorts"
-                                stylesheets="@style/style.css" text="Save"/>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="138.0" prefWidth="300.0">
                             <children>
                                 <Button fx:id="okSortBtn" mnemonicParsing="false" onAction="#handleOk"

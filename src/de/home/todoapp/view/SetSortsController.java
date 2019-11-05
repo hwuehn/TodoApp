@@ -96,6 +96,7 @@ public class SetSortsController implements Initializable {
     public void addSort(final ActionEvent event) {
         final Sort newSort = new Sort(inputTextField.getText());
         sortListView.getItems().add(newSort);
+
     }
 
     @FXML
@@ -131,6 +132,7 @@ public class SetSortsController implements Initializable {
     private void handleOk(ActionEvent evt) {
         okClicked = true;
         if (okClicked) {
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE_SORTS));
             hide(evt);
         }
     }
