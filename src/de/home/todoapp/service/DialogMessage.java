@@ -1,5 +1,8 @@
 package de.home.todoapp.service;
 
+import de.home.todoapp.model.util.IMainController;
+import javafx.stage.Stage;
+
 import java.io.File;
 
 public class DialogMessage implements IMsg {
@@ -10,15 +13,23 @@ public class DialogMessage implements IMsg {
     private final String msgType;
     // private final String filePattern;
     private final File files;
+    private Stage stage;
 
-    public DialogMessage(String msgType, File files) {
+    public DialogMessage(String msgType, File files,Stage stage) {
         this.msgType = msgType;
         //this.filePattern = filePattern;
         this.files = files;
+        this.stage = stage;
     }
 
     public DialogMessage(String msgType) {
-        this(msgType, null);
+        this(msgType, null,null);
+    }
+
+
+
+    public DialogMessage(String msgType, Stage stage) {
+        this(msgType,null,stage);
     }
 
     @Override
@@ -32,5 +43,9 @@ public class DialogMessage implements IMsg {
                 "msgType='" + msgType + '\'' +
                 ", files=" + files +
                 '}';
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

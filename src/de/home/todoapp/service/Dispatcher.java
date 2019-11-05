@@ -21,11 +21,11 @@ public class Dispatcher {
     }
 
     @Subscribe
-    public void dispatchDialogMessage(DialogMessage msg) throws IOException {
+    public void dispatchDialogMessage(DialogMessage msg) {
         switch (msg.getMsgType()) {
 
             case DialogMessage.LOAD_DIALOG:
-                DialogService.showLoadDialog();
+                DialogService.showLoadDialog(msg);
                 break;
 //            case DialogMessage.SAVE_DIALOG:
 //                DialogService.showSaveDialog();

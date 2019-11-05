@@ -2,6 +2,7 @@ package de.home.todoapp.service;
 
 import de.home.todoapp.model.util.IMainController;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -9,20 +10,20 @@ public class DialogService {
 
     public final static FileChooser fileChooser = new FileChooser();
 
-    // Reference to the main application.
-    public static IMainController mainController;
 
-    public static void showLoadDialog() {
+    public static void showLoadDialog(DialogMessage msg) {
+        Stage stage=msg.getStage();
         setExtensionFilter(fileChooser);
-        File file = fileChooser.showOpenDialog(mainController.getStage());
+        File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
         }
     }
 
-    public static void showSaveDialog() {
+    public static void showSaveDialog(DialogMessage msg) {
+        Stage stage=msg.getStage();
         setExtensionFilter(fileChooser);
-        File file = fileChooser.showSaveDialog(mainController.getStage());
+        File file = fileChooser.showSaveDialog(stage);
         if (file != null) {
             // Make sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {

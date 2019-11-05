@@ -178,7 +178,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleOpenMenuBtn() throws FileNotFoundException {
-        Dispatcher.dispatch(new DialogMessage(DialogMessage.LOAD_DIALOG));
+        Dispatcher.dispatch(new DialogMessage(DialogMessage.LOAD_DIALOG,mainController.getStage()));
 //        FileChooser fileChooser = new FileChooser();
 //
 //        // Set extension filter
