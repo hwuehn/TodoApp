@@ -1,8 +1,8 @@
 package de.home.todoapp.service;
 
 import de.home.todoapp.MainApp;
-import de.home.todoapp.model.Task;
 import de.home.todoapp.model.AppDB;
+import de.home.todoapp.model.Task;
 import de.home.todoapp.model.util.Sort;
 import de.home.todoapp.model.util.SortListXMLWrapper;
 import de.home.todoapp.model.util.TaskListXMLWrapper;
@@ -48,6 +48,7 @@ public class PersistenceService {
         } catch (Exception e) {
             //todo: dispatch filepath
             //setTaskFilePath(file, appDB);
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
         }
     }
 
@@ -66,6 +67,7 @@ public class PersistenceService {
 
             //todo: Save the file path to the registry via dispatch path
             //setTaskFilePath(file, appDB);
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
 
         } catch (Exception e) { // catches ANY exception
         }
