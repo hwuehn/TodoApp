@@ -21,6 +21,8 @@ public class PersistMessage<T> implements IMsg {
 
 
     public File file;
+
+
     public List<T> payload;
     private String msgType;
 

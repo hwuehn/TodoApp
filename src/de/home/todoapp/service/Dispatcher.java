@@ -1,47 +1,32 @@
 package de.home.todoapp.service;
 
+import com.google.common.eventbus.DeadEvent;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.Sort;
 
-import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 
 public class Dispatcher {
 
     private final TaskAdministration taskAdministration;
+    private final EventBus eventBus;
 
     private Dispatcher(){
         taskAdministration = new TaskAdministration();
+        eventBus = new EventBus();
+        eventBus.register(this);
     }
 
 
-    private void dispatchTaskMsg(IMsg msg) {
 
-    }
-    public static Dispatcher getInstance() {
-        return Holder.INSTANCE;
-    }
-
-    public TaskAdministration getTaskAdministration() {
-        return taskAdministration;
-    }
-    public static void dispatch(IMsg msg){
-        getInstance().dispatch_(msg);
-    }
-
-    private void dispatch_(IMsg msg) {
-        System.out.println(msg);
-
+    @Subscribe
+    public void dispatchTaskMessage(TaskMessage msg) {
         switch (msg.getMsgType()){
-            case FilterMessage.FILTER:
-                FilterService.filter(((FilterMessage) msg).filter, getTaskAdministration());
-                break;
-            case SortMessage.EDIT_SORTS:
-                SortService.showEditSorts(getTaskAdministration());
-                break;
+
             case TaskMessage.SELECT:
-                TaskService.selectTask(((TaskMessage) msg).newTask, getTaskAdministration());
+                TaskService.selectTask(msg.newTask, getTaskAdministration());
                 break;
             case TaskMessage.EDIT:
                 TaskService.editTask(getTaskAdministration());
@@ -55,39 +40,85 @@ public class Dispatcher {
             case TaskMessage.FINISHED:
                 TaskService.showFinishedTasks();
                 break;
+
+            default:
+                throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+
+    }
+
+    @Subscribe
+    public void dispatchPersistMessage(PersistMessage msg){
+        switch (msg.getMsgType()) {
+
             case PersistMessage.LOAD_SORTS:
                 PersistenceService.loadSorts();
                 break;
             case PersistMessage.LOADED_SORTS:
+//                setSorts(((PersistMessage<Sort>) msg).payload);
                 setSorts(((PersistMessage<Sort>) msg).payload);
                 break;
             case PersistMessage.SAVE:
-                PersistenceService.saveTaskDataToFile(PersistenceService.getTaskFilePath(), getTaskAdministration().getTasks());
+                PersistenceService.saveTaskDataToFile(PersistenceService.getTaskFilePath(), taskAdministration.getTasks());
                 break;
             case PersistMessage.LOAD:
-                PersistenceService.loadTaskDataFromFile(PersistenceService.getTaskFilePath(), getTaskAdministration().getTasks());
+                PersistenceService.loadTaskDataFromFile(PersistenceService.getTaskFilePath(), taskAdministration.getTasks());
                 break;
             case PersistMessage.NEW:
-                PersistenceService.clearView(getTaskAdministration().getTasks());
+                PersistenceService.clearView(taskAdministration.getTasks());
                 break;
             case PersistMessage.EXIT:
                 PersistenceService.exit();
                 break;
-//            case PersistMessage.GET_PATH:
-//                PersistenceService.getTaskFilePath();
-//                break;
+
             case PersistMessage.SET_PATH:
-                PersistenceService.setTaskFilePath(((PersistMessage) msg).file, getTaskAdministration());
+                PersistenceService.setTaskFilePath(msg.file, taskAdministration);
                 break;
             case PersistMessage.LOAD_TESTDATA:
-                PersistenceService.loadTestData(getTaskAdministration());
+                PersistenceService.loadTestData(taskAdministration);
                 break;
             case PersistMessage.SAVE_SORTS:
-                PersistenceService.saveSorts(getTaskAdministration().getSorts());
+                PersistenceService.saveSorts(taskAdministration.getSorts());
                 break;
 
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+    }
+
+    @Subscribe
+    public void handleDeadEvent(DeadEvent deadEvent) {
+        System.out.println("!!! No subscriber for message: !!!");
+        System.out.println(deadEvent.getEvent().toString());
+        //throw new IllegalStateException("No subscriber for message: " + deadEvent.toString());
+    }
+
+
+    public static Dispatcher getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    public TaskAdministration getTaskAdministration() {
+        return taskAdministration;
+    }
+    public static void dispatch(IMsg msg){
+        getInstance().dispatch_(msg);
+    }
+
+    private void dispatch_(IMsg msg) {
+        System.out.println(msg);
+        eventBus.post(msg);
+        switch (msg.getMsgType()){
+//            case FilterMessage.FILTER:
+//                FilterService.filter(((FilterMessage) msg).filter, getTaskAdministration());
+//                break;
+            case SortMessage.EDIT_SORTS:
+                SortService.showEditSorts(getTaskAdministration());
+                break;
+
+
+            default:
+                //throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
 
     }
