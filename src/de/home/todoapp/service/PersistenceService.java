@@ -67,7 +67,7 @@ public class PersistenceService {
 
             //todo: Save the file path to the registry via dispatch path
             //setTaskFilePath(file);
-            //Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
 
         } catch (Exception e) { // catches ANY exception
         }
