@@ -1,15 +1,15 @@
 package de.home.todoapp.service;
 
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.AppDB;
 
 import java.util.Comparator;
 import java.util.function.Predicate;
 
 public class FilterService {
 
-    public static void filter(Predicate<Task> filter, TaskAdministration taskAdministration) {
-        taskAdministration.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
-        taskAdministration.filterProperty().set(filter);
+    public static void filter(Predicate<Task> filter, AppDB appDB) {
+        appDB.sortProperty().set(Comparator.comparing(task -> task.getDaysBetween()));
+        appDB.filterProperty().set(filter);
     }
 }

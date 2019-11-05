@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-public class TaskAdministration implements IMainController {
+public class AppDB {
 
     private final StringProperty title = new SimpleStringProperty();
     private final ObjectProperty<Task> currentTask = new SimpleObjectProperty<Task>();
@@ -71,10 +71,7 @@ public class TaskAdministration implements IMainController {
         return tasks;
     }
 
-    @Override
-    public Stage getStage() {
-        return null;
-    }
+
 
     public void setTitle(String s) {
         title.setValue(s);

@@ -2,7 +2,7 @@ package de.home.todoapp.service;
 
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.util.Sort;
 import de.home.todoapp.model.util.SortListXMLWrapper;
 import de.home.todoapp.model.util.TaskListXMLWrapper;
@@ -20,14 +20,13 @@ import java.util.stream.Collectors;
 public class PersistenceService {
 
     private static final String SORTLIST_XML = "./resources/save/sortList.xml";
-    private static TaskAdministration taskAdministration;
 
     public PersistenceService() {
-        taskAdministration = new TaskAdministration();
+
     }
 
     public static void saveTaskDataToFile(File file, List<Task> tasks) {
-        if (file == null)
+        if (file == null) return;
         try {
             JAXBContext context = JAXBContext
                     .newInstance(TaskListXMLWrapper.class);
@@ -47,7 +46,8 @@ public class PersistenceService {
 
             // Save the file path to the registry.
         } catch (Exception e) {
-            setTaskFilePath(file, taskAdministration);
+            //todo: dispatch filepath
+            //setTaskFilePath(file, appDB);
         }
     }
 
@@ -64,8 +64,8 @@ public class PersistenceService {
             tasks.clear();
             tasks.addAll(wrapper.getTasks());
 
-            // Save the file path to the registry.
-            setTaskFilePath(file, taskAdministration);
+            //todo: Save the file path to the registry via dispatch path
+            //setTaskFilePath(file, appDB);
 
         } catch (Exception e) { // catches ANY exception
         }
@@ -93,25 +93,25 @@ public class PersistenceService {
         }
     }
 
-    public static void setTaskFilePath(File file, TaskAdministration taskAdministration) {
+    public static void setTaskFilePath(File file, AppDB appDB) {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
 
-            // Update the stage title.
+            // todo: Update the stage title. via dispatch
 
-            PersistenceService.taskAdministration.setTitle("TodoApp - " + file.getName());
+            //PersistenceService.appDB.setTitle("TodoApp - " + file.getName());
 
         } else {
             prefs.remove("filePath");
 
-            // Update the stage title.
-            PersistenceService.taskAdministration.setTitle("TodoApp");
+            // todo: Update the stage title. via dispatch
+            //PersistenceService.appDB.setTitle("TodoApp");
         }
     }
 
-    public static void loadTestData(TaskAdministration taskAdministration) {
-        taskAdministration.loadTestData();
+    public static void loadTestData(AppDB appDB) {
+        appDB.loadTestData();
     }
 
 

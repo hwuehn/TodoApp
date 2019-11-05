@@ -1,7 +1,7 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.ListViewCell;
 import de.home.todoapp.service.Dispatcher;
@@ -85,7 +85,7 @@ public class FinishedTasksController implements Initializable {
         this.mainController = controller;
     }
 
-    public void setAppState(TaskAdministration appState) {
+    public void setAppState(AppDB appState) {
         finishListView.setItems(appState.getFinished());
     }
 

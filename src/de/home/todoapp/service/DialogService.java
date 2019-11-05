@@ -27,7 +27,7 @@ public class DialogService {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE,file,null));
         }
     }
 

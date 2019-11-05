@@ -60,7 +60,7 @@ public class MainApp extends Application implements IMainController {
             // Give the controller access to the main app.
             ListViewController controller = loader.getController();
             controller.setMainController(this);
-            controller.setAppState(Dispatcher.getInstance().getTaskAdministration());
+            controller.setAppState(Dispatcher.getInstance().getAppDB());
             Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_TESTDATA));
 
 

@@ -3,18 +3,19 @@ package de.home.todoapp.service;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.util.Sort;
 
+import java.io.File;
 import java.util.List;
 
 public class Dispatcher {
 
-    private final TaskAdministration taskAdministration;
+    private final AppDB appDB;
     private final EventBus eventBus;
 
     private Dispatcher(){
-        taskAdministration = new TaskAdministration();
+        appDB = new AppDB();
         eventBus = new EventBus();
         eventBus.register(this);
     }
@@ -41,7 +42,7 @@ public class Dispatcher {
         switch (msg.getMsgType()){
 
             case FilterMessage.FILTER:
-                FilterService.filter(msg.filter, getTaskAdministration());
+                FilterService.filter(msg.filter, getAppDB());
                 break;
 
             default:
@@ -61,26 +62,27 @@ public class Dispatcher {
                 setSorts(((PersistMessage<Sort>) msg).payload);
                 break;
             case PersistMessage.SAVE:
-                PersistenceService.saveTaskDataToFile(PersistenceService.getTaskFilePath(), taskAdministration.getTasks());
+                File f= msg.file == null ? PersistenceService.getTaskFilePath(): msg.file;
+                PersistenceService.saveTaskDataToFile(f, appDB.getTasks());
                 break;
             case PersistMessage.LOAD:
-                PersistenceService.loadTaskDataFromFile(PersistenceService.getTaskFilePath(), taskAdministration.getTasks());
+                PersistenceService.loadTaskDataFromFile(PersistenceService.getTaskFilePath(), appDB.getTasks());
                 break;
             case PersistMessage.NEW:
-                PersistenceService.clearView(taskAdministration.getTasks());
+                PersistenceService.clearView(appDB.getTasks());
                 break;
             case PersistMessage.EXIT:
                 PersistenceService.exit();
                 break;
 
             case PersistMessage.SET_PATH:
-                PersistenceService.setTaskFilePath(msg.file, taskAdministration);
+                PersistenceService.setTaskFilePath(msg.file, appDB);
                 break;
             case PersistMessage.LOAD_TESTDATA:
-                PersistenceService.loadTestData(taskAdministration);
+                PersistenceService.loadTestData(appDB);
                 break;
             case PersistMessage.SAVE_SORTS:
-                PersistenceService.saveSorts(taskAdministration.getSorts());
+                PersistenceService.saveSorts(appDB.getSorts());
                 break;
 
             default:
@@ -93,7 +95,7 @@ public class Dispatcher {
         switch (msg.getMsgType()) {
 
             case SortMessage.EDIT_SORTS:
-                SortService.showEditSorts(getTaskAdministration());
+                SortService.showEditSorts(getAppDB());
                 break;
 
             default:
@@ -106,16 +108,16 @@ public class Dispatcher {
         switch (msg.getMsgType()) {
 
             case TaskMessage.SELECT:
-                TaskService.selectTask(msg.newTask, getTaskAdministration());
+                TaskService.selectTask(msg.newTask, getAppDB());
                 break;
             case TaskMessage.EDIT:
-                TaskService.editTask(getTaskAdministration());
+                TaskService.editTask(getAppDB());
                 break;
             case TaskMessage.REMOVE:
-                TaskService.removeTask(getTaskAdministration());
+                TaskService.removeTask(getAppDB());
                 break;
             case TaskMessage.ADD:
-                TaskService.newTask(getTaskAdministration());
+                TaskService.newTask(getAppDB());
                 break;
             case TaskMessage.FINISHED:
                 TaskService.showFinishedTasks();
@@ -136,8 +138,8 @@ public class Dispatcher {
         return Holder.INSTANCE;
     }
 
-    public TaskAdministration getTaskAdministration() {
-        return taskAdministration;
+    public AppDB getAppDB() {
+        return appDB;
     }
     public static void dispatch(IMsg msg){
         getInstance().dispatch_(msg);
@@ -149,8 +151,8 @@ public class Dispatcher {
     }
 
     private void setSorts(List<Sort> sortList) {
-        taskAdministration.getSorts().clear();
-        taskAdministration.getSorts().setAll(sortList);
+        appDB.getSorts().clear();
+        appDB.getSorts().setAll(sortList);
 
     }
 

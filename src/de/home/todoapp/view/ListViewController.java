@@ -1,7 +1,7 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.TaskAdministration;
+import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.ListViewCell;
 import de.home.todoapp.model.util.Priority;
@@ -15,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -139,7 +138,7 @@ public class ListViewController implements Initializable {
         this.mainController = controller;
     }
 
-    public void setAppState(TaskAdministration appState) {
+    public void setAppState(AppDB appState) {
         listView.setItems(appState.getViewableTasks());
     }
 
@@ -180,10 +179,10 @@ public class ListViewController implements Initializable {
     }
 
     @FXML
-    private void handleSaveMenuBtn(File file) {
+    private void handleSaveMenuBtn() {
             Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
-        if (file == null)
-            handleSaveAsMenuBtn();
+//        if (file == null)
+//            handleSaveAsMenuBtn();
     }
 
     @FXML
