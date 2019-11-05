@@ -96,7 +96,6 @@ public class SetSortsController implements Initializable {
     public void addSort(final ActionEvent event) {
         final Sort newSort = new Sort(inputTextField.getText());
         sortListView.getItems().add(newSort);
-
     }
 
     @FXML
@@ -104,28 +103,6 @@ public class SetSortsController implements Initializable {
         if (sortListView.getItems().size() > 0) {
             sortListView.getItems().remove(sortListView.getSelectionModel().getSelectedItem());
         }
-    }
-
-    @FXML
-    public void loadSorts(final ActionEvent event) {
-        Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_SORTS));
-//        try {
-//            final Unmarshaller unmarshaller = JAXBContext.newInstance(SortList.class).createUnmarshaller();
-//            sorts.set((SortList) unmarshaller.unmarshal(new File("sorts.xml")));
-//        } catch (final JAXBException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    @FXML
-    public void saveSorts(final ActionEvent event) {
-        Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE_SORTS));
-//        try {
-//            final Marshaller marshaller = JAXBContext.newInstance(SortList.class).createMarshaller();
-//            marshaller.marshal(sorts.get(), new File("sorts.xml"));
-//        } catch (final JAXBException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @FXML

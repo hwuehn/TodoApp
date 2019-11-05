@@ -71,7 +71,6 @@ public class ListViewController implements Initializable {
         );
     }
 
-    // Reference to the main application.
     private IMainController mainController;
 
     public ListViewController() {
@@ -105,7 +104,6 @@ public class ListViewController implements Initializable {
         listView.setContextMenu(createContextMenu());
         listView.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> {
            Dispatcher.dispatch(new TaskMessage("select_task", newValue));
-
         });
 
         allBtn.setUserData(new PriorityMatcher(Priority.Alle)); // "*"
@@ -123,7 +121,6 @@ public class ListViewController implements Initializable {
         noHurryBtn.setUserData(new PriorityMatcher(Priority.Eilt_nicht));
         noHurryBtn.setOnAction(toggleHandler);
         noHurryBtn.setToggleGroup(filtersGroup);
-
     }
 
     @FXML
@@ -135,7 +132,6 @@ public class ListViewController implements Initializable {
     public void subscribeAppDb(AppDB appDB){
         setAppState(appDB);
     }
-
 
     /**
      * Is called by the main application to give a reference back to itself.
