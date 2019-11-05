@@ -3,6 +3,7 @@ package de.home.todoapp.service;
 import de.home.todoapp.MainApp;
 import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.Task;
+import de.home.todoapp.model.util.FinishListXMLWrapper;
 import de.home.todoapp.model.util.Sort;
 import de.home.todoapp.model.util.SortListXMLWrapper;
 import de.home.todoapp.model.util.TaskListXMLWrapper;
@@ -17,11 +18,12 @@ import java.util.List;
 import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 
-public class PersistenceService {
+public class PersistService {
 
     private static final String SORTLIST_XML = "./resources/save/sortList.xml";
+    private static final String FINISHLIST_XML = "./resources/save/finishList.xml";
 
-    public PersistenceService() {
+    public PersistService() {
 
     }
 
@@ -44,10 +46,9 @@ public class PersistenceService {
                 e.printStackTrace();
             }
             Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH,file,null));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE_FINISHED));
 
-            // Save the file path to the registry.
         } catch (Exception e) {
-            //todo: dispatch filepath
         }
     }
 
@@ -64,8 +65,6 @@ public class PersistenceService {
             tasks.clear();
             tasks.addAll(wrapper.getTasks());
 
-            //todo: Save the file path to the registry via dispatch path
-            //setTaskFilePath(file);
             Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH,file,null));
 
         } catch (Exception e) { // catches ANY exception
@@ -109,7 +108,6 @@ public class PersistenceService {
         appDB.loadTestData();
     }
 
-
     public static void saveSorts(List<Sort> sorts) {
         try {
             final Marshaller marshaller = JAXBContext.newInstance(SortListXMLWrapper.class).createMarshaller();
@@ -142,5 +140,29 @@ public class PersistenceService {
         saveSorts(dummysorts);
     }
 
+    public static void saveFinished(List<Task> finished) {
+        try {
+            final Marshaller marshaller = JAXBContext.newInstance(FinishListXMLWrapper.class).createMarshaller();
+            FinishListXMLWrapper finishListXMLWrapper = new FinishListXMLWrapper();
+            finishListXMLWrapper.setFinished(finished);
+            marshaller.marshal(finishListXMLWrapper, new File(FINISHLIST_XML));
+
+        } catch (final JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadFinished() {
+        if (FINISHLIST_XML == null) return;
+        try {
+            final Unmarshaller unmarshaller = JAXBContext.newInstance(FinishListXMLWrapper.class).createUnmarshaller();
+            FinishListXMLWrapper finishListXMLWrapper = (FinishListXMLWrapper) unmarshaller.unmarshal(new File(FINISHLIST_XML));
+            List<Task> finished = finishListXMLWrapper.getFinished();
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOADED_FINISHED, null, finished));
+
+        } catch (final JAXBException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

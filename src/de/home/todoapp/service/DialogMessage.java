@@ -10,13 +10,11 @@ public class DialogMessage implements IMsg {
     public final static String SAVE_AS_DIALOG = "saveAs_Dialog";
 
     private final String msgType;
-    // private final String filePattern;
     private final File files;
     private Stage stage;
 
     public DialogMessage(String msgType, File files,Stage stage) {
         this.msgType = msgType;
-        //this.filePattern = filePattern;
         this.files = files;
         this.stage = stage;
     }

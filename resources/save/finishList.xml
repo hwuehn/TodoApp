@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasks>
+    <finished>
+        <finishDate>2019-11-05</finishDate>
+        <input>Add link between menubar and edit sorts</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort description="Feature"/>
+    </finished>
+    <finished>
+        <finishDate>2019-11-05</finishDate>
+        <input>Add add feature to context menu</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort description="Feature"/>
+    </finished>
+    <finished>
+        <finishDate>2019-11-11</finishDate>
+        <input>Show finished tasks as new listview scene</input>
+        <name>Henning Wuehn</name>
+        <priority>Offen</priority>
+        <sort description="Feature"/>
+    </finished>
+</tasks>

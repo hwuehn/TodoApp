@@ -1,11 +1,10 @@
 package de.home.todoapp.view;
 
 import de.home.todoapp.model.Task;
-import de.home.todoapp.model.AppDB;
-import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.ListViewCell;
 import de.home.todoapp.service.Dispatcher;
 import de.home.todoapp.service.TaskMessage;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,18 +24,15 @@ public class FinishedTasksController implements Initializable {
 
     @FXML
     private ListView<Task> finishListView;
-    // Reference to the main application.
-    private IMainController mainController;
 
     public FinishedTasksController() {
     }
 
-    public static void showFinished() {
-        FinishedTasksController controller = new FinishedTasksController();
-        showView("Show finished tasks");
+    public static void showFinished(ObservableList<Task> finished) {
+        showView("Show finished tasks", finished);
     }
 
-    public static FinishedTasksController showView(String title) {
+    public static FinishedTasksController showView(String title, ObservableList<Task> finished) {
         try {
             FXMLLoader loader =
                     new FXMLLoader(FinishedTasksController.class.getResource("FinishedTasks.fxml"));
@@ -52,6 +48,7 @@ public class FinishedTasksController implements Initializable {
 
             FinishedTasksController controller = loader.getController();
 
+            if (finished != null) controller.setFinishedTasks(finished);
             dialogStage.showAndWait();
             return controller;
 
@@ -81,12 +78,10 @@ public class FinishedTasksController implements Initializable {
         });
     }
 
-    public void setMainController(IMainController controller) {
-        this.mainController = controller;
-    }
-
-    public void setAppState(AppDB appState) {
-        finishListView.setItems(appState.getFinished());
+    private void setFinishedTasks(ObservableList<Task> finished) {
+        System.out.println("set finished tasks");
+        System.out.println(finished);
+        finishListView.setItems(finished);
     }
 
 }

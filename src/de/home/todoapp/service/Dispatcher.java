@@ -4,8 +4,8 @@ import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import de.home.todoapp.model.AppDB;
+import de.home.todoapp.model.Task;
 import de.home.todoapp.model.util.Sort;
-import de.home.todoapp.view.ListViewController;
 
 import java.io.File;
 import java.util.List;
@@ -43,7 +43,6 @@ public class Dispatcher {
         }
     }
 
-
     @Subscribe
     public void dispatchFilterMessage(FilterMessage msg) {
         switch (msg.getMsgType()){
@@ -73,36 +72,45 @@ public class Dispatcher {
         switch (msg.getMsgType()) {
 
             case PersistMessage.LOAD_SORTS:
-                PersistenceService.loadSorts();
+                PersistService.loadSorts();
                 break;
             case PersistMessage.LOADED_SORTS:
 //                setSorts(((PersistMessage<Sort>) msg).payload);
                 setSorts(((PersistMessage<Sort>) msg).payload);
                 break;
+            case PersistMessage.LOAD_FINISHED:
+                PersistService.loadFinished();
+                break;
+            case PersistMessage.LOADED_FINISHED:
+                setFinished(((PersistMessage<Task>) msg).payload);
+                break;
             case PersistMessage.SAVE:
-                PersistenceService.saveTaskDataToFile(pathOrDefaultPath(msg), appDB.getTasks());
+                PersistService.saveTaskDataToFile(pathOrDefaultPath(msg), appDB.getTasks());
                 break;
             case PersistMessage.LOAD:
-                PersistenceService.loadTaskDataFromFile(pathOrDefaultPath(msg), appDB.getTasks());
+                PersistService.loadTaskDataFromFile(pathOrDefaultPath(msg), appDB.getTasks());
                 break;
             case PersistMessage.NEW:
-                PersistenceService.clearView(appDB.getTasks());
+                PersistService.clearView(appDB.getTasks());
                 break;
             case PersistMessage.EXIT:
-                PersistenceService.exit();
+                PersistService.exit();
                 break;
 
             case PersistMessage.SET_PATH:
-                PersistenceService.setTaskFilePath(msg.file);
+                PersistService.setTaskFilePath(msg.file);
                 break;
             case PersistMessage.LOAD_TESTDATA:
-                PersistenceService.loadTestData(appDB);
+                PersistService.loadTestData(appDB);
                 break;
             case PersistMessage.SAVE_SORTS:
-                PersistenceService.saveSorts(appDB.getSorts());
+                PersistService.saveSorts(appDB.getSorts());
                 break;
             case PersistMessage.SET_TITLE:
                 setTitle(msg.file);
+                break;
+            case PersistMessage.SAVE_FINISHED:
+                PersistService.saveFinished(appDB.getFinished());
                 break;
 
             default:
@@ -110,8 +118,9 @@ public class Dispatcher {
         }
     }
 
+
     public File pathOrDefaultPath(PersistMessage msg) {
-        return msg.file == null ? PersistenceService.getTaskFilePath() : msg.file;
+        return msg.file == null ? PersistService.getTaskFilePath() : msg.file;
     }
 
     @Subscribe
@@ -144,7 +153,7 @@ public class Dispatcher {
                 TaskService.newTask(appDB);
                 break;
             case TaskMessage.FINISHED:
-                TaskService.showFinishedTasks();
+                TaskService.showFinishedTasks(appDB.getFinished());
                 break;
 
             default:
@@ -174,13 +183,16 @@ public class Dispatcher {
     private void setSorts(List<Sort> sortList) {
         appDB.getSorts().clear();
         appDB.getSorts().setAll(sortList);
+    }
 
+    private void setFinished(List<Task> finished) {
+        appDB.getFinished().clear();
+        appDB.getFinished().setAll(finished);
     }
 
     private void setTitle(File file) {
         String path = file != null ? " - " + file.getName() : "";
         appDB.setTitle("TodoApp" + path);
-
     }
 
     private static class Holder {

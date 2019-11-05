@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 
 public class EditDialogController implements Initializable {
 
-    private static final String SORTLIST_XML = "C:\\Users\\hensche\\Projekte\\TodoApp\\resources\\save\\sortList.xml";
     @FXML private TextField inputNameField;
     @FXML private TextArea inputTextAreaField;
     @FXML private DatePicker finishDatePicker;
@@ -29,10 +28,8 @@ public class EditDialogController implements Initializable {
     @FXML private Button cancelBtn;
     @FXML
     private Button editSortsBtn;
-
     @FXML
     private ComboBox<Sort> sortCombo = new ComboBox<>();
-
     private boolean okClicked = false;
 
     public static Task showAddPlayer(ObservableList<Sort> sorts) {
@@ -80,8 +77,6 @@ public class EditDialogController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
     }
-
-
 
     /**
      * Sets the task to be edited in the dialog.

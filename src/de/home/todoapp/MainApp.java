@@ -22,11 +22,11 @@ public class MainApp extends Application implements IMainController {
         launch(args);
     }
 
-    private  Stage stage;
+    private Stage stage;
     private AnchorPane rootLayout;
 
     public MainApp() {
-        //PersistenceService.CreateDummySorts();
+        //PersistService.CreateDummySorts();
     }
 
     @Override
@@ -37,13 +37,9 @@ public class MainApp extends Application implements IMainController {
         Dispatcher.subscribe(this);
         initRootLayout();
 
-
-
-        // Try to load last opened task file.
         Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD));
         Dispatcher.dispatch(new PersistMessage( PersistMessage.LOAD_SORTS));
-
-
+        Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_FINISHED));
     }
 
     @Subscribe
@@ -64,9 +60,9 @@ public class MainApp extends Application implements IMainController {
             // Give the controller access to the main app.
             ListViewController controller = loader.getController();
             controller.setMainController(this);
+
             Dispatcher.dispatch(new DataMessage(DataMessage.REQUEST));
             Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_TESTDATA));
-
 
             stage.show();
 

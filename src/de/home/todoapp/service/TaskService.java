@@ -1,14 +1,16 @@
 package de.home.todoapp.service;
 
-import de.home.todoapp.model.Task;
 import de.home.todoapp.model.AppDB;
+import de.home.todoapp.model.Task;
 import de.home.todoapp.view.EditDialogController;
 import de.home.todoapp.view.FinishedTasksController;
+import javafx.collections.ObservableList;
 
 public class TaskService {
 
     public static void removeTask(AppDB appDB) {
         appDB.remove(appDB.getCurrentTask());
+        appDB.getFinished().add(appDB.getCurrentTask());
     }
 
     public static void newTask(AppDB appDB) {
@@ -38,7 +40,7 @@ public class TaskService {
         appDB.setCurrentTask(newValue);
     }
 
-    public static void showFinishedTasks() {
-        FinishedTasksController.showFinished();
+    public static void showFinishedTasks(ObservableList<Task> finished) {
+        FinishedTasksController.showFinished(finished);
     }
 }
