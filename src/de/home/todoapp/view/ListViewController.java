@@ -13,11 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -177,52 +175,20 @@ public class ListViewController implements Initializable {
     }
 
     @FXML
-    private void handleOpenMenuBtn() throws FileNotFoundException {
+    private void handleOpenMenuBtn() {
         Dispatcher.dispatch(new DialogMessage(DialogMessage.LOAD_DIALOG,mainController.getStage()));
-//        FileChooser fileChooser = new FileChooser();
-//
-//        // Set extension filter
-//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-//                "XML files (*.xml)", "*.xml");
-//        fileChooser.getExtensionFilters().add(extFilter);
-//
-//        // Show save file dialog
-//        File file = fileChooser.showOpenDialog(mainController.getStage());
-//
-//        if (file != null) {
-//            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
-//        }
     }
 
-    /**
-     * Saves the file to the task file that is currently open. If there is no
-     * open file, the "save as" dialog is shown.
-     */
     @FXML
-    private void handleSaveMenuBtn() {
+    private void handleSaveMenuBtn(File file) {
             Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
-            //handleSaveAsMenuBtn();
+        if (file == null)
+            handleSaveAsMenuBtn();
     }
 
     @FXML
     private void handleSaveAsMenuBtn() {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainController.getStage());
-
-        if (file != null) {
-            // Make sure it has the correct extension
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
-        }
+        Dispatcher.dispatch(new DialogMessage(DialogMessage.SAVE_AS_DIALOG, mainController.getStage()));
     }
 
     @FXML

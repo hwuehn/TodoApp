@@ -6,7 +6,6 @@ import com.google.common.eventbus.Subscribe;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.Sort;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Dispatcher {
@@ -27,9 +26,9 @@ public class Dispatcher {
             case DialogMessage.LOAD_DIALOG:
                 DialogService.showLoadDialog(msg);
                 break;
-//            case DialogMessage.SAVE_DIALOG:
-//                DialogService.showSaveDialog();
-//                DialogService.saveAS(DialogService.file);
+            case DialogMessage.SAVE_AS_DIALOG:
+                DialogService.showSaveAsDialog(msg);
+                break;
 
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());

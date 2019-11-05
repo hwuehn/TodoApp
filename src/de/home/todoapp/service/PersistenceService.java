@@ -27,7 +27,7 @@ public class PersistenceService {
     }
 
     public static void saveTaskDataToFile(File file, List<Task> tasks) {
-        if (file == null) return;
+        if (file == null)
         try {
             JAXBContext context = JAXBContext
                     .newInstance(TaskListXMLWrapper.class);

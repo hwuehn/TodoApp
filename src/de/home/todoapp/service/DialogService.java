@@ -1,6 +1,5 @@
 package de.home.todoapp.service;
 
-import de.home.todoapp.model.util.IMainController;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -9,7 +8,6 @@ import java.io.File;
 public class DialogService {
 
     public final static FileChooser fileChooser = new FileChooser();
-
 
     public static void showLoadDialog(DialogMessage msg) {
         Stage stage=msg.getStage();
@@ -20,7 +18,7 @@ public class DialogService {
         }
     }
 
-    public static void showSaveDialog(DialogMessage msg) {
+    public static void showSaveAsDialog(DialogMessage msg) {
         Stage stage=msg.getStage();
         setExtensionFilter(fileChooser);
         File file = fileChooser.showSaveDialog(stage);
