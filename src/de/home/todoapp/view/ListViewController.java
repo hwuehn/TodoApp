@@ -1,7 +1,7 @@
 package de.home.todoapp.view;
 
-import de.home.todoapp.model.Task;
 import de.home.todoapp.model.AppDB;
+import de.home.todoapp.model.Task;
 import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.ListViewCell;
 import de.home.todoapp.model.util.Priority;
@@ -181,8 +181,6 @@ public class ListViewController implements Initializable {
     @FXML
     private void handleSaveMenuBtn() {
             Dispatcher.dispatch(new PersistMessage(PersistMessage.SAVE));
-//        if (file == null)
-//            handleSaveAsMenuBtn();
     }
 
     @FXML

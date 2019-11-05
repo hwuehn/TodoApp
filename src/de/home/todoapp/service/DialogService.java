@@ -7,9 +7,8 @@ import java.io.File;
 
 public class DialogService {
 
-    public final static FileChooser fileChooser = new FileChooser();
-
     public static void showLoadDialog(DialogMessage msg) {
+        FileChooser fileChooser = new FileChooser();
         Stage stage=msg.getStage();
         setExtensionFilter(fileChooser);
         File file = fileChooser.showOpenDialog(stage);
@@ -19,6 +18,7 @@ public class DialogService {
     }
 
     public static void showSaveAsDialog(DialogMessage msg) {
+        FileChooser fileChooser = new FileChooser();
         Stage stage=msg.getStage();
         setExtensionFilter(fileChooser);
         File file = fileChooser.showSaveDialog(stage);
