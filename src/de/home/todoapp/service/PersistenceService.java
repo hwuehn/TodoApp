@@ -146,4 +146,5 @@ public class PersistenceService {
         List<Sort> dummysorts = sortnames.stream().map(Sort::new).collect(Collectors.toList());
         saveSorts(dummysorts);
     }
+
 }

@@ -44,8 +44,9 @@ public class PersistMessage<T> implements IMsg {
     @Override
     public String toString() {
         return "PersistMessage{" +
-                "msgType='" + msgType + '\'' +
-                ", file=" + file +
+                "file=" + file +
+                ", payload=" + payload +
+                ", msgType='" + msgType + '\'' +
                 '}';
     }
 }

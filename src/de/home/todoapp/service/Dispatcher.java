@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 import de.home.todoapp.model.TaskAdministration;
 import de.home.todoapp.model.util.Sort;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Dispatcher {
@@ -19,32 +20,34 @@ public class Dispatcher {
         eventBus.register(this);
     }
 
+    @Subscribe
+    public void dispatchDialogMessage(DialogMessage msg) throws IOException {
+        switch (msg.getMsgType()) {
+
+            case DialogMessage.LOAD_DIALOG:
+                DialogService.showLoadDialog();
+                break;
+//            case DialogMessage.SAVE_DIALOG:
+//                DialogService.showSaveDialog();
+//                DialogService.saveAS(DialogService.file);
+
+            default:
+                throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+    }
 
 
     @Subscribe
-    public void dispatchTaskMessage(TaskMessage msg) {
+    public void dispatchFilterMessage(FilterMessage msg) {
         switch (msg.getMsgType()){
 
-            case TaskMessage.SELECT:
-                TaskService.selectTask(msg.newTask, getTaskAdministration());
-                break;
-            case TaskMessage.EDIT:
-                TaskService.editTask(getTaskAdministration());
-                break;
-            case TaskMessage.REMOVE:
-                TaskService.removeTask(getTaskAdministration());
-                break;
-            case TaskMessage.ADD:
-                TaskService.newTask(getTaskAdministration());
-                break;
-            case TaskMessage.FINISHED:
-                TaskService.showFinishedTasks();
+            case FilterMessage.FILTER:
+                FilterService.filter(msg.filter, getTaskAdministration());
                 break;
 
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
         }
-
     }
 
     @Subscribe
@@ -87,12 +90,48 @@ public class Dispatcher {
     }
 
     @Subscribe
+    public void dispatchSortMessage(SortMessage msg) {
+        switch (msg.getMsgType()) {
+
+            case SortMessage.EDIT_SORTS:
+                SortService.showEditSorts(getTaskAdministration());
+                break;
+
+            default:
+                throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+    }
+
+    @Subscribe
+    public void dispatchTaskMessage(TaskMessage msg) {
+        switch (msg.getMsgType()) {
+
+            case TaskMessage.SELECT:
+                TaskService.selectTask(msg.newTask, getTaskAdministration());
+                break;
+            case TaskMessage.EDIT:
+                TaskService.editTask(getTaskAdministration());
+                break;
+            case TaskMessage.REMOVE:
+                TaskService.removeTask(getTaskAdministration());
+                break;
+            case TaskMessage.ADD:
+                TaskService.newTask(getTaskAdministration());
+                break;
+            case TaskMessage.FINISHED:
+                TaskService.showFinishedTasks();
+                break;
+
+            default:
+                throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+    }
+
+    @Subscribe
     public void handleDeadEvent(DeadEvent deadEvent) {
         System.out.println("!!! No subscriber for message: !!!");
         System.out.println(deadEvent.getEvent().toString());
-        //throw new IllegalStateException("No subscriber for message: " + deadEvent.toString());
     }
-
 
     public static Dispatcher getInstance() {
         return Holder.INSTANCE;
@@ -108,19 +147,6 @@ public class Dispatcher {
     private void dispatch_(IMsg msg) {
         System.out.println(msg);
         eventBus.post(msg);
-        switch (msg.getMsgType()){
-//            case FilterMessage.FILTER:
-//                FilterService.filter(((FilterMessage) msg).filter, getTaskAdministration());
-//                break;
-            case SortMessage.EDIT_SORTS:
-                SortService.showEditSorts(getTaskAdministration());
-                break;
-
-
-            default:
-                //throw new IllegalStateException("Message not defined: " + msg.getMsgType());
-        }
-
     }
 
     private void setSorts(List<Sort> sortList) {

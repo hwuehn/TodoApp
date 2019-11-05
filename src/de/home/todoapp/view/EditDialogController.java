@@ -3,7 +3,7 @@ package de.home.todoapp.view;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.util.Sort;
 import de.home.todoapp.service.Dispatcher;
-import de.home.todoapp.service.TaskMessage;
+import de.home.todoapp.service.SortMessage;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -115,7 +115,7 @@ public class EditDialogController implements Initializable {
     @FXML
     public void handleEditSortBtn(ActionEvent evt) {
 
-        Dispatcher.dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
+        Dispatcher.dispatch(new SortMessage(SortMessage.EDIT_SORTS));
     }
 
     @FXML

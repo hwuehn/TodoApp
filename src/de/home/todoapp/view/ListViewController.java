@@ -6,10 +6,7 @@ import de.home.todoapp.model.util.IMainController;
 import de.home.todoapp.model.util.ListViewCell;
 import de.home.todoapp.model.util.Priority;
 import de.home.todoapp.model.util.PriorityMatcher;
-import de.home.todoapp.service.Dispatcher;
-import de.home.todoapp.service.FilterMessage;
-import de.home.todoapp.service.PersistMessage;
-import de.home.todoapp.service.TaskMessage;
+import de.home.todoapp.service.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -181,19 +178,20 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleOpenMenuBtn() throws FileNotFoundException {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainController.getStage());
-
-        if (file != null) {
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
-        }
+        Dispatcher.dispatch(new DialogMessage(DialogMessage.LOAD_DIALOG));
+//        FileChooser fileChooser = new FileChooser();
+//
+//        // Set extension filter
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+//                "XML files (*.xml)", "*.xml");
+//        fileChooser.getExtensionFilters().add(extFilter);
+//
+//        // Show save file dialog
+//        File file = fileChooser.showOpenDialog(mainController.getStage());
+//
+//        if (file != null) {
+//            Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD, file, null));
+//        }
     }
 
     /**
@@ -229,7 +227,7 @@ public class ListViewController implements Initializable {
 
     @FXML
     private void handleEditSortMenuBtn() {
-        Dispatcher.dispatch(new TaskMessage(TaskMessage.EDIT_SORTS));
+        Dispatcher.dispatch(new SortMessage(SortMessage.EDIT_SORTS));
     }
 
     @FXML

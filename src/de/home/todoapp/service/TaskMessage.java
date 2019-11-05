@@ -8,7 +8,6 @@ public class TaskMessage implements IMsg {
     public static final String EDIT = "edit_task";
     public static final String REMOVE = "remove_task";
     public static final String ADD = "add_task";
-    public static final String EDIT_SORTS = "editSorts_task";
     public static final String FINISHED = "showFinished_task";
 
     public final String msgType;
