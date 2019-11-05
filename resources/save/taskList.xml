@@ -70,4 +70,11 @@
         <priority>Eilt_nicht</priority>
         <sort description="Feature"/>
     </tasks>
+    <tasks>
+        <finishDate>2019-11-06</finishDate>
+        <input>finishList xml structure</input>
+        <name>Henning Wuehn</name>
+        <priority>Eilt</priority>
+        <sort description="Fix"/>
+    </tasks>
 </tasks>
