@@ -43,12 +43,11 @@ public class PersistenceService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH,file,null));
 
             // Save the file path to the registry.
         } catch (Exception e) {
             //todo: dispatch filepath
-            //setTaskFilePath(file, appDB);
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
         }
     }
 
@@ -67,7 +66,7 @@ public class PersistenceService {
 
             //todo: Save the file path to the registry via dispatch path
             //setTaskFilePath(file);
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH));
+            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_PATH,file,null));
 
         } catch (Exception e) { // catches ANY exception
         }
@@ -99,18 +98,11 @@ public class PersistenceService {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
-
-            // todo: Update the stage title. via dispatch
-
-            //PersistenceService.appDB.setTitle("TodoApp - " + file.getName());
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_TITLE));
         } else {
             prefs.remove("filePath");
-
-            // todo: Update the stage title. via dispatch
-            //PersistenceService.appDB.setTitle("TodoApp");
-            Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_TITLE));
         }
+        Dispatcher.dispatch(new PersistMessage(PersistMessage.SET_TITLE,file,null));
+
     }
 
     public static void loadTestData(AppDB appDB) {

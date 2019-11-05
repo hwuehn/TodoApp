@@ -1,5 +1,6 @@
 package de.home.todoapp.view;
 
+import com.google.common.eventbus.Subscribe;
 import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.Task;
 import de.home.todoapp.model.util.IMainController;
@@ -97,6 +98,7 @@ public class ListViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Dispatcher.subscribe(this);
         assert listView != null : "fx:id\"listView\" was not injected: check your FXML file 'ListView.fxml'.";
 
         setCellFactory();
@@ -121,11 +123,17 @@ public class ListViewController implements Initializable {
         noHurryBtn.setUserData(new PriorityMatcher(Priority.Eilt_nicht));
         noHurryBtn.setOnAction(toggleHandler);
         noHurryBtn.setToggleGroup(filtersGroup);
+
     }
 
     @FXML
     public void showAddPlayer() {
         Dispatcher.dispatch(new TaskMessage("add_task"));
+    }
+
+    @Subscribe
+    public void subscribeAppDb(AppDB appDB){
+        setAppState(appDB);
     }
 
 

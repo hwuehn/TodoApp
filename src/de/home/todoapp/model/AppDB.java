@@ -77,6 +77,10 @@ public class AppDB {
         title.setValue(s);
     }
 
+    public StringProperty titleProperty() {
+        return title;
+    }
+
     public void loadTestData() {
 
         tasks.clear();

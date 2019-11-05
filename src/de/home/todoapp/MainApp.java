@@ -1,6 +1,9 @@
 package de.home.todoapp;
 
+import com.google.common.eventbus.Subscribe;
+import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.util.IMainController;
+import de.home.todoapp.service.DataMessage;
 import de.home.todoapp.service.Dispatcher;
 import de.home.todoapp.service.PersistMessage;
 import de.home.todoapp.view.ListViewController;
@@ -19,7 +22,7 @@ public class MainApp extends Application implements IMainController {
         launch(args);
     }
 
-    private static Stage stage;
+    private  Stage stage;
     private AnchorPane rootLayout;
 
     public MainApp() {
@@ -27,16 +30,13 @@ public class MainApp extends Application implements IMainController {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        MainApp.stage = stage;
-        MainApp.stage.setTitle("TodoApp");
-        MainApp.stage.getIcons().add(new Image("file:resources/images/todo.png"));
+    public void start(Stage stage)  {
+        this.stage = stage;
+        stage.setTitle("TodoApp");
+        stage.getIcons().add(new Image("file:resources/images/todo.png"));
+        Dispatcher.subscribe(this);
         initRootLayout();
 
-        // Try to load last used sort list from file.
-//        File fileSort = new File(SORTLIST_XML);
-//        Dispatcher.dispatch2(new PersistMessage(PersistMessage.LOAD_SORTS, null, fileSort));
-//        System.out.println(Dispatcher.getInstance().getTaskAdministration().getSorts());
 
 
         // Try to load last opened task file.
@@ -46,6 +46,10 @@ public class MainApp extends Application implements IMainController {
 
     }
 
+    @Subscribe
+    public void subscribeAppDb(AppDB appDB){
+        stage.titleProperty().bind(appDB.titleProperty());
+    }
 
     public void initRootLayout() {
         try {
@@ -60,7 +64,7 @@ public class MainApp extends Application implements IMainController {
             // Give the controller access to the main app.
             ListViewController controller = loader.getController();
             controller.setMainController(this);
-            controller.setAppState(Dispatcher.getInstance().getAppDB());
+            Dispatcher.dispatch(new DataMessage(DataMessage.REQUEST));
             Dispatcher.dispatch(new PersistMessage(PersistMessage.LOAD_TESTDATA));
 
 

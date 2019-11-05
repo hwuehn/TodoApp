@@ -5,6 +5,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import de.home.todoapp.model.AppDB;
 import de.home.todoapp.model.util.Sort;
+import de.home.todoapp.view.ListViewController;
 
 import java.io.File;
 import java.util.List;
@@ -18,6 +19,12 @@ public class Dispatcher {
         appDB = new AppDB();
         eventBus = new EventBus();
         eventBus.register(this);
+    }
+
+    public static void subscribe(Object o) {
+        System.out.println("Dispatcher.subscribe");
+        System.out.println("o = " + o);
+        getInstance().eventBus.register(o);
     }
 
     @Subscribe
@@ -42,11 +49,22 @@ public class Dispatcher {
         switch (msg.getMsgType()){
 
             case FilterMessage.FILTER:
-                FilterService.filter(msg.filter, getAppDB());
+                FilterService.filter(msg.filter, appDB);
                 break;
 
             default:
                 throw new IllegalStateException("Message not defined: " + msg.getMsgType());
+        }
+    }
+    @Subscribe
+    public void dispatchDataMessage(DataMessage msg) {
+        switch (msg.getMsgType()){
+
+            case DataMessage.REQUEST:
+                eventBus.post(appDB);
+                break;
+
+            default:
         }
     }
 
@@ -62,11 +80,10 @@ public class Dispatcher {
                 setSorts(((PersistMessage<Sort>) msg).payload);
                 break;
             case PersistMessage.SAVE:
-                File f= msg.file == null ? PersistenceService.getTaskFilePath(): msg.file;
-                PersistenceService.saveTaskDataToFile(f, appDB.getTasks());
+                PersistenceService.saveTaskDataToFile(pathOrDefaultPath(msg), appDB.getTasks());
                 break;
             case PersistMessage.LOAD:
-                PersistenceService.loadTaskDataFromFile(PersistenceService.getTaskFilePath(), appDB.getTasks());
+                PersistenceService.loadTaskDataFromFile(pathOrDefaultPath(msg), appDB.getTasks());
                 break;
             case PersistMessage.NEW:
                 PersistenceService.clearView(appDB.getTasks());
@@ -93,12 +110,16 @@ public class Dispatcher {
         }
     }
 
+    public File pathOrDefaultPath(PersistMessage msg) {
+        return msg.file == null ? PersistenceService.getTaskFilePath() : msg.file;
+    }
+
     @Subscribe
     public void dispatchSortMessage(SortMessage msg) {
         switch (msg.getMsgType()) {
 
             case SortMessage.EDIT_SORTS:
-                SortService.showEditSorts(getAppDB());
+                SortService.showEditSorts(appDB);
                 break;
 
             default:
@@ -111,16 +132,16 @@ public class Dispatcher {
         switch (msg.getMsgType()) {
 
             case TaskMessage.SELECT:
-                TaskService.selectTask(msg.newTask, getAppDB());
+                TaskService.selectTask(msg.newTask, appDB);
                 break;
             case TaskMessage.EDIT:
-                TaskService.editTask(getAppDB());
+                TaskService.editTask(appDB);
                 break;
             case TaskMessage.REMOVE:
-                TaskService.removeTask(getAppDB());
+                TaskService.removeTask(appDB);
                 break;
             case TaskMessage.ADD:
-                TaskService.newTask(getAppDB());
+                TaskService.newTask(appDB);
                 break;
             case TaskMessage.FINISHED:
                 TaskService.showFinishedTasks();
@@ -141,9 +162,6 @@ public class Dispatcher {
         return Holder.INSTANCE;
     }
 
-    public AppDB getAppDB() {
-        return appDB;
-    }
     public static void dispatch(IMsg msg){
         getInstance().dispatch_(msg);
     }
@@ -160,11 +178,9 @@ public class Dispatcher {
     }
 
     private void setTitle(File file) {
-        if (file != null) {
-            appDB.setTitle("TodoApp - " + file.getName());
-        } else {
-            appDB.setTitle("TodoApp");
-        }
+        String path = file != null ? " - " + file.getName() : "";
+        appDB.setTitle("TodoApp" + path);
+
     }
 
     private static class Holder {
