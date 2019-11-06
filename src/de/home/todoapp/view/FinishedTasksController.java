@@ -79,8 +79,8 @@ public class FinishedTasksController implements Initializable {
     }
 
     private void setFinishedTasks(ObservableList<Task> finished) {
-        System.out.println("set finished tasks");
-        System.out.println(finished);
+        //System.out.println("set finished tasks");
+        //System.out.println(finished);
         finishListView.setItems(finished);
     }
 
