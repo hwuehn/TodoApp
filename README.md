@@ -1,6 +1,6 @@
 TodoApp | make complex things easy
 
-
+![Screenshot](resources/images/todo.png)
 
 Create tasks:
 - set name, input, finish date
