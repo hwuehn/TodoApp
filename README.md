@@ -1,5 +1,7 @@
 TodoApp | make complex things easy
 
+![Screenshot](resources/images/todo_first.png)
+
 Create tasks:
 - set name, input, finish date
 - choose an entry from editable description list for easy task creation
